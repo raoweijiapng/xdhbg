@@ -1,241 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="237bd48b-7369-4caf-b9a7-4a13016f7b9a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/interceptor/TeacherInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/SomeMethods.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/SomeMethods.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/AdminLogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/AdminLogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/DelNoticeDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/DelNoticeDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/ExeperienceDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/ExeperienceDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/NoticeContentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/NoticeContentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/NoticeDataDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/NoticeDataDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/StudentNumberDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/StudentNumberDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/TeacherDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/TeacherDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/TeacherLogRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/TeacherLogRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/TeacherRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/TeacherRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/WorksDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/WorksDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/XdhClassDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/XdhClassDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/XdhClassRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/XdhClassRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Admin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/AdminLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/AdminLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/City.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/City.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Exeperience.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Exeperience.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Experience.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Experience.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Msg.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Msg.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Notice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Notice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/NoticeContent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/NoticeContent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/NoticeData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/NoticeData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Page.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Page.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/TeacherClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/TeacherClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/TeacherLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/TeacherLog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Works.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/Works.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/XdhClass.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/entity/XdhClass.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/interceptor/InterceptorConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/interceptor/InterceptorConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/interceptor/SomeInterceptor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/interceptor/SomeResourcesConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/interceptor/SomeResourcesConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/DelNoticeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/DelNoticeService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/ExeperienceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/ExeperienceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/NoticeContentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/NoticeContentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/NoticeDataService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/NoticeDataService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/StudentNumberService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/StudentNumberService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/StudentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/TeacherService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/WorksService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/WorksService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/ClassServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/ClassServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/DelNoticeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/DelNoticeServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/ExeperienceServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/ExeperienceServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/NoticeContentServerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/NoticeContentServerImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/NoticeDataServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/NoticeDataServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/StudentNumberServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/StudentNumberServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/StudentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/StudentServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/TeacherServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/TeacherServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/WorksServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/service/impl/WorksServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/CookieTestUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/CookieTestUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/ExcelToObjectUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/ExcelToObjectUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/GetCurrentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/GetCurrentPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/ImageVerifyCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/ImageVerifyCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/MyPaging.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/MyPaging.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/PageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/PageUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/util/VerifyPhone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/util/VerifyPhone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/BasicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/BasicController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/CityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/CityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/ExeperienceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/ExeperienceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/TeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/WorkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/WorkController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DelNoticeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DelNoticeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/ExeperienceMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/ExeperienceMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/NoticeCentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/NoticeCentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/NoticeDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/NoticeDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/StudentNumberMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/StudentNumberMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/TeacherMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/TeacherMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/WorksMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/WorksMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/XdhClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/XdhClassMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/css/app.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/css/app.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/js/exeperience.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/exeperience.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/js/operate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/operate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/js/preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/preloader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/js/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/assets/js/works.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/assets/js/works.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/addteacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/addteacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/teacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/updateteacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/updateteacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/updatexdhclass.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/updatexdhclass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/xdhclass.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/xdhclass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/xdhclassform.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/xdhclassform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error/4xx.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error/5xx.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error/5xx.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/datasedit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/datasedit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/editor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/experienceList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/experienceList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/insertWorks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/insertWorks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/studentDatas.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/studentDatas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/studentWorks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/studentWorks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/updateWorks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/updateWorks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/GraduateStudentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/GraduateStudentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/TeacherLogList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/TeacherLogList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/UndergraduateStudentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/UndergraduateStudentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/exeperience.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/exeperience.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/noticeManage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/noticeManage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/works.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/works.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/RunBoot.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/RunBoot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/SomeMethods.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/SomeMethods.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/AdminDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/AdminDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/AdminLogRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/AdminLogRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/ClassDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/ClassDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/DelNoticeDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/DelNoticeDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/ExeperienceDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/ExeperienceDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/NoticeContentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/NoticeContentDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/NoticeDataDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/NoticeDataDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/StudentDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/StudentDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/StudentNumberDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/StudentNumberDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/TeacherDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/TeacherDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/TeacherLogRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/TeacherLogRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/TeacherRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/TeacherRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/WorksDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/WorksDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/XdhClassDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/XdhClassDao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/XdhClassRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/XdhClassRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Admin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Admin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/AdminLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/AdminLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/City.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/City.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Exeperience.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Exeperience.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Experience.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Experience.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Msg.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Msg.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Notice.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Notice.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/NoticeContent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/NoticeContent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/NoticeData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/NoticeData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Page.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Page.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Teacher.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Teacher.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/TeacherClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/TeacherClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/TeacherLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/TeacherLog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Works.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/Works.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/entity/XdhClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/entity/XdhClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/interceptor/InterceptorConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/interceptor/InterceptorConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/interceptor/SomeInterceptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/interceptor/SomeResourcesConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/interceptor/SomeResourcesConfiguration.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/AdminService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/AdminService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/ClassService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/ClassService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/DelNoticeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/DelNoticeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/ExeperienceService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/ExeperienceService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/NoticeContentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/NoticeContentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/NoticeDataService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/NoticeDataService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/StudentNumberService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/StudentNumberService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/StudentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/StudentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/TeacherService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/TeacherService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/WorksService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/WorksService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/AdminServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/ClassServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/ClassServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/DelNoticeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/DelNoticeServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/ExeperienceServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/ExeperienceServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/NoticeContentServerImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/NoticeContentServerImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/NoticeDataServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/NoticeDataServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/StudentNumberServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/StudentNumberServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/StudentServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/StudentServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/TeacherServiceImpl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/TeacherServiceImpl$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/TeacherServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/TeacherServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/WorksServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/service/impl/WorksServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/CookieTestUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/CookieTestUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/ExcelToObjectUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/ExcelToObjectUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/GetCurrentPage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/GetCurrentPage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/ImageVerifyCode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/ImageVerifyCode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/MyPaging.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/MyPaging.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/PageUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/PageUtil.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/util/VerifyPhone.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/util/VerifyPhone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/BasicController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/BasicController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/CityController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/CityController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/ExeperienceController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/ExeperienceController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/StudentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/StudentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/TeacherController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/TeacherController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/WorkController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/WorkController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/DelNoticeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/DelNoticeMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/ExeperienceMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/ExeperienceMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/NoticeCentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/NoticeCentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/NoticeDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/NoticeDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/StudentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/StudentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/StudentNumberMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/StudentNumberMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/TeacherMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/TeacherMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/WorksMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/WorksMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/XdhClassMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/XdhClassMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/css/app.less" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/css/app.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/js/exeperience.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/js/exeperience.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/js/operate.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/js/operate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/js/preloader.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/js/preloader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/js/theme.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/js/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/static/assets/js/works.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/static/assets/js/works.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/addteacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/addteacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/teacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/teacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/updateteacher.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/updateteacher.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/updatexdhclass.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/updatexdhclass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/xdhclass.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/xdhclass.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/admin/xdhclassform.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/admin/xdhclassform.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/error/4xx.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/error/5xx.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/error/5xx.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/datasedit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/datasedit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/editor.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/editor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/experienceList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/experienceList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/insertWorks.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/insertWorks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/studentDatas.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/studentDatas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/studentWorks.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/studentWorks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/student/updateWorks.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/student/updateWorks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/GraduateStudentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/GraduateStudentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/StudentAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/StudentAdd.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/StudentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/StudentEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/TeacherLogList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/TeacherLogList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/UndergraduateStudentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/UndergraduateStudentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/exeperience.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/exeperience.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/noticeManage.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/noticeManage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/works.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/works.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/xdhbg.iml" beforeDir="false" afterPath="$PROJECT_DIR$/xdhbg.iml" afterDir="false" />
-    </list>
+    <list default="true" id="237bd48b-7369-4caf-b9a7-4a13016f7b9a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -407,21 +173,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:xdhbg@49.235.143.250" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:xdhbg@49.235.143.250" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@6c73c466" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:xdhbg@49.235.143.250" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@79c6201b" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:xdhbg@49.235.143.250" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@7d4a52a" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -477,7 +228,7 @@
       <workItem from="1578302507740" duration="694000" />
       <workItem from="1578303282044" duration="233000" />
       <workItem from="1578303807556" duration="1120000" />
-      <workItem from="1578306102213" duration="667000" />
+      <workItem from="1578306102213" duration="1164000" />
     </task>
     <task id="LOCAL-00001" summary="最新">
       <created>1577708158616</created>
@@ -542,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578065444463</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="管理员整合">
+      <created>1578307354734</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1578307354734</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +334,8 @@
     <MESSAGE value="管理员端和教师端和学生端整合v1.0" />
     <MESSAGE value="管理员端和教师端和学生端整合v2.0" />
     <MESSAGE value="管理员端和教师端和学生端整合v3.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="管理员端和教师端和学生端整合v3.0" />
+    <MESSAGE value="管理员整合" />
+    <option name="LAST_COMMIT_MESSAGE" value="管理员整合" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -611,10 +370,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="436" y="105" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577954913723" />
-    <state x="434" y="0" key="CommitChangelistDialog2" timestamp="1578065442644">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="543" y="0" key="CommitChangelistDialog2" timestamp="1578307346174">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="434" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578065442644" />
+    <state x="543" y="0" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1578307346174" />
     <state x="686" y="209" key="FileChooserDialogImpl" timestamp="1578293997022">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -687,11 +447,11 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="336" y="56" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1578281945596" />
-    <state x="451" y="181" key="Vcs.Push.Dialog.v2" timestamp="1578307037492">
+    <state x="451" y="181" key="Vcs.Push.Dialog.v2" timestamp="1578307357586">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="451" y="143" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578065447183" />
-    <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1578307037492" />
+    <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1578307357586" />
     <state x="707" y="353" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1578293768137">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
