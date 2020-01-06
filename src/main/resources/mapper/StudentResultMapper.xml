@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.xdh.dao.StudentResultDao">
-    
 
+    <select id="selectStudentNameById" resultType="cn.xdh.entity.Student">
+        select username
+        from xdh_student
+        where id = ${id}
+    </select>
 
+    <select id="selectPaperAndTest" resultType="cn.xdh.entity.PaperAndTest">
+        select p.id,p.teacher_id,p.name,p.class_id,p.choice_question_score,p.short_answer_score,
+               p.total_score,p.state,p.test_time,p.start_time,p.end_time,t.student_id,t.hand_time,
+               t.score,t.test_id,t.marking_time
+               from xdh_test_paper  p,xdh_attend_test  t where p.id = t.test_id
+    </select>
 </mapper>

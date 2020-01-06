@@ -9,16 +9,27 @@
     <meta name="keywords" content="index">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="renderer" content="webkit">
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <link rel="icon" type="image/png" href="/assets/i/favicon.png">
     <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
-    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
     <script src="/assets/js/echarts.min.js"></script>
-    <link rel="stylesheet" href="/assets/css/amazeui.min.css" />
-    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css"/>
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/jquery.min.js"></script>
-
+    <style>
+        .testlist {
+            border-width: 0px;
+            position: absolute;
+            left: 11px;
+            top: 156px;
+            width: 192px;
+            height: 256px;
+            overflow: hidden;
+            background-image: url(http://www.axshare.cn/gsc/QOM2AE/6b/ae/63/6bae636…/…gif?token=7f482c0…);
+        }
+    </style>
 </head>
 
 <body data-type="index">
@@ -47,7 +58,8 @@
                     <!-- 欢迎语 -->
                     <li class="am-text-sm tpl-header-navbar-welcome">
                         <a href="#">欢迎你 &nbsp;
-                            <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                            <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                                  th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
                             </span>
                         </a>
                     </li>
@@ -83,7 +95,8 @@
             <div class="tpl-user-panel-slide-toggleable">
                 <span class="user-panel-logged-in-text">
                     <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
-                    <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                    <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                          th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
                     </span>
                 </span>
             </div>
@@ -145,47 +158,19 @@
                         </div>
                         <div class="widget-body  am-fr">
                             <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-                                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
-                                    <input type="text" class="am-form-field " placeholder="请输入要查询老师或手机号" id="lookname">
-                                    <span class="am-input-group-btn">
+                                <p th:text="${selectStudentNameById.username}"></p>
+                            </div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                            <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                <input type="text" class="am-form-field " placeholder="请输入要查询的试卷名" id="lookname">
+                                <span class="am-input-group-btn">
                                         <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" id="lookfor" type="button"></button>
-                                    </span>
-                                </div>
+                                </span>
                             </div>
-
-                            <div class="am-u-sm-12">
-                                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
-                                    <thead>
-                                    <tr>
-                                        <th>教师id</th>
-                                        <th>教师姓名</th>
-                                        <th>教师电话</th>
-                                        <th>入职时间</th>
-                                        <th>操作</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="gradeX" th:each="User:${selectTeacher}">
-                                        <td th:text="${User.id}"></td>
-                                        <td th:text="${User.name}"></td>
-                                        <td th:text="${User.mobile}"></td>
-                                        <td th:text="${#dates.format(User.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
-                                        <td>
-                                            <div class="tpl-table-black-operation">
-                                                <a th:href="@{'/admintoUpdateTeacher?id='+${User.id}}">
-                                                    <i class="am-icon-pencil"></i> 编辑
-                                                </a>
-                                                <a th:href="@{'/admindeleteteacher/'+${User.id}}" class="tpl-table-black-operation-del"
-                                                   onclick="javascript:return p_del()">
-                                                    <i class="am-icon-trash"></i> 删除
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!-- more data -->
-                                    </tbody>
-                                </table>
-                            </div>
+                        </div>
+                        <div class="tpl-user-card am-text-center widget-body-lg testlist">
+                            dsjifojqiosfio
                         </div>
                     </div>
                 </div>
@@ -198,13 +183,6 @@
 <script src="/assets/js/dataTables.responsive.min.js"></script>
 <script src="/assets/js/app.js"></script>
 <script src="/assets/js/operate.js"></script>
-<script>
-    $("#lookfor").click(function(){
-        var likeask = $("#lookname").val();
-        window.location.href = "/admin.teacher?type=likename&lookname="+likeask;
-
-    })
-</script>
 </body>
 
 </html>

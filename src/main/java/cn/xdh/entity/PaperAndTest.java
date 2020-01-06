@@ -1,19 +1,18 @@
 package cn.xdh.entity;
-//试卷表
-public class StudentTestPaper {
+
+public class PaperAndTest {
     private int id;
     private int teacher_id;
     private String name;
-    //关联学科
-    private int subject_id;
     private int class_id;
     //选择题分数
-    private int choice_question_score;
-    //简答题分数hand_time
+    private int choice_qustion_score;
+    //简答题分数
     private int short_answer_score;
     //总分
     private int total_score;
-    //试卷状态 1未开始 2正在 3已完成
+    
+    //1未开始 2正在 3已完成,在成绩页面中只需要3
     private int state;
     //考试时间
     private Long test_time;
@@ -21,29 +20,37 @@ public class StudentTestPaper {
     private Long start_time;
     //结束时间
     private Long end_time;
-    //发布状态 0未发布 1已发布
-    private int is_publish;
-    //创建时间
-    private Long add_time;
+    
+    private int student_id;
+    //交卷时间
+    private Long hand_time;
+    //分数
+    private int score;
+    //试卷id
+    private int test_id;
+    //批卷时间 0未批阅 >0已批阅,在成绩页面中只需>0
+    private long marking_time;
 
-    public StudentTestPaper() {
+    public PaperAndTest() {
     }
 
-    public StudentTestPaper(int id, int teacher_id, String name, int subject_id, int class_id, int choice_question_score, int short_answer_score, int total_score, int state, Long test_time, Long start_time, Long end_time, int is_publish, Long add_time) {
+    public PaperAndTest(int id, int teacher_id, String name, int class_id, int choice_qustion_score, int short_answer_score, int total_score, int state, Long test_time, Long start_time, Long end_time, int student_id, Long hand_time, int score, int test_id, long marking_time) {
         this.id = id;
         this.teacher_id = teacher_id;
         this.name = name;
-        this.subject_id = subject_id;
         this.class_id = class_id;
-        this.choice_question_score = choice_question_score;
+        this.choice_qustion_score = choice_qustion_score;
         this.short_answer_score = short_answer_score;
         this.total_score = total_score;
         this.state = state;
         this.test_time = test_time;
         this.start_time = start_time;
         this.end_time = end_time;
-        this.is_publish = is_publish;
-        this.add_time = add_time;
+        this.student_id = student_id;
+        this.hand_time = hand_time;
+        this.score = score;
+        this.test_id = test_id;
+        this.marking_time = marking_time;
     }
 
     public int getId() {
@@ -70,14 +77,6 @@ public class StudentTestPaper {
         this.name = name;
     }
 
-    public int getSubject_id() {
-        return subject_id;
-    }
-
-    public void setSubject_id(int subject_id) {
-        this.subject_id = subject_id;
-    }
-
     public int getClass_id() {
         return class_id;
     }
@@ -86,12 +85,12 @@ public class StudentTestPaper {
         this.class_id = class_id;
     }
 
-    public int getChoice_question_score() {
-        return choice_question_score;
+    public int getChoice_qustion_score() {
+        return choice_qustion_score;
     }
 
-    public void setChoice_question_score(int choice_question_score) {
-        this.choice_question_score = choice_question_score;
+    public void setChoice_qustion_score(int choice_qustion_score) {
+        this.choice_qustion_score = choice_qustion_score;
     }
 
     public int getShort_answer_score() {
@@ -142,40 +141,65 @@ public class StudentTestPaper {
         this.end_time = end_time;
     }
 
-    public int getIs_publish() {
-        return is_publish;
+    public int getStudent_id() {
+        return student_id;
     }
 
-    public void setIs_publish(int is_publish) {
-        this.is_publish = is_publish;
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
     }
 
-    public Long getAdd_time() {
-        return add_time;
+    public Long getHand_time() {
+        return hand_time;
     }
 
-    public void setAdd_time(Long add_time) {
-        this.add_time = add_time;
+    public void setHand_time(Long hand_time) {
+        this.hand_time = hand_time;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getTest_id() {
+        return test_id;
+    }
+
+    public void setTest_id(int test_id) {
+        this.test_id = test_id;
+    }
+
+    public long getMarking_time() {
+        return marking_time;
+    }
+
+    public void setMarking_time(long marking_time) {
+        this.marking_time = marking_time;
     }
 
     @Override
     public String toString() {
-        return "TestPaper{" +
+        return "PaperAndTest{" +
                 "id=" + id +
                 ", teacher_id=" + teacher_id +
                 ", name='" + name + '\'' +
-                ", subject_id=" + subject_id +
                 ", class_id=" + class_id +
-                ", choice_question_score=" + choice_question_score +
+                ", choice_qustion_score=" + choice_qustion_score +
                 ", short_answer_score=" + short_answer_score +
                 ", total_score=" + total_score +
                 ", state=" + state +
                 ", test_time=" + test_time +
                 ", start_time=" + start_time +
                 ", end_time=" + end_time +
-                ", is_publish=" + is_publish +
-                ", add_time=" + add_time +
+                ", student_id=" + student_id +
+                ", hand_time=" + hand_time +
+                ", score=" + score +
+                ", test_id=" + test_id +
+                ", marking_time=" + marking_time +
                 '}';
     }
-    
 }
