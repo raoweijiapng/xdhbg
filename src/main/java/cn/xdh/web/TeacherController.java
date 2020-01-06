@@ -85,6 +85,8 @@ public class TeacherController {
             model.addAttribute("totalPage", totalPage);
             model.addAttribute("totalPageList", totalPageList);
             model.addAttribute("teacherLogs", teacherLogs);
+            model.addAttribute("likeName",0);
+            model.addAttribute("p",page);
             return new ModelAndView("teacher/TeacherLogList");
         }else {
             response.setContentType("text/html; charset=utf-8");
@@ -99,8 +101,64 @@ public class TeacherController {
             out.println("</script>");
             return new ModelAndView("redirect:/");
         }
+    }
 
+    //教师日志的模糊查询/teacherLog/like/1/
+    @GetMapping("/teacherLog/like/{page}/{action}")
+    public String undergraduateStudentList(Model model, @PathVariable String action,@PathVariable int page,HttpServletRequest request,HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        //获得日志中需要的数据
+        String teacherId = "id";
+        int teacher_id = 0;
+        if (cookies != null){
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals(teacherId)) {
+                    //将字符串形式的id转换成int类型
+                    teacher_id = Integer.parseInt(cookie.getValue());
+                }
+            }
+            //模糊查找所有的教师日志
+            //System.out.println(teacher_id);
+            List<TeacherLog> teacherLogList = teacherService.selectTeacherLogLikeAction(teacher_id,action);
+            //数据量
+            int total = teacherLogList.size();
+            //防止数据库中没有值
+            if (total == 0) {
+                TeacherLog teacherLog = new TeacherLog();
+                teacherLog.setTeacher_name("暂无日志");
+                teacherLog.setAdd_time(0);
+                teacherLogList.add(teacherLog);
+                total = teacherLogList.size();
+            }
+            //总页数
+            int totalPage = PageUtil.getTotalPage(total, PageUtil.count);
+            //校对页数正确与否
+            page = PageUtil.numberOfPage(page, totalPage);
+            //页数集合
+            List<Integer> totalPageList = PageUtil.pageUtil(page, totalPage);
+            //分好页的未毕业学生集合
+            List<TeacherLog> teacherLogs = PageUtil.teacherLogList(page, totalPage, total, teacherLogList);
 
+            model.addAttribute("totalPage", totalPage);
+            model.addAttribute("totalPageList", totalPageList);
+            model.addAttribute("teacherLogs", teacherLogs);
+            model.addAttribute("likeName",1);
+            model.addAttribute("action",action);
+            model.addAttribute("p",page);
+            return "teacher/TeacherLogList";
+        }else {
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out.println("<script>");
+            out.println("alert('请先登录,再进行操作!');");
+            out.println("</script>");
+            return "redirect:/";
+        }
     }
 
     //    公告列表初始化
@@ -135,6 +193,7 @@ public class TeacherController {
         mav.setViewName("teacher/noticeManage");
         return mav;
     }
+
     //    删除公告
     @GetMapping(value = "delManage/{id}")
     @ResponseBody

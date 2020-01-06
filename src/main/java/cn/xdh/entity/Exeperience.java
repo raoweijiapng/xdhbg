@@ -1,5 +1,8 @@
 package cn.xdh.entity;
 
+import java.util.Date;
+import java.util.Objects;
+
 /**
  * @author TZB
  */
@@ -69,5 +72,28 @@ public class Exeperience {
 
     public void setClass_name(String class_name) {
         this.class_name = class_name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Exeperience that = (Exeperience) o;
+        return id == that.id &&
+                student_id == that.student_id &&
+                add_time == that.add_time &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(class_name, that.class_name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, student_id, content, add_time, username, class_name);
+    }
+
+    public Date getDateTime(){
+        Long l = getAdd_time()*1000;
+        return new Date(l);
     }
 }

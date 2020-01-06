@@ -34,20 +34,21 @@ public class NoticeContentServerImpl implements NoticeContentService {
         Cookie[] cookies = request.getCookies();
         String mobile = null;
         String password = null;
-        for(Cookie cookie:cookies){
-            if (cookie.getName().equals("mobile")){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("mobile")) {
                 mobile = cookie.getValue();
             }
-            if (cookie.getName().equals("password")){
+            if (cookie.getName().equals("password")) {
                 password = cookie.getValue();
             }
 
         }
-        Teacher teacher = teacherDao.selectByPhoneAndPassword(mobile,password);
-        TeacherLog teacherLog = new TeacherLog(teacher.getId(),teacher.getName(),action,SomeMethods.getCurrentTime(),SomeMethods.getIp4());
+        Teacher teacher = teacherDao.selectByPhoneAndPassword(mobile, password);
+        TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
         //将日志实体类添加到日志表中
         teacherDao.addTeacherLog(teacherLog);
-        Integer nc = noticeContentDao.addNoticeContent(content,time);
+        Integer nc = noticeContentDao.addNoticeContent(content, time);
         return nc;
+
     }
 }

@@ -59,28 +59,34 @@ public class SomeMethods {
     }
 
     //设置cookie和session
-    public static void setCookieAndSession(int id, String name, String password,String mobile, HttpServletResponse response, HttpServletRequest request) {
+    public static void setCookieAndSession(String type,int id, String name, String password,String mobile, HttpServletResponse response, HttpServletRequest request) {
         //1.  创建Cookie
         Cookie cookie = new Cookie("name", name);
         Cookie cookie1 = new Cookie("password", password);
         Cookie cookie2 = new Cookie("mobile", mobile);
         String cookieid = Integer.toString(id);
         Cookie cookie3 = new Cookie("id", cookieid);
+        Cookie cookie4 = new Cookie("type", type);
         //    设置存活时长为1年
         cookie.setMaxAge(365*24*60*60);
         cookie1.setMaxAge(365*24*60*60);
         cookie2.setMaxAge(365*24*60*60);
         cookie3.setMaxAge(365*24*60*60);
+        cookie4.setMaxAge(365*24*60*60);
+
         //    设置cookie存储路径为/
         cookie.setPath("/");
         cookie1.setPath("/");
         cookie2.setPath("/");
         cookie3.setPath("/");
+        cookie4.setPath("/");
         //2.  将Cookie 添加到响应头部
         response.addCookie(cookie);
         response.addCookie(cookie1);
         response.addCookie(cookie2);
         response.addCookie(cookie3);
+        response.addCookie(cookie4);
+
         //获得session
         HttpSession session =  request.getSession();
         //把用户名存入session
@@ -88,30 +94,32 @@ public class SomeMethods {
         session.setAttribute("password", password);
         session.setAttribute("mobile", mobile);
         session.setAttribute("id", id);
+        session.setAttribute("type", type);
+
     }
 
     //查看cookie和session中是否有用户名
-    public static boolean checkCookieAndSession(HttpServletResponse response, HttpServletRequest request) throws IOException {
+    public static String checkCookieAndSession(HttpServletResponse response, HttpServletRequest request) throws IOException {
         Cookie[] cookies = request.getCookies();
         //3.  循环遍历Cookie 取出用户手机号
-        String mobile = null;
+        String type = null;
         if(cookies!=null) {
             for (Cookie cookie : cookies) {
-                if(cookie.getName().equals("mobile")) {
-                    mobile = cookie.getValue();
-                    if(mobile == null) {
+                if(cookie.getName().equals("type")) {
+                    type = cookie.getValue();
+                    if(type == null) {
                         HttpSession session  = request.getSession();
-                        mobile = (String) session.getAttribute("mobile");
-                        if (mobile == null){
-                            return false;
+                        type = (String) session.getAttribute("type");
+                        if (type == null){
+                            return type;
                         }
-                        return true;
+                        return type;
                     }
-                    return true;
+                    return type;
                 }
             }
         }
-        return false;
+        return type;
     }
 
     //删除cookie和session

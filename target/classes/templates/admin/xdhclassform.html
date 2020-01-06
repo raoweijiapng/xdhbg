@@ -136,20 +136,20 @@
                         </div>
                         <div class="widget-body  am-fr">
                             <div class="am-u-sm-12">
-                                <form class="am-form tpl-form-line-form">
+                                <form class="am-form tpl-form-line-form" id="form" autocomplete="off">
                                     <label class="am-u-sm-3 am-form-label">班期名称:</label>
                                     <div class="am-u-sm-9">
                                         <input type="text" name="class_name" id="class"/></div><br/><br/>
                                     <input style="display: none" type="hidden" name="add_time" th:value="1"/><br/><br/>
                                     <label class="am-u-sm-3 am-form-label">班主任名称:</label>
                                     <div class="am-u-sm-9">
-                                    <select class="form-control" name="teacher_id" id="teacher_id" data-am-selected="{searchBox: 1}">
-                                        <option >请选择老师</option>
-                                        <option  th:each="teacher:${selectByTeacher}" th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
-                                    </select></div><br/><br/>
+                                        <select class="form-control" name="teacher_id" id="teacher_id" data-am-selected style="display: none;">
+                                            <option th:value="-1">请选择老师</option>
+                                            <option  th:each="teacher:${selectByTeacher}" th:value="${teacher.getId()}" th:text="${teacher.getName()}"></option>
+                                        </select></div><br/><br/>
                                     <input style="display: none" type="hidden" name="is_graduate" th:value="0"/><br/><br/>
                                     <div class="am-u-sm-4 am-form-label">
-                                    <input class="am-btn am-btn-primary tpl-btn-bg-color-success" id="btn" disabled="true" onclick="javascript:return p_insert()" type="button" value="添加"/>
+                                        <input class="am-btn am-btn-primary tpl-btn-bg-color-success" onclick="p_insert()" type="button" value="添加"/>
                                     </div>
                                 </form>
                             </div>

@@ -224,13 +224,15 @@
 <!--                                        正常分页-->
                                         <ul th:if="${likeName}==0" class="am-pagination tpl-pagination">
                                             <li><a th:href="@{/student/Undergraduate/1}">«</a></li>
-                                            <li th:each="page:${totalPageList}"><a th:href="@{/student/Undergraduate/}+${page}" th:text="${page}"></a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a th:href="@{/student/Undergraduate/}+${page}" th:text="${page}"></a></li>
                                             <li><a th:href="@{/student/Undergraduate/}+${totalPage}">»</a></li>
                                         </ul>
 <!--                                        模糊查询分页-->
                                         <ul th:if="${likeName}==1" class="am-pagination tpl-pagination">
                                             <li><a th:href="@{/student/like/0/1/}+${name}">«</a></li>
-                                            <li th:each="page:${totalPageList}"><a th:href="@{/student/like/0/}+${page}+'/'+${name}" th:text="${page}"></a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a th:href="@{/student/like/0/}+${page}+'/'+${name}" th:text="${page}"></a></li>
                                             <li><a th:href="@{/student/like/0/}+${totalPage}+'/'+${name}">»</a></li>
                                         </ul>
                                     </div>

@@ -6,6 +6,10 @@
     <select id="selectByXdhClass" resultType="cn.xdh.entity.XdhClass">
         select * from xdh_class
     </select>
+
+    <select id="selectClassByNameAndId" resultType="cn.xdh.entity.XdhClass">
+        select * from xdh_class where class_name = #{class_name} and id != #{id}
+    </select>
     
     <select id="selectByClassName" resultType="cn.xdh.entity.XdhClass">
         select * from xdh_class where class_name = #{class_name}
@@ -24,6 +28,7 @@
         UPDATE
             xdh_class
         SET
+            class_name = ${'"'+class_name+'"'},
             teacher_id = ${teacher_id},
             is_graduate = ${is_graduate}
         where

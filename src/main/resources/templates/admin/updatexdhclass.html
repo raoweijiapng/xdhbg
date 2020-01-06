@@ -137,27 +137,25 @@
                         </div>
                         <div class="widget-body  am-fr">
                             <div class="am-u-sm-12">
-                                <form th:action="@{'/adminupdatexdhclass/'+${xdhclassId}}" method="Post" class="am-form tpl-form-line-form">
+                                <form th:attr="url='/adminupdatexdhclass/'+${xdhclassId}" id="form" method="Post" class="am-form tpl-form-line-form">
                                     <label class="am-u-sm-3 am-form-label">班期名称:</label>
                                     <div class="am-u-sm-9">
-                                    <b><td th:if="${teacherClass.id}==${xdhclassId}" th:text="${teacherClass.class_name}" th:each="teacherClass:${teacherClasses}"></td></b><br/><br/>
+                                        <input type="text" name="class_name" id="class" th:value="${xdhClass.class_name}"/>
                                     </div>
-<!--                                    <input style="display: none" type="hidden" name="add_time" th:value="1"/><br/><br/>-->
                                     <label class="am-u-sm-3 am-form-label">班主任名称:</label>
                                     <div class="am-u-sm-9">
-                                    <select class="form-control" name="teacher_id" data-am-selected="{searchBox: 1}">
-                                        <option th:each="teacherClass:${teacherClasses}" th:if="${teacherClass.id}==${xdhclassId}" th:text="${teacherClass.name}" th:value="${teacherClass.teacher_id}"></option>
-                                        <option  th:each="selectTeacher:${selectByTeacher}" th:value="${selectTeacher.id}" th:text="${selectTeacher.name}"></option>
-                                    </select>
-                                        </div>
-                                        <br/><br/>
+                                        <select class="form-control" id="teacher_id" name="teacher_id" data-am-selected style="display: none;">
+                                            <option th:each="selectTeacher:${selectByTeacher}" th:value="${selectTeacher.id}" th:selected="${selectTeacher.id}==${xdhClass.teacher_id}" th:text="${selectTeacher.name}"></option>
+                                        </select>
+                                    </div>
+                                    <br/><br/>
                                     <label class="am-u-sm-3 am-form-label">是否毕业:</label>
                                     <div class="am-u-sm-9">
-                                        <input type="radio" name="is_graduate" th:value="0" checked/>未毕业
+                                        <input type="radio" name="is_graduate"  th:value="0" checked/>未毕业
                                         <input type="radio" name="is_graduate" th:value="1"/>已毕业<br/><br/>
                                     </div>
                                     <div class="am-u-sm-9">
-                                    <input  id="btn" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="javascript:return p_update()" type="submit" value="修改"/>
+                                        <input  id="btn" class="am-btn am-btn-primary tpl-btn-bg-color-success " type="button" value="修改"/>
                                     </div>
                                 </form>
                             </div>

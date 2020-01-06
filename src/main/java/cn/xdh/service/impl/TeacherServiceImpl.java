@@ -78,7 +78,11 @@ public class TeacherServiceImpl implements TeacherService {
     //更新老师信息
     @Override
     public int updateByTeacher(Teacher teacher) {
-        int updateByTeacher = teacherdao.updateByTeacher(teacher);
+        Teacher teacher1 = teacherdao.selectTeacherByMobileAndId(teacher);
+        int updateByTeacher = 0;
+        if (teacher1 == null){
+            updateByTeacher = teacherdao.updateByTeacher(teacher);
+        }
         return updateByTeacher;
     }
 
@@ -133,4 +137,9 @@ public class TeacherServiceImpl implements TeacherService {
         teacherdao.addTeacherLog(teacherLog);
     }
 
+    //模糊查看老师操作日志列表
+    @Override
+    public List<TeacherLog> selectTeacherLogLikeAction(int teacher_id,String action){
+        return teacherdao.selectTeacherLogLikeAction(teacher_id,action);
+    }
 }

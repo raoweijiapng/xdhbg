@@ -277,6 +277,11 @@ public class StudentServiceImpl implements StudentService {
         return studentDao.selectClassByUndergraduate();
     }
 
+    @Override
+    public List<Student> selectStudentByClass(int class_id) {
+        return studentDao.selectStudentByClass(class_id);
+    }
+
 
     @Override
     public List<String> selectUsername() {
@@ -320,9 +325,16 @@ public class StudentServiceImpl implements StudentService {
         return usefulDataList;
     }
 
+
+
     @Override
-    public void  updateData(int id,String password,long birthday,String graduate_school,String stage_id,int province_id,int city_id,int area_id) {
-        studentDao.updateData(id,password,birthday,graduate_school,stage_id,province_id,city_id,area_id);
+    public void updateData(int id,String password,long birthday,String graduate_school,String stage_id,int province_id,int city_id,int area_id,String address) {
+        studentDao.updateData(id,password,birthday,graduate_school,stage_id,province_id,city_id,area_id,address);
+    }
+
+    @Override
+    public void updateOther(int id,long birthday,String graduate_school,String stage_id,int province_id,int city_id,int area_id,String address) {
+        studentDao.updateOther(id,birthday,graduate_school,stage_id,province_id,city_id,area_id,address);
     }
 
     @Override

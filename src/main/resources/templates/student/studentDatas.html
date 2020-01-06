@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="widget-body am-fr">
-                                <form class="am-form tpl-form-border-form tpl-form-border-br" >
+                                <form class="am-form tpl-form-border-form tpl-form-border-br">
                                     <!--             用户名          -->
                                     <div class="am-form-group">
                                         <label  class="am-u-sm-3 am-form-label" >用户名 : </label>
@@ -145,7 +145,8 @@
                                             <small>&nbsp;</small>
                                         </div>
                                     </div>
-                                    <div class="am-form-group">
+
+                                    <div class="am-form-group" th:if="${dat['birthday']}">
                                         <label  class="am-u-sm-3 am-form-label">生日 : </label>
                                         <div class="am-u-sm-9">
                                             <span th:text="${#dates.format(dat['birthday']*1000,'yyyy-MM-dd')}"></span>
@@ -163,7 +164,7 @@
                                     </div>
 
                                     <!--             毕业日期          -->
-                                    <div class="am-form-group">
+                                    <div class="am-form-group" th:if="${dat['graduate_time']}" >
                                         <label class="am-u-sm-3 am-form-label">毕业日期 : </label>
                                         <div class="am-u-sm-9">
                                             <span th:text="${#dates.format(dat['graduate_time']*1000,'yyyy-MM-dd')}">显示数据库日期</span>
@@ -227,7 +228,7 @@
                                     <div class="am-form-group">
                                         <label  class="am-u-sm-3 am-form-label">毕业状态 : </label>
                                         <div class="am-u-sm-9">
-                                            <span th:text="${dat['graduate_time']} != null?'已毕业':'未毕业'">显示数据库is_graduate</span>
+                                            <span th:text="${dat['is_graduate']} != null?'已毕业':'未毕业'">显示数据库is_graduate</span>
                                         </div>
                                         <small> &nbsp;</small>
                                     </div>

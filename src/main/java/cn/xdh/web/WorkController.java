@@ -179,7 +179,7 @@ public class WorkController {
     }
 
 
-
+    //学生端作品的代码
 
     @GetMapping(value = "/worklist/{page}")
     public ModelAndView getTeacherLog(Model model, @PathVariable int page, HttpServletRequest request, HttpServletResponse response) {
@@ -202,14 +202,7 @@ public class WorkController {
             int total = worksList.size();
             //防止数据库中没有值
             if (total == 0) {
-                Works works = new Works();
-                works.setId(1);
-                works.setStudent_id(0);
-                works.setName("暂无数据");
-                works.setUrl("暂无数据");
-                works.setAdd_time(0);
-                worksList.add(works);
-                total = worksList.size();
+                return new ModelAndView("student/studentWorks");
             }
             //总页数
             int totalPage = PageUtil.getTotalPage(total, PageUtil.count);
@@ -255,20 +248,14 @@ public class WorkController {
                     name = cookie.getValue();
                 }
             }
+            String workname1 = workname.replaceAll(" ","");
             //获取该学生的作品集合
-            List<Works> worksList = worksServiceimpl.likeSelectWorks(workname, student_id);
+            List<Works> worksList = worksServiceimpl.likeSelectWorks(workname1, student_id);
             //作品数据量
             int total = worksList.size();
             //防止数据库中没有值
             if (total == 0) {
-                Works works = new Works();
-                works.setId(1);
-                works.setStudent_id(0);
-                works.setName("暂无数据");
-                works.setUrl("暂无数据");
-                works.setAdd_time(0);
-                worksList.add(works);
-                total = worksList.size();
+                return new ModelAndView("student/studentWorks");
             }
             //总页数
             int totalPage = PageUtil.getTotalPage(total, PageUtil.count);
