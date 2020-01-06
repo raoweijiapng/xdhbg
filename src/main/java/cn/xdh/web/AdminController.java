@@ -205,8 +205,17 @@ public class AdminController {
 
     //老师增加操作提交的地址,并重定向到教师管理列表
     @PostMapping(value = "/admin.addteacher")
-    public ModelAndView insertTeacher(Teacher teacher,HttpServletRequest request,HttpServletResponse response) {
-        teacherservice.insertByTeacher(teacher);
+    public Map<String, Object> insertTeacher(Teacher teacher, HttpServletRequest request, HttpServletResponse response) {
+        String md5password = SomeMethods.md5(teacher.getPassword());
+        teacher.setPassword(md5password);
+        Teacher result = teacherservice.selectTeacherMobile(teacher.getMobile());
+        Map<String,Object> map = new HashMap<String,Object>();
+        if (result == null){
+            teacherservice.insertByTeacher(teacher);
+            map.put("msg","success");
+        }else {
+            map.put("msg","failed");
+        }
         String content = "管理员增加老师";
         String mobile = null;
         String password = null;
@@ -222,7 +231,6 @@ public class AdminController {
             Admin admin = adminservice.selectByPhoneAndPassword(mobile,password);
             AdminLog adminlog = new AdminLog(admin.getId(), admin.getUsername(), content, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
             adminservice.addAdminLog(adminlog);
-            return new ModelAndView("redirect:/admin.teacher");
         }else{
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = null;
@@ -232,27 +240,40 @@ public class AdminController {
                 e.printStackTrace();
             }
             out.println("<script>");
-            out.println("alert('请先登录,再进行操作!');");
+            out.println("alert('请先登录,再进行操作!');window.location.href='/';");
             out.println("</script>");
-            return new ModelAndView("redirect:/");
         }
+        return map;
     }
 
     //通过老师的id,与查询出来的老师信息,实现老师信息的显示和修改
     @GetMapping("/admintoUpdateTeacher")
     public ModelAndView toUpdateTeacher(@RequestParam(name="id",required=false)int id,Model model){
         Teacher selectByTeacher = teacherservice.selectByTeacher(id);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("admin/updateteacher");
-        mav.addObject("selectByTeacher",selectByTeacher);
         model.addAttribute("teacherId",id);
-        return mav;
+        model.addAttribute("selectByTeacher",selectByTeacher);
+        return new ModelAndView("admin/updateteacher");
+    }
+
+    @PostMapping("/updateteacher")
+    public Teacher updateTeacher(@RequestParam(name="mobile",required=false)String mobile){
+        Teacher selectByTeacher = teacherservice.selectTeacherMobile(mobile);
+        return selectByTeacher;
+
     }
 
     //修改老师信息
     @PostMapping(value = "/adminupdateteacher/{id}")
-    public ModelAndView updateTeacher(Teacher teacher,HttpServletRequest request,HttpServletResponse response) {
-        teacherservice.updateByTeacher(teacher);
+    public Map<String,Object> updateTeacher(Teacher teacher,HttpServletRequest request,HttpServletResponse response) {
+        String md5password = SomeMethods.md5(teacher.getPassword());
+        teacher.setPassword(md5password);
+        int a = teacherservice.updateByTeacher(teacher);
+        Map<String,Object> map = new HashMap<String,Object>();
+        if (a==1){
+            map.put("msg","success");
+        }else {
+            map.put("msg","failed");
+        }
         String content = "管理员修改老师信息";
         String mobile = null;
         String password = null;
@@ -268,7 +289,6 @@ public class AdminController {
             Admin admin = adminservice.selectByPhoneAndPassword(mobile,password);
             AdminLog adminlog = new AdminLog(admin.getId(), admin.getUsername(), content, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
             adminservice.addAdminLog(adminlog);
-            return new ModelAndView("redirect:/admin.teacher");
         }else{
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = null;
@@ -278,10 +298,10 @@ public class AdminController {
                 e.printStackTrace();
             }
             out.println("<script>");
-            out.println("alert('请先登录,再进行操作!');");
+            out.println("alert('请先登录,再进行操作!');window.location.href='/';");
             out.println("</script>");
-            return new ModelAndView("redirect:/");
         }
+        return map;
     }
 
     //将查询出来的老师和班级有关的数据发到页面
@@ -341,7 +361,6 @@ public class AdminController {
     public XdhClass checkclassname(HttpServletRequest request){
         String class_name = request.getParameter("class_name");
         XdhClass xdhclass = classservice.selectByClassName(class_name);
-        //System.out.println(xdhclass);
         return xdhclass;
     }
 
@@ -351,6 +370,7 @@ public class AdminController {
         Long addTime = SomeMethods.getCurrentTime();
         xdhClass.setAdd_time(addTime);
         int result = classservice.insertByXdhClass(xdhClass);
+        System.out.println(result);
         String content = "管理员增加班级";
         String mobile = null;
         String password = null;
@@ -392,22 +412,23 @@ public class AdminController {
     public ModelAndView toUpdateXdhClass(@PathVariable int id,Model model){
         model.addAttribute("xdhclassId",id);
         List<Teacher> selectByTeacher = teacherservice.selectAllTeacher();
-//        System.out.println(selectByTeacher);
-        //通过查询老师班级类可以知道班级的班主任是谁
-        List<TeacherClass> teacherClasses = teacherservice.selectTeacherClass();
-//        System.out.println(teacherClasses);
-        model.addAttribute("teacherClasses",teacherClasses);
+        XdhClass xdhClass = classservice.selectClassById(id);
+        model.addAttribute("xdhClass",xdhClass);
         model.addAttribute("selectByTeacher",selectByTeacher);
         return new ModelAndView("admin/updatexdhclass");
     }
 
     //修改班级信息页面
     @PostMapping(value = "/adminupdatexdhclass/{id}")
-    public ModelAndView updateXdhClass(XdhClass xdhClass,HttpServletRequest request,HttpServletResponse response){
-//        Long addTime = SomeMethods.getCurrentTime();
-//        xdhClass.setAdd_time(addTime);
-        //System.out.println(xdhClass);
-        classservice.updateByXdhClass(xdhClass);
+    public Map<String,Object> updateXdhClass(XdhClass xdhClass,HttpServletRequest request,HttpServletResponse response){
+        int a = classservice.updateByXdhClass(xdhClass);
+        System.out.println(xdhClass.getIs_graduate());
+        Map<String,Object> map = new HashMap<String,Object>();
+        if (a==1){
+            map.put("msg","success");
+        }else {
+            map.put("msg","failed");
+        }
         String content = "管理员修改班级信息";
         String mobile = null;
         String password = null;
@@ -423,7 +444,6 @@ public class AdminController {
             Admin admin = adminservice.selectByPhoneAndPassword(mobile,password);
             AdminLog adminlog = new AdminLog(admin.getId(), admin.getUsername(), content, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
             adminservice.addAdminLog(adminlog);
-            return new ModelAndView("redirect:/admin.xdhclass");
         }else{
             response.setContentType("text/html; charset=utf-8");
             PrintWriter out = null;
@@ -433,11 +453,10 @@ public class AdminController {
                 e.printStackTrace();
             }
             out.println("<script>");
-            out.println("alert('请先登录,再进行操作!');");
+            out.println("alert('请先登录,再进行操作!');window.location.href='/';");
             out.println("</script>");
-            return new ModelAndView("redirect:/");
         }
-
+        return map;
     }
 
     //通过id执行删除班级操作

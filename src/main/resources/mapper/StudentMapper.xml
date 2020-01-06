@@ -138,6 +138,7 @@
 		update xdh_student set
 		is_graduate = #{is_graduate},
 		company = #{company},
+		class_id=#{class_id},
 		salary = #{salary,jdbcType=DECIMAL},
 		aim_province_id = #{aim_province_id},
 		aim_city_id = #{aim_city_id},
@@ -169,7 +170,7 @@
 		SELECT * FROM xdh_student WHERE id = #{id}
 	</select>
 
-	<!-- 查询班级id查询班级表中的班级名 -->
+	<!-- 查询学生id查询学生信息 -->
 	<select id="getUsefulData" resultType="java.util.HashMap">
 			select
 			student.id,student.username,student.mobile,student.password
@@ -183,7 +184,14 @@
 	<update id="updateData" parameterType="java.util.HashMap" >
 		UPDATE xdh_student SET password=#{password},birthday=#{birthday}
 		,graduate_school=#{graduate_school},stage_id=#{stage_id}
-		,province_id=#{province_id},city_id=#{city_id},area_id=#{area_id} WHERE ID=#{id}
+		,province_id=#{province_id},city_id=#{city_id},area_id=#{area_id},address=#{address} WHERE ID=#{id}
+		<!-- 属性字段名区分大小写 -->
+	</update>
+
+	<update id="updateOther" parameterType="java.util.HashMap" >
+		UPDATE xdh_student SET birthday=#{birthday}
+		,graduate_school=#{graduate_school},stage_id=#{stage_id}
+		,province_id=#{province_id},city_id=#{city_id},area_id=#{area_id},address=#{address} WHERE ID=#{id}
 		<!-- 属性字段名区分大小写 -->
 	</update>
 

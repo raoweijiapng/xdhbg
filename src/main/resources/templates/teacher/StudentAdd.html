@@ -273,6 +273,9 @@
                 },
                 function (data) {
                     alert(data.msg);
+                    if (data.msg=="添加成功"){
+                        window.location.href="/student/Undergraduate/1";
+                    }
                 });
         }
         $("#username").val("");
@@ -305,6 +308,9 @@
             },
             success: function (data) {
                 alert(data.msg);
+                if (data.msg=="添加成功"){
+                    window.location.href="/student/Undergraduate/1";
+                }
             }
         };
         if (fileName == "") {

@@ -8,13 +8,15 @@ import java.util.List;
 @Repository
 public interface XdhClassDao {
 
-     List<XdhClass> selectByXdhClass();
-     
-     int deleteByXdhClass(int id);
-     
-     int insertByXdhClass(XdhClass xdhClass);
-     
-     int updateByXdhClass(XdhClass xdhClass);
+    List<XdhClass> selectByXdhClass();
 
-     XdhClass selectByClassName(String class_name);
+    int deleteByXdhClass(int id);
+
+    int insertByXdhClass(XdhClass xdhClass);
+
+    int updateByXdhClass(XdhClass xdhClass);
+
+    XdhClass selectByClassName(String class_name);
+
+    XdhClass selectClassByNameAndId(XdhClass xdhClass);
 }

@@ -1,20 +1,66 @@
 // 删除确认弹出框
 function p_del() {
     var msg = "您真的确定要删除吗？";
-    if (confirm(msg)==true){
-        alert("点击确定完成删除!");
+    if (confirm(msg) == true) {
         return true;
-    }else{
+    } else {
         return false;
-        
+
     }
 }
+//手机号正则
+var regex = /^((0\d{2,3}-\d{7,8})|(1[3456789]\d{9}))$/;
+//姓名正则
+var reg_name = /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
+//班级名称正则
+var reg_class = /^([a-z0-9]){2,10}$/i;
+//密码正则
+var reg_password = /^([a-z0-9\.\@\!\#\$\%\^\&\*\(\)]){6,20}$/i;
 
+//手机号符合正则时手机号条变绿
+$("#form").bind("input propertychange", function () {
+    if (regex.test($("#mobile").val())){
+        $('#mobile').css("border-color","green").css("border-width","2px");
+    }else {
+        $('#mobile').css("border-color","red");
+    }
+})
 
-// 增加班级确认弹出框
+//姓名符合正则时密码框变绿
+$("#name").bind("input propertychange", function () {
+    if (reg_name.test($("#name").val())) {
+        $('#name').css("border-color", "green").css("border-width", "2px");
+    } else {
+        $('#name').css("border-color", "red");
+    }
+})
+
+//密码符合正则时密码框变绿
+$("#psd").bind("input propertychange", function () {
+    if (reg_password.test($("#psd").val())) {
+        $('#psd').css("border-color", "green").css("border-width", "2px");
+    } else {
+        $('#psd').css("border-color", "red");
+    }
+})
+$("#psd2").bind("input propertychange", function () {
+    if (reg_password.test($("#psd2").val())) {
+        $('#psd2').css("border-color", "green").css("border-width", "2px");
+    } else {
+        $('#psd2').css("border-color", "red");
+    }
+})
+
+// 增加班级
 function p_insert() {
-    var insert = "您确定要增加班级吗？";
-    if (confirm(insert)==true){
+    var className = $("#class").val().trim();
+    var teacherId = $("#teacher_id").val();
+    if (className == "") {
+        alert("班级名称不能为空");
+        return false;
+    } else if (teacherId == -1) {
+        alert("请选择老师");
+    } else {
         $.ajax({
             type: "post",
             url: "/adminaddxdhclassform",
@@ -23,161 +69,134 @@ function p_insert() {
                 teacher_id: parseInt($('#teacher_id').val())
             }, //发送到服务器的参数
             success: function (result) {
-                if (result.msg == "success"){
-                    alert("增加班级成功!");
-                    window.location.href='/admin.xdhclass';
-                }else {
-                    alert("增加班级失败!");
-                    window.location.href='/admin.xdhclass';
+                if (result.msg == "success") {
+                    window.location.href = "/admin.xdhclass"
+                } else {
+                    alert("该班级已存在");
                 }
-            },
-            error: function (errorMsg) {
-                alert("增加班级操作无效!");
-                window.location.href='/admin.xdhclass';
             }
         });
-    }else{
-        alert("取消增加");
-        return false;
-    }
-}
-// 增加确认修改弹出框
-function p_update() {
-    var update = "您确定要修改吗？";
-    if (confirm(update)==true){
-        alert("修改成功");
-        return true;
-    }else{
-        alert("取消修改");
-        return false;
     }
 }
 
-//姓名正则
-var  reg_name= /^[\u4E00-\u9FA5\uf900-\ufa2d·s]{2,20}$/;
-//姓名符合正则时密码框变绿
-$("#name").bind("input propertychange", function () {
-    if (reg_name.test($("#name").val())){
-        $('#name').css("border-color","green").css("border-width","2px");
-    }else {
-        $('#name').css("border-color","red");
-    }
-})
-//姓名符合正则时候姓名框变绿
-// $("#form").bind("input propertychange", function () {
-//     if (reg_name.test($("#name").val())){
-//         $('#name').css("border-color","green").css("border-width","2px");
-//     }else {
-//         $('#name').css("border-color","red");
-//     }
-// })
-//班级名称正则
-var  reg_class= /^([a-z0-9]){2,10}$/i;
-//班级符合格式并且数据库中不存在该班级才是绿色
-$("#class").bind("input propertychange", function () {
-    if (reg_class.test($("#class").val())){
+
+
+
+
+
+
+//修改班级
+$("#btn").click(function () {
+    var class_name = $("#class").val();
+    var teacher_id = $("#teacher_id").val();
+    var is_graduate = $("input:radio[name='is_graduate']:checked").val();
+    if (class_name == "") {
+        alert("班级名称不能为空");
+    } else {
         $.ajax({
             type: "post",
-            url: "/admincheckclassname",
+            url: $("#form").attr("url"),
             data: {
-                class_name: $('#class').val()
+                teacher_id: teacher_id,
+                class_name: class_name,
+                is_graduate: is_graduate
             }, //发送到服务器的参数
             success: function (result) {
-                if (result.class_name){
-                    console.log(result.class_name)
-                    $('#class').css("border-color","red");
-                    alert("班级已存在!");
-                    $("#btn").attr("disabled",true);
-                }else {
-                    $('#class').css("border-color", "green").css("border-width", "2px");
-                    $("#btn").attr("disabled",false);
+                if (result.msg == "success") {
+                    window.location.href = "/admin.xdhclass";
+                } else {
+                    alert("该班级名已存在");
                 }
             },
-            error: function (errorMsg) {
-                alert("查询班级错误,请稍后查询!");
-                $("#btn").attr("disabled",true);
-            }
         });
-    }else {
-        $('#class').css("border-color","red");
-        $("#btn").attr("disabled",true);
     }
-})
+});
 
 
-//手机号正则
-var regex=/^((0\d{2,3}-\d{7,8})|(1[3456789]\d{9}))$/;
-//手机号符合正则时手机号条变绿
-// $("#form").bind("input propertychange", function () {
-//     if (regex.test($("#mobile").val())){
-//         $('#mobile').css("border-color","green").css("border-width","2px");
-//     }else {
-//         $('#mobile').css("border-color","red");
-//     }
-// })
-
-// $("#mobile").bind("input propertychange", function () {
-//     if (regex.test($("#mobile").val())){
-//         $('#mobile').css("border-color","green").css("border-width","2px");
-//     }else {
-//         $('#mobile').css("border-color","red");
-//     }
-// })
-//判断手机号是否存在,若数据库不存在则绿色
-$("#mobile").bind("input propertychange", function () {
-    if (regex.test($("#mobile").val())){
+//修改教师
+$("#btn3").click(function () {
+    var password = $('#psd').val();
+    var password2 = $("#psd2").val();
+    var mobile = $("#mobile").val();
+    var name = $("#name").val();
+    console.log(mobile);
+    if (password != password2) {
+        alert("两次输入的密码不相等,请重新输入");
+    }else if (password == "" && password2 == ""){
+        alert("请输入密码" );
+    }
+    else if (mobile == ""){
+        alert("手机号不能为空");
+    } else if (name == "" ){
+        alert("请填写教师姓名" );
+    }
+    else if (regex.test(mobile) && reg_name.test(name)
+        && reg_password.test(password)) {
         $.ajax({
             type: "post",
-            url: "/admincheckmobile",
+            url: $("#form").attr("url"),
             data: {
-                mobile: $('#mobile').val(),
+                name: name,
+                mobile: mobile,
+                password : password
             }, //发送到服务器的参数
-            success: function (data) {
-                if (data.msg == "notexist"){
-                    console.log(data.msg)
-                    $('#mobile').css("border-color", "green").css("border-width", "2px");
-                    $("#btn").attr("disabled",false);
-                }else {
-                    $('#mobile').css("border-color","red");
-                    alert("手机号已存在!");
-                    $("#btn").attr("disabled",true);
+            success: function (result) {
+                if (result.msg == "success") {
+                    window.location.href = "/admin.teacher";
+                } else {
+                    alert("该手机号已存在");
                 }
             },
-            error: function (errorMsg) {
-                alert("验证手机号失败!");
-                $("#btn").attr("disabled",true);
+        });
+    }
+});
+
+
+
+
+
+
+
+
+
+function p_ateacher() {
+    var password = $('#psd').val();
+    var password2 = $("#psd2").val();
+    var mobile = $('#mobile').val();
+    var name = $('#name').val();
+    var add_time = 1;
+    var add_ip = 1;
+    if (password != password2) {
+        alert("两次输入的密码不相等,请重新输入");
+    }
+    else if (password == "" && password2 == ""){
+        alert("请输入密码" );
+    }else if (name == ""){
+        alert("请填写教师姓名" );
+    }else if (regex.test(mobile) && reg_name.test(name)
+        && reg_password.test(password)) {
+        $.ajax({
+            type: "post",
+            url: "/admin.addteacher",
+            data: {
+                name: name,
+                mobile: mobile,
+                password: password,
+                add_ip: add_ip,
+                add_time: add_time
+            },success:function(result) {
+                if (result.msg == "success"){
+                    window.location.href ="/admin.teacher";
+                }else {
+                    alert("该手机号已存在");
+                    
+                }
+                
             }
         });
-    }else {
-        $('#mobile').css("border-color","red");
-        $("#btn").attr("disabled",true);
-    }
-})
-
-
-
-//密码正则
-var  reg_password= /^([a-z0-9\.\@\!\#\$\%\^\&\*\(\)]){6,20}$/i;
-//密码符合正则时密码框变绿
-$("#psd").bind("input propertychange", function () {
-    if (reg_password.test($("#psd").val())){
-        $('#psd').css("border-color","green").css("border-width","2px");
-    }else {
-        $('#psd').css("border-color","red");
-    }
-})
-
-
-//数据都符合正则时候才可以点击按钮
-$("#form").bind("input propertychange", function () {
-    if (regex.test($("#mobile").val())&&reg_name.test($("#name").val())
-        &&reg_password.test($("#psd").val())){
-        $("#btn").attr("disabled",false);
-    }else {
-        $("#btn").attr("disabled",true);
     }
 
-})
 
+}
 
 

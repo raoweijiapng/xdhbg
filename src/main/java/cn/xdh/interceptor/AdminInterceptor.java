@@ -6,12 +6,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component
-public class SomeInterceptor implements HandlerInterceptor {
+public class AdminInterceptor implements HandlerInterceptor {
     /*
      * 视图渲染之后的操作（Controller方法调用之前）
      */
@@ -19,11 +18,12 @@ public class SomeInterceptor implements HandlerInterceptor {
             throws Exception {
         //System.out.println("-----preHandle------");
         response.setContentType("text/html; charset=utf-8");
-        boolean result = SomeMethods.checkCookieAndSession(response,request);
-        if (result){
+        String result = SomeMethods.checkCookieAndSession(response,request);
+        //System.out.println(result);
+        if (result.equals("admin")){
             return true;
         }
-        response.getWriter().append("<script>alert('请先登录！');window.location.href='/';</script>");
+        response.getWriter().append("<script>alert('请先进行管理员登录！');window.location.href='/';</script>");
 
         return false;
     }

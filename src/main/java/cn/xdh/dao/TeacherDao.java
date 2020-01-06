@@ -28,6 +28,8 @@ public interface TeacherDao {
 
     Teacher selectTeacherMobile(String mobile);
 
+    Teacher selectTeacherByMobileAndId(Teacher teacher);
+
     Teacher selectByTeacher(int id);
 
     //增加教师操作日志
@@ -35,6 +37,9 @@ public interface TeacherDao {
 
     //查看教师操作日志列表
     List<TeacherLog> selectTeacherLog(int teacher_id);
+
+    //模糊查看教师操作日志列表
+    List<TeacherLog> selectTeacherLogLikeAction(@Param("teacher_id") int teacher_id,@Param("action")String action);
 
 
 }

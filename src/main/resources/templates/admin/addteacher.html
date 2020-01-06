@@ -137,7 +137,7 @@
                         </div>
                         <div class="widget-body  am-fr">
                             <div class="am-u-sm-12">
-                                <form id="form" th:action="@{/admin.addteacher/}" method="Post" class="am-form tpl-form-line-form">
+                                <form id="form" class="am-form tpl-form-line-form" autocomplete="off">
                                     <label class="am-u-sm-3 am-form-label">教师姓名:</label>
                                     <div class="am-u-sm-9">
                                         <input type="text" name="name" id="name"/></div><br/><br/>
@@ -146,12 +146,15 @@
                                         <input type="text" name="mobile" id="mobile"/></div><br/><br/>
                                     <label class="am-u-sm-3 am-form-label">教师密码:</label>
                                     <div class="am-u-sm-9">
-                                        <input type="text" name="password" id="psd"/></div><br/><br/>
+                                        <input type="password" name="password" id="psd"/></div><br/><br/>
+                                    <label class="am-u-sm-3 am-form-label">确认密码:</label>
+                                    <div class="am-u-sm-9">
+                                        <input type="password" name="password" id="psd2"/></div><br/><br/>
                                     <input style="display: none" name="add_time" th:value="1"/>
                                     <input style="display: none" name="add_ip" th:value="1"/>
                                     <div class="am-u-sm-4 am-form-label">
-                                    <input id="btn" class="am-btn am-btn-primary tpl-btn-bg-color-success " 
-                                           disabled="true" type="submit" value="添加"/>
+                                        <input id="btn" class="am-btn am-btn-primary tpl-btn-bg-color-success "
+                                               type="button" value="添加" onclick="p_ateacher()"/>
                                     </div>
                                 </form>
                             </div>

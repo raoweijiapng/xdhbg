@@ -86,7 +86,16 @@ public interface StudentDao {
             ,@Param("stage_id")String stage_id
             ,@Param("province_id")int province_id
             ,@Param("city_id")int city_id
-            ,@Param("area_id")int area_id);
+            ,@Param("area_id")int area_id
+            ,@Param("address")String address);
+
+    public void updateOther(@Param("id") int id,@Param("birthday")long birthday
+            ,@Param("graduate_school")String graduate_school
+            ,@Param("stage_id")String stage_id
+            ,@Param("province_id")int province_id
+            ,@Param("city_id")int city_id
+            ,@Param("area_id")int area_id
+            ,@Param("address")String address);
 
     // 学生信息页面显示省市区
     public String getNameByProvinceid(@Param("province_id") int province_id);
