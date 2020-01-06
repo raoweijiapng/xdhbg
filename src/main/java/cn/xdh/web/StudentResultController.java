@@ -1,5 +1,6 @@
 package cn.xdh.web;
 
+import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
 import cn.xdh.entity.Teacher;
 import cn.xdh.service.impl.StudentResultServiceImpl;
@@ -21,8 +22,12 @@ public class StudentResultController {
     
     
     @GetMapping(value="/studentTest.studentResult")
-    public ModelAndView selectStudentResult(@Param("id") Integer id, Model model) {
+    public ModelAndView selectStudentResult(@Param("id") Integer id, Model model, PaperAndTest paperAndTest) {
+        System.out.println(paperAndTest);
         Student selectStudentNameById = studentResultServiceimpl.selectStudentNameById(id);
+        PaperAndTest paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
+//        model.addAttribute("paperAndTest1",paperAndTest1);
+        System.out.println(paperAndTest1);
         model.addAttribute("studentId",id);
         model.addAttribute("selectStudentNameById",selectStudentNameById);
         return new ModelAndView("studentTest/studentResult");

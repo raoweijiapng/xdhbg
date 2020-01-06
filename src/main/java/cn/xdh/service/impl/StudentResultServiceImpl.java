@@ -1,6 +1,7 @@
 package cn.xdh.service.impl;
 
 import cn.xdh.dao.StudentResultDao;
+import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
 import cn.xdh.service.StudentResultService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +17,11 @@ public class StudentResultServiceImpl implements StudentResultService {
     public Student selectStudentNameById(int id) {
         Student selectStudentNameById = studentResultDao.selectStudentNameById(id);
         return selectStudentNameById;
+    }
+
+    @Override
+    public PaperAndTest selectPaperAndTest(PaperAndTest paperAndTest) {
+        PaperAndTest selectPaperAndTest = studentResultDao.selectPaperAndTest(paperAndTest);
+        return selectPaperAndTest;
     }
 }
