@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/jquery.min.js"></script>
     <style>
-        .testlist{
+        .testlist {
             float: left;
             border-width: 0px;
             left: 11px;
@@ -28,12 +28,11 @@
             height: 250px;
             overflow: hidden;
         }
+
         .testlist:first-child {
 
             clear: both;
         }
-        
-
         .am-text-center {
             margin: 20px;
         }
@@ -56,9 +55,6 @@
             <!-- 侧边切换 -->
             <div class="am-fl tpl-header-switch-button am-icon-list">
                 <span></span>
-            </div>
-            <div class="am-fl">
-                <span>在线考试系统</span>
             </div>
             <!-- 其它功能-->
             <div class="am-fr tpl-header-navbar">
@@ -146,11 +142,6 @@
                     <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 教师管理
                 </a>
             </li>
-            <li class="sidebar-nav-link">
-                <a href="/studentTest.studentResult" class="active">
-                    <i class="am-icon-bar-chart sidebar-nav-link-logo"></i> 我的成绩
-                </a>
-            </li>
         </ul>
     </div>
 
@@ -180,11 +171,12 @@
                         </div>
                         <ul>
                             <li class="tpl-user-card am-text-center testlist" th:each="paperandtest:${paperAndTest1}">
-                                <div class="am-text-center" th:text="${paperandtest.name}"></div>
-                                <div class="am-text-center" th:text="'总分:'+${paperandtest.total_score}"></div>
-                                <div class="am-text-center" style="color: red;font-size: 35px; font-weight: bold"
-                                     th:text="${paperandtest.score}"></div>
-                            </li>
+                                <a style="color: #ffffdd" th:href="'/studentTest.studentResultList?id='+${paperandtest.id}">
+                                    <div class="am-text-center" th:text="${paperandtest.name}"></div>
+                                    <div class="am-text-center" th:text="'总分:'+${paperandtest.total_score}"></div>
+                                    <div class="am-text-center" style="color: red;font-size: 35px; font-weight: bold"
+                                         th:text="${paperandtest.score}"></div>
+                                </a></li>
                         </ul>
 
                     </div>
@@ -198,6 +190,12 @@
 <script src="/assets/js/dataTables.responsive.min.js"></script>
 <script src="/assets/js/app.js"></script>
 <script src="/assets/js/operate.js"></script>
+<script>
+    $("#lookfor").click(function () {
+        var likeask = $("#lookname").val();
+        window.location.href = "/studentTest.studentResult?type=likename&lookname=" + likeask;
+    })
+</script>
 </body>
 
 </html>

@@ -88,17 +88,7 @@ public class ClassServiceImpl implements ClassService {
     @Override
     public Page<TeacherClass> getAllTeacherClassBy(int page, int size, final String lookname){
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        /*final*/ Pageable pageable = PageRequest.of(page, size, sort);
-        /*Specification<TeacherClass> queryCondition = new Specification<TeacherClass>() {
-            @Override
-            public Predicate toPredicate(Root<TeacherClass> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                //查找条件
-                Predicate p1 = cb.like(root.get("class_name").as(String.class), "%" + lookname + "%");
-                Predicate p2 = cb.like(root.get("name").as(String.class), "%" + lookname + "%");
-                Predicate p3 = cb.equal(root.get("id").as(Integer.class), root.get("xdh_teacher_id").as(Integer.class));
-                return cb.and(p3,cb.or(p1,p2));
-            }
-        };*/
+        Pageable pageable = PageRequest.of(page, size, sort);
         Page<TeacherClass> xdhclasspage = xdhclassrepository.getAllTeacherClassBy(lookname,pageable);
         return xdhclasspage;
     }

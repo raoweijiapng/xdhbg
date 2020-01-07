@@ -33,4 +33,15 @@ public class StudentResultController {
         model.addAttribute("selectStudentNameById",selectStudentNameById);
         return new ModelAndView("studentTest/studentResult");
     }
+
+    @GetMapping(value="/studentTest.studentResultList")
+    public ModelAndView selectStudentResultToList(@Param("id") Integer id, Model model, PaperAndTest paperAndTest) {
+        Student selectStudentNameById = studentResultServiceimpl.selectStudentNameById(id);
+        List<PaperAndTest> paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
+        System.out.println(paperAndTest1);
+        model.addAttribute("paperAndTest1",paperAndTest1);
+        model.addAttribute("studentId",id);
+        model.addAttribute("selectStudentNameById",selectStudentNameById);
+        return new ModelAndView("studentTest/studentResultList");
+    }
 }
