@@ -145,6 +145,11 @@
                     <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
                 </a>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.question">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 试题管理
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -164,10 +169,10 @@
                                     <label class="am-u-sm-3 am-form-label">所属类别 </label>
                                     <div class="am-u-sm-9">
                                         <select id="subject_id" name="subject_id" data-am-selected style="display: none;">
-                                            <option th:value="0" th:text="请选择..."></option>
+                                            <option th:value="-1" th:text="请选择..."></option>
                                             <option th:value="1" th:text="Java"></option>
-                                            <option th:value="2" th:text="PHP"></option>
-                                            <option th:value="3" th:text="Python"></option>
+                                            <option th:value="0" th:text="PHP"></option>
+                                            <option th:value="2" th:text="Python"></option>
                                         </select>
                                         <select id="stage_id" name="stage_id" data-am-selected style="display: none;">
                                             <option th:value="0" th:text="请选择..."></option>
@@ -236,7 +241,7 @@
         if (title == "") {
             alert("添加失败,请填写知识点内容")
             return false;
-        } else if (subject_id == "0" || stage_id == "0") {
+        } else if (subject_id == "-1" || stage_id == "0") {
             alert("添加失败,所属类别不能为空");
             return false;
         } else {

@@ -50,6 +50,8 @@ public class TeacherController {
     private KnowledgeServiceImpl knowledgeServiceImpl;
     @Autowired
     private TeacherServiceImpl teacherServiceimpl;
+    @Autowired
+    private QuestionsServiceImpl questionsServiceimpl;
 
 
     @GetMapping(value = "/teacher/Log/{page}")
@@ -272,7 +274,7 @@ public class TeacherController {
         //Knowledge knowledge = new Knowledge(subject_id,stage_id,title, SomeMethods.getCurrentTime());
         List<Knowledge> knowledge1 = knowledgeServiceImpl.selectknowledgeByTitle(knowledge.getTitle());
         Map<String,Object> map = new HashMap<>();
-        if (knowledge1 == null) {
+        if (knowledge1.isEmpty()) {
             //3是添加成功
             knowledgeServiceImpl.addKnowledge(knowledge);
             //获取cookie中的老师信息
@@ -388,6 +390,23 @@ public class TeacherController {
     public ModelAndView godeleteKnowledgeview(@PathVariable Integer id){
         knowledgeServiceImpl.deleteKnowledge(id);
         return new ModelAndView("redirect:/teacher.knowledge");
+    }
+
+    //跳转到试题列表的页面
+    @GetMapping("/teacher.question")
+    public ModelAndView goquestionview(@RequestParam(name="type",required=false,defaultValue="all")String type,
+                                       @RequestParam(name="page",required=false,defaultValue="1")int page,
+                                       @RequestParam(name="size",required=false,defaultValue="2")int size){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("teacher/question");
+        Page<Question> questions = null;
+        questions = questionsServiceimpl.getAllQuestion(page - 1, size);
+        mav.getModel().put("current", questions.getNumber()+1);
+        mav.getModel().put("total", questions.getTotalPages());
+        mav.addObject("questions",questions.getContent());
+        mav.getModel().put("type", type);
+        //mav.getModel().put("lookname", lookname);
+        return mav;
     }
 
 

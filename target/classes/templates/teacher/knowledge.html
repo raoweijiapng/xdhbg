@@ -135,6 +135,11 @@
                         <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
                     </a>
                 </li>
+                <li class="sidebar-nav-link">
+                    <a href="/teacher.question">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 试题管理
+                    </a>
+                </li>
             </ul>
         </div>
         <!-- 内容区域 -->
@@ -183,8 +188,8 @@
                                             <tr class="gradeX" th:each="knowledge : ${knowledges}">
 
                                                 <td th:if="${knowledge.getSubject_id()}==1" th:text="Java"></td>
-                                                <td th:if="${knowledge.getSubject_id()}==2" th:text="PHP"></td>
-                                                <td th:if="${knowledge.getSubject_id()}==3" th:text="Python"></td>
+                                                <td th:if="${knowledge.getSubject_id()}==0" th:text="PHP"></td>
+                                                <td th:if="${knowledge.getSubject_id()}==2" th:text="Python"></td>
 
                                                 <td th:if="${knowledge.getStage_id()}==1" th:text="第一阶段"></td>
                                                 <td th:if="${knowledge.getStage_id()}==2" th:text="第二阶段"></td>
