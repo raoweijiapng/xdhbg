@@ -7,6 +7,8 @@ import cn.xdh.service.StudentResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StudentResultServiceImpl implements StudentResultService {
     
@@ -20,8 +22,8 @@ public class StudentResultServiceImpl implements StudentResultService {
     }
 
     @Override
-    public PaperAndTest selectPaperAndTest(PaperAndTest paperAndTest) {
-        PaperAndTest selectPaperAndTest = studentResultDao.selectPaperAndTest(paperAndTest);
+    public List<PaperAndTest> selectPaperAndTest(PaperAndTest paperAndTest) {
+        List<PaperAndTest> selectPaperAndTest = studentResultDao.selectPaperAndTest(paperAndTest);
         return selectPaperAndTest;
     }
 }

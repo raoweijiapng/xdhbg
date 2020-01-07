@@ -19,15 +19,23 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     <script src="/assets/js/jquery.min.js"></script>
     <style>
-        .testlist {
+        .testlist{
+            float: left;
             border-width: 0px;
-            position: absolute;
             left: 11px;
             top: 156px;
             width: 192px;
-            height: 256px;
+            height: 250px;
             overflow: hidden;
-            background-image: url(http://www.axshare.cn/gsc/QOM2AE/6b/ae/63/6bae636…/…gif?token=7f482c0…);
+        }
+        .testlist:first-child {
+
+            clear: both;
+        }
+        
+
+        .am-text-center {
+            margin: 20px;
         }
     </style>
 </head>
@@ -165,13 +173,20 @@
                             <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
                                 <input type="text" class="am-form-field " placeholder="请输入要查询的试卷名" id="lookname">
                                 <span class="am-input-group-btn">
-                                        <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" id="lookfor" type="button"></button>
+                                        <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+                                                id="lookfor" type="button"></button>
                                 </span>
                             </div>
                         </div>
-                        <div class="tpl-user-card am-text-center widget-body-lg testlist">
-                            dsjifojqiosfio
-                        </div>
+                        <ul>
+                            <li class="tpl-user-card am-text-center testlist" th:each="paperandtest:${paperAndTest1}">
+                                <div class="am-text-center" th:text="${paperandtest.name}"></div>
+                                <div class="am-text-center" th:text="'总分:'+${paperandtest.total_score}"></div>
+                                <div class="am-text-center" style="color: red;font-size: 35px; font-weight: bold"
+                                     th:text="${paperandtest.score}"></div>
+                            </li>
+                        </ul>
+
                     </div>
                 </div>
             </div>

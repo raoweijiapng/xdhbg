@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @RestController
 public class StudentResultController {
     
@@ -23,11 +25,10 @@ public class StudentResultController {
     
     @GetMapping(value="/studentTest.studentResult")
     public ModelAndView selectStudentResult(@Param("id") Integer id, Model model, PaperAndTest paperAndTest) {
-        System.out.println(paperAndTest);
         Student selectStudentNameById = studentResultServiceimpl.selectStudentNameById(id);
-        PaperAndTest paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
-//        model.addAttribute("paperAndTest1",paperAndTest1);
+        List<PaperAndTest> paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
         System.out.println(paperAndTest1);
+        model.addAttribute("paperAndTest1",paperAndTest1);
         model.addAttribute("studentId",id);
         model.addAttribute("selectStudentNameById",selectStudentNameById);
         return new ModelAndView("studentTest/studentResult");
