@@ -27,19 +27,18 @@ import java.util.List;
 public class ClassServiceImpl implements ClassService {
     @Autowired
     private ClassDao classdao;
-
+    //引入班级Dao接口
+    @Autowired
+    private XdhClassDao xdhClassDao;
+    @Autowired
+    private XdhClassRepository xdhclassrepository;
+    
     //获取所有班级数量
     @Override
     public int selectAllNumber(){
         int number = classdao.selectAllNumber();
         return number;
     }
-
-    //引入班级Dao接口
-    @Autowired
-    private XdhClassDao xdhClassDao;
-    @Autowired
-    private XdhClassRepository xdhclassrepository;
 
     //查询班级,并放入到list集合中
     @Override
@@ -55,17 +54,26 @@ public class ClassServiceImpl implements ClassService {
         return deleteByXdhClass;
     }
 
+
     //添加班级
     @Override
     public int insertByXdhClass(XdhClass xdhClass) {
-        int insertByXdhClass = xdhClassDao.insertByXdhClass(xdhClass);
+        XdhClass xdhClass1 = xdhClassDao.selectByClassName(xdhClass.getClass_name());
+        int insertByXdhClass = 0;
+        if (xdhClass1==null){
+            insertByXdhClass = xdhClassDao.insertByXdhClass(xdhClass);
+        }
         return insertByXdhClass;
     }
 
     //更新班级
     @Override
     public int updateByXdhClass(XdhClass xdhClass) {
-        int updateByXdhClass = xdhClassDao.updateByXdhClass(xdhClass);
+        XdhClass xdhClass1 = xdhClassDao.selectClassByNameAndId(xdhClass);
+        int updateByXdhClass = 0;
+        if (xdhClass1 == null){
+            updateByXdhClass = xdhClassDao.updateByXdhClass(xdhClass);
+        }
         return updateByXdhClass;
     }
 

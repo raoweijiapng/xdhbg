@@ -14,6 +14,9 @@ import java.util.List;
 public interface ExeperienceDao {
     //查询所有数据
     List<Exeperience> selectAll();
+    //教师根据id查看详细心得
+    Exeperience selectById(int id);
+
     //根据学生id查找
     List<Exeperience> selectByStudent_id(int id);
     //根据id删除

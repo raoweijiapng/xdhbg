@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>兄弟会管理系统</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/jquery.min.js"></script>
+
+</head>
+
+<body data-type="index">
+<script src="assets/js/theme.js"></script>
+<div class="am-g tpl-g">
+    <!-- 头部 -->
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                <img src="assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+            </a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 侧边切换 -->
+            <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span></span>
+            </div>
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="#">欢迎你 &nbsp;
+                            <span th:if="${username}"th:text="${username}">
+                                </span>
+                            <span th:unless="${username}" th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                        </a>
+                    </li>
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="/loginout">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+            <div class="tpl-skiner-content-title">
+                选择主题
+            </div>
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 侧边导航栏 -->
+    <div class="left-sidebar">
+        <!-- 用户信息 -->
+        <div class="tpl-sidebar-user-panel">
+            <div class="tpl-user-panel-slide-toggleable">
+                <span class="user-panel-logged-in-text">
+                    <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                    <span th:if="${username}" th:text="${username}"></span>
+                    <span th:unless="${username}" th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a href="/teacher.index" class="active">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher/Log/1">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 日志管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/noticeManage">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 公告管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 学生管理
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub">
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/Undergraduate/1}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生信息
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/add/view}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 新增学生
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/exeperiences?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生心得
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/works?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生作品
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
+        </ul>
+    </div>
+
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+        <!-- 顶部标题 -->
+        <div class="container-fluid am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                    <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span> 教师管理平台 <small>Teacher</small></div>
+                    <p class="page-header-description">教师</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中间内容区域 -->
+        <div class="row-content am-cf">
+            <!-- 人数模块 -->
+            <div class="row  am-cf">
+                <!-- 学生总数模块 -->
+<!--                <a href="">-->
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                        <div  style="background-color: #00a23f" class="widget widget-primary am-cf">
+                            <div class="widget-statistic-header">
+                                学生总数：
+                            </div>
+                            <div class="widget-statistic-body">
+                                <div class="widget-statistic-value" th:text="${totalNumber}">
+                                    5000人
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+<!--                </a>-->
+                <!-- 未毕业人数模块 -->
+                <a href="/student/Undergraduate/1">
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                        <div class="widget widget-primary am-cf">
+                            <div class="widget-statistic-header">
+                                未毕业人数：
+                            </div>
+                            <div class="widget-statistic-body">
+                                <div class="widget-statistic-value" th:text="${notGraduNumber}">
+                                    1000人
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <!-- 毕业人数模块 -->
+                <a href="/student/Graduate/1">
+                    <div class="am-u-sm-12 am-u-md-6 am-u-lg-4">
+                        <div  style="background-color: #8E44AD" class="widget widget-primary am-cf">
+                            <div class="widget-statistic-header">
+                                毕业人数：
+                            </div>
+                            <div class="widget-statistic-body">
+                                <div class="widget-statistic-value" th:text="${graduNumber}">
+                                    4000人
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- 图形区域 -->
+            <div class="row am-cf">
+
+                <div style="float:left;margin:0 10px;padding:0 10px;background: #4b5357;width: 65%;border: 1px solid #33393c;border-top: 2px solid #313639;">
+                    <div id="container" style="height: 259.6px;width: 100%;"></div>
+                </div>
+
+                <div style="width: 31%;height: 259.6px;float: left;margin:0 10px;padding:0 10px;background: #4b5357;border: 1px solid #33393c;border-top: 2px solid #313639;">
+                    <div id="container2" style="width4:100%;height: 100%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/amazeui.datatables.min.js"></script>
+<script src="assets/js/dataTables.responsive.min.js"></script>
+<script src="assets/js/app.js"></script>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl/dist/echarts-gl.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-stat/dist/ecStat.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/dataTool.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/china.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/map/js/world.js"></script>
+<!--       <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>-->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts/dist/extension/bmap.min.js"></script>
+<script type="text/javascript" th:inline="javascript">
+    var stripDom = document.getElementById("container");
+    var stripChart = echarts.init(stripDom);
+    stripOption = null;
+    //阶段人数
+    var stageOne = [[${stageOne}]];
+    var stageTwo = [[${stageTwo}]];
+    var stageThree = [[${stageThree}]];
+    var stageFour = [[${stageFour}]];
+    var stageFive = [[${stageFive}]];
+    stripOption = {
+        title: {
+            text: "阶段人数",
+            left: 'top',
+            top: 20,
+            textStyle: {
+                color: 'rgba(255, 255, 255, 0.6)',
+            }
+        },
+        color: ['#3398DB'],
+        tooltip : {
+            trigger: 'axis',
+            axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+            }
+        },
+        textStyle : {
+            color: 'rgba(255, 255, 255, 0.6)'
+        },
+        grid: {
+            //与左侧的距离
+            left: '6%',
+            // right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                data : ['第一阶段', '第二阶段', '第三阶段', '第四阶段', '第五阶段'],
+                axisTick: {
+                    alignWithLabel: true
+                },
+                axisLine: {
+                    // x坐标轴样式
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                }
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value',
+                axisLine: {
+                    // y坐标轴样式
+                    lineStyle: {
+                        color: '#fff'
+                    }
+                }
+            }
+        ],
+        series : [
+            {
+                name:'人数',
+                type:'bar',
+                //条形宽度
+                barWidth: '30%',
+                data:[stageOne, stageTwo, stageThree, stageFour, stageFive]
+            }
+        ]
+    };
+    ;
+    if (stripOption && typeof stripOption === "object") {
+        stripChart.setOption(stripOption, true);
+    }
+    //饼形图
+    var roundDom = document.getElementById("container2");
+    var roundChart = echarts.init(roundDom);
+    roundOption = null;
+    roundOption = {
+        // backgroundColor: '#2c343c',
+        title: {
+            text: '阶段人数占比',
+            left: 'top',
+            top: 20,
+            textStyle: {
+                color: '#ccc'
+            }
+        },
+        tooltip : {
+            trigger: 'item',
+            formatter: "{a} <br/>{b} : {c} ({d}%)"
+        },
+        visualMap: {
+            show: false,
+            min: 80,
+            max: 600,
+            inRange: {
+                colorLightness: [0.3, 0.8]
+            }
+        },
+        series : [
+            {
+                name:'访问来源',
+                type:'pie',
+                radius : '70%',
+                center: ['50%', '60%'],
+                data:[
+                    {value:stageOne, name:'第一阶段'},
+                    {value:stageTwo, name:'第二阶段'},
+                    {value:stageThree, name:'第三阶段'},
+                    {value:stageFour, name:'第四阶段'},
+                    {value:stageFive, name:'第五阶段'}
+                ].sort(function (a, b) { return a.value - b.value; }),
+                roseType: 'radius',
+                label: {
+                    normal: {
+                        textStyle: {
+                            color: 'rgba(255, 255, 255, 0.6)'
+                        }
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        lineStyle: {
+                            color: 'rgba(255, 255, 255, 0.6)'
+                        },
+                        smooth: 0.2,
+                        length: 10,
+                        length2: 20
+                    }
+                },
+                itemStyle: {
+                    normal: {
+                        color: '#c23531',
+                        shadowBlur: 100,
+                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                    }
+                },
+                animationType: 'scale',
+                animationEasing: 'elasticOut',
+                animationDelay: function (idx) {
+                    return Math.random() * 200;
+                }
+            }
+        ]
+    };
+    if (roundOption && typeof roundOption === "object") {
+        roundChart.setOption(roundOption, true);
+    }
+</script>
+</body>
+
+</html>

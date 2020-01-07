@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:text-decoration="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>兄弟会管理系统</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/js/jquery.min.js"  th:src="@{/webjars/jquery/3.3.1/jquery.min.js}" ></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<style>
+    #box a{
+        text-decoration: none;
+    }
+</style>
+
+<body data-type="index">
+<script src="/assets/js/theme.js"></script>
+<div class="am-g tpl-g" id="box">
+    <!-- 头部 -->
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                <img src="assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+            </a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 侧边切换 -->
+            <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span></span>
+            </div>
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="#">欢迎你 &nbsp;
+                            <span th:if="${username}"th:text="${username}"></span>
+                            <span th:unless="${username}" th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                            </span>
+                        </a>
+                    </li>
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="/loginout">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+            <div class="tpl-skiner-content-title">
+                选择主题
+            </div>
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 侧边导航栏 -->
+    <div class="left-sidebar">
+        <!-- 用户信息 -->
+        <div class="tpl-sidebar-user-panel">
+            <div class="tpl-user-panel-slide-toggleable">
+                <span class="user-panel-logged-in-text">
+                    <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                    <span th:if="${username}" th:text="${username}"></span>
+                    <span th:unless="${username}" th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a th:href="@{/student.index}" class="active">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a th:href="@{/list}">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 学生信息
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a th:href="@{/worklist/1}">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 作品列表
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a th:href="@{/selectExperience}">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 心得体会
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+        <div class="row-content am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title  am-cf">公告栏</div>
+                        </div>
+                        <div class="widget-body  am-fr">
+                            <div class="am-u-sm-12">
+                                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+                                    <thead>
+                                    <tr>
+                                        <th>通知内容</th>
+                                        <th>发布时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="msg:${msgs}">
+                                        <td th:text="${msg.getNotice()}"></td>
+                                        <td th:text="${#dates.format(msg.getDateTime(),'yyyy-MM-dd HH:mm:ss')}"></td>
+
+                                        <!--                                        <td th:text="${#dates.format(msg.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>-->
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="widget am-cf widget-body-lg">
+                    <div class="am-scrollable-horizontal" >
+                        <div class="am-u-sm-12 am-u-md-12 am-u-lg-12"  >
+                            <div class="widget-head am-cf">
+                                <div class="widget-title  am-cf"> <h2 style="color: #FFFFFF">兄弟会培养内容</h2> </div>
+                            </div>
+                            <div class="accordion" id="accordionExample" style="background: #4b5357; ">
+                                <div class="card" style="background: #4b5357" >
+                                    <div class="card-header" id="headingOne"                     >
+                                        <h2 class="mb-0" >
+                                            <button class="btn am-btn-default " type="button"  text-decoration="none" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                <h2 style="color: #FFFFFF">阶段一 : 基础逻辑训练</h2>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body" style="background: #5d6468" >
+                                            <h3 style="color: #FFFFFF">简介：<br><br>
+                                                理解操作系统原理，熟悉常 见操作开发工具使用，培养 编程思想，建立编程信心。<br><br>成果：<br><br>理解编程逻辑，为后面做准备。
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card" style="background: #4b5357">
+                                    <div class="card-header" id="headingTwo" >
+                                        <h2 class="mb-0">
+                                            <button class="btn collapsed am-btn-default" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                <h2 style="color: #FFFFFF">阶段二 : 前端组件训练</h2>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample"  >
+                                        <div class="card-body" style="background: #5d6468"  >
+                                            <h3 style="color: #FFFFFF">简介：<br><br>
+                                                理解组件化开发思想，熟练使用主流的前端框架和技能。握好前端知识是我们学习任何一门语言的开始。<br><br>
+                                                成果：<br><br>
+                                                独立完成前端页面开发。</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card" style="background: #4b5357">
+                                    <div class="card-header" id="headingThree" >
+                                        <h2 class="mb-0">
+                                            <button class="btn  collapsed am-btn-default" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                <h2 style="color: #FFFFFF">阶段三 : 强化编程训练</h2>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                        <div class="card-body" style="background: #5d6468"  >
+                                            <h3 style="color: #FFFFFF">简介：<br><br>
+                                                自选两门编程语言（Java/Python/PHP）强化，掌握开发规范设计模式，使用主流框架进行开发，使用容器（Docker）技术完成后端环境部署/迭代/持续集成（云计算）。
+                                                <br><br>
+                                                成果：<br><br>
+                                                独立完成项目、模块、组件、插件开发。</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card" style="background: #4b5357">
+                                    <div class="card-header" id="headingFour" >
+                                        <h2 class="mb-0">
+                                            <button class="btn  collapsed am-btn-default" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                                <h2 style="color: #FFFFFF">阶段四 : 结合开源社区生态 完成项目开发训练</h2>
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                        <div class="card-body" style="background: #5d6468"  >
+                                            <h3 style="color: #FFFFFF">简介：<br><br>
+                                                掌握大数据与科学计算、常用框架工具及开发技巧，能独立搭建生产级别本地云环境，完成中等规模的企业级项目。
+                                                <br><br>
+                                                成果：
+                                                <br><br>
+                                                独立设计完成项目开发。</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" style="background: #4b5357">
+                                <div class="card-header" id="headingFive" >
+                                    <h2 class="mb-0">
+                                        <button class="btn  collapsed am-btn-default" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                            <h2 style="color: #FFFFFF">阶段五 : 国内常见第三方生态使用，带领小型团队</h2>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                    <div class="card-body" style="background: #5d6468"  >
+                                        <h3 style="color: #FFFFFF">简介：<br><br>
+                                            学习前沿开发生态及人工智能应用技术，具备领导5-7人团队协同开发能力。
+                                            <br><br>
+                                            成果：
+                                            <br><br>
+                                            善用国内优秀的基础设施与第三方支持快速完成互联网项目交付。</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/umd/popper.min.js" integrity="sha384-L2pyEeut/H3mtgCBaUNw7KWzp5n9+4pDQiExs933/5QfaTh8YStYFFkOzSoXjlTb" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

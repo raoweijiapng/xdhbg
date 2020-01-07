@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.xdh.SomeMethods;
+import cn.xdh.entity.Knowledge;
 import cn.xdh.entity.Student;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -138,6 +140,7 @@ public class ExcelToObjectUtil {
             return String.valueOf(hssfCell.getStringCellValue());
         }
     }
+
     /**
      * 得到Excel表中的值
      *
@@ -158,4 +161,106 @@ public class ExcelToObjectUtil {
             return String.valueOf(xssfCell.getStringCellValue());
         }
     }
+
+    /**
+     * 读取xls文件内容
+     *
+     * @return List<Knowledge>对象
+     * @throws IOException 输入/输出(i/o)异常
+     */
+    public static List<Knowledge> readKnowledge(MultipartFile excelFile) throws IOException {
+        InputStream is = excelFile.getInputStream();
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
+        Knowledge knowledge = null;
+        List<Knowledge> list = new ArrayList<Knowledge>();
+        // 循环工作表Sheet
+        for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+            HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
+            if (hssfSheet == null) {
+                continue;
+            }
+            // 循环行Row
+            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+                HSSFRow hssfRow = hssfSheet.getRow(rowNum);
+                if (hssfRow == null) {
+                    continue;
+                }
+                knowledge = new Knowledge();
+
+                // 循环列Cell
+                HSSFCell subject_idCell = hssfRow.getCell(0);
+                if (subject_idCell == null) {
+                    continue;
+                }
+                //将名字取出放入学生实体类中
+                knowledge.setSubject_id(Integer.parseInt(getValueOfHSSFCell(subject_idCell)));
+
+                HSSFCell stage_idCell = hssfRow.getCell(1);
+                if (stage_idCell == null) {
+                    continue;
+                }
+                knowledge.setStage_id(Integer.parseInt(getValueOfHSSFCell(stage_idCell)));
+
+                HSSFCell titleCell = hssfRow.getCell(2);
+                if (titleCell == null) {
+                    continue;
+                }
+                knowledge.setTitle(getValueOfHSSFCell(titleCell));
+                knowledge.setAdd_time(SomeMethods.getCurrentTime());
+                list.add(knowledge);
+            }
+        }
+        is.close();
+        return list;
+    }
+
+    public static List<Knowledge> readKnowledgeXlsx(MultipartFile excelFile) throws IOException {
+        InputStream is = excelFile.getInputStream();
+        XSSFWorkbook xssfWorkbook = new XSSFWorkbook(is);
+        Knowledge knowledge = null;
+        List<Knowledge> list = new ArrayList<Knowledge>();
+        // 循环工作表Sheet
+        for (int numSheet = 0; numSheet < xssfWorkbook.getNumberOfSheets(); numSheet++) {
+            XSSFSheet xssfSheet = xssfWorkbook.getSheetAt(numSheet);
+            if (xssfSheet == null) {
+                continue;
+            }
+            // 循环行Row
+            for (int rowNum = 1; rowNum <= xssfSheet.getLastRowNum(); rowNum++) {
+                XSSFRow xssfRow = xssfSheet.getRow(rowNum);
+                if (xssfRow == null) {
+                    continue;
+                }
+                knowledge = new Knowledge();
+
+                // 循环列Cell
+                XSSFCell subject_idCell = xssfRow.getCell(0);
+                if (subject_idCell == null) {
+                    continue;
+                }
+                //将名字取出放入学生实体类中
+                knowledge.setSubject_id(Integer.parseInt(getValueOfXSSFCell(subject_idCell)));
+
+                XSSFCell stage_idCell = xssfRow.getCell(1);
+                if (stage_idCell == null) {
+                    continue;
+                }
+                knowledge.setStage_id(Integer.parseInt(getValueOfXSSFCell(stage_idCell)));
+
+                XSSFCell titleCell = xssfRow.getCell(2);
+                if (titleCell == null) {
+                    continue;
+                }
+                knowledge.setTitle(getValueOfXSSFCell(titleCell));
+                knowledge.setAdd_time(SomeMethods.getCurrentTime());
+                list.add(knowledge);
+            }
+        }
+        is.close();
+        //System.out.println(list);
+        return list;
+    }
+
+
+
 }

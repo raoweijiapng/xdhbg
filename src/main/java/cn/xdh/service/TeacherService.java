@@ -40,4 +40,6 @@ public interface TeacherService {
     //查看教师操作日志列表
     List<TeacherLog> selectTeacherLog(int teacher_id);
 
+    //模糊查看教师操作日志列表
+    List<TeacherLog> selectTeacherLogLikeAction(int teacher_id,String action);
 }

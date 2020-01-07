@@ -135,6 +135,11 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -221,13 +226,15 @@
 <!--                                        正常分页-->
                                         <ul th:if="${likeName}==0" class="am-pagination tpl-pagination">
                                             <li><a th:href="@{/student/Graduate/1}">«</a></li>
-                                            <li th:each="page:${totalPageList}"><a th:href="@{/student/Graduate/}+${page}" th:text="${page}"></a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a th:href="@{/student/Graduate/}+${page}" th:text="${page}"></a></li>
                                             <li><a th:href="@{/student/Graduate/}+${totalPage}">»</a></li>
                                         </ul>
 <!--                                        模糊查询分页-->
                                         <ul th:if="${likeName}==1" class="am-pagination tpl-pagination">
                                             <li><a th:href="@{/student/like/1/1/}+${name}">«</a></li>
-                                            <li th:each="page:${totalPageList}"><a th:href="@{/student/like/1/}+${page}+'/'+${name}" th:text="${page}"></a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a th:href="@{/student/like/1/}+${page}+'/'+${name}" th:text="${page}"></a></li>
                                             <li><a th:href="@{/student/like/1/}+${totalPage}+'/'+${name}">»</a></li>
                                         </ul>
                                     </div>

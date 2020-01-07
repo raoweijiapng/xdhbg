@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>兄弟会管理系统</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <script src="/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css"/>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/js/jquery.min.js"></script>
+    <style>
+        #box a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body data-type="widgets">
+<script src="/assets/js/theme.js"></script>
+<div class="am-g tpl-g" id="box">
+    <!-- 头部 -->
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                <img src="/assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+            </a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 侧边切换 -->
+            <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span></span>
+            </div>
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="#">欢迎你 &nbsp;
+                            <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                        </a>
+                    </li>
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="/loginout">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+            <div class="tpl-skiner-content-title">
+                选择主题
+            </div>
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 侧边导航栏 -->
+    <div class="left-sidebar">
+        <!-- 用户信息 -->
+        <div class="tpl-sidebar-user-panel">
+            <div class="tpl-user-panel-slide-toggleable">
+                    <span class="user-panel-logged-in-text">
+                        <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                        <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                        </span>
+                    </span>
+            </div>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a href="/teacher.index">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher/Log/1"  class="active">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 日志管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/noticeManage">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 公告管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 学生管理
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico sidebar-nav-sub-ico-rotate"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub">
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/Undergraduate/1}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生信息
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/add/view}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 新增学生
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/exeperiences?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生心得
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/works?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生作品
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+        <div class="row-content am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title  am-cf">教师日志列表</div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                            <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                <!--搜索框-->
+                                <input id="searchContent" type="text" class="am-form-field" placeholder="请输入操作进行搜索">
+                                <span class="am-input-group-btn">
+                                    <a href="#" id="search"
+                                       class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+                                       type="button">
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="widget-body  am-fr">
+                            <div class="am-u-sm-12">
+                                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black "
+                                       id="example-r">
+                                    <thead>
+                                    <tr>
+                                        <th th:text="教师Id"></th>
+                                        <th th:text="教师姓名"></th>
+                                        <th th:text="操作"></th>
+                                        <th th:text="时间"></th>
+                                        <th th:text="登陆Ip"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody id="rows">
+                                    <tr class="gradeX" th:each="teacherlogs:${teacherLogs}">
+                                        <td th:text="${teacherlogs.getTeacher_id()}"></td>
+                                        <td th:text="${teacherlogs.teacher_name}"></td>
+                                        <td th:text="${teacherlogs.action}"></td>
+                                        <td th:text="${#dates.format(teacherlogs.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                        <td th:text="${teacherlogs.add_ip}"></td>
+                                    </tr>
+                                    <!-- more data -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="am-u-lg-12 am-cf">
+
+                                <div class="am-fr">
+                                    <div class="am-fr">
+                                        <!--                                        正常分页-->
+                                        <ul th:if="${likeName}==0" class="am-pagination tpl-pagination">
+                                            <li><a th:href="@{/teacher/Log/1}">«</a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a
+                                                    th:href="@{/teacher/Log/}+${page}" th:text="${page}"></a></li>
+                                            <li><a th:href="@{/teacher/Log/}+${totalPage}">»</a></li>
+                                        </ul>
+                                        <!--                                        模糊查询分页-->
+                                        <ul th:if="${likeName}==1" class="am-pagination tpl-pagination">
+                                            <li><a th:href="@{/teacherLog/like/1/}+${action}">«</a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a th:href="@{/teacherLog/like/}+${page}+'/'+${action}" th:text="${page}"></a></li>
+                                            <li><a th:href="@{/teacherLog/like/}+${totalPage}+'/'+${action}">»</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.js}"></script>
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.css}">
+<!--模糊搜索-->
+<script>
+    $("#search").click(function () {
+        var searchContent = $("#searchContent").val().trim();
+        if (searchContent == "") {
+            alert("请输入操作进行搜索");
+        } else {
+            $("#search").attr("href", "/teacherLog/like/1/" + searchContent);
+        }
+    });
+</script>
+</body>
+
+</html>

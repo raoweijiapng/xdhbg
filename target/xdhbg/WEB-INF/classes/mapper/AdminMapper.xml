@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdh.dao.AdminDao">
+	<!-->根据手机号和密码查找管理员<-->
+	<select id="selectByPhoneAndPassword" resultType="cn.xdh.entity.Admin">
+		select * from xdh_admin where mobile = #{mobile} and password = #{password}
+	</select>
+
+	<!-->增加管理员日志<-->
+	<insert id="addAdminLog" parameterType="cn.xdh.entity.AdminLog">
+		insert into xdh_admin_log (admin_id,admin_name,content,add_time,add_ip)
+		values (#{admin_id},#{admin_name},#{content},#{add_time},#{add_ip})
+	</insert>
+
+	<!-->查找最新的五个管理员日志<-->
+	<select id="selectNewAdminLog" resultType="cn.xdh.entity.AdminLog">
+		select * from xdh_admin_log order by add_time desc limit 5
+	</select>
+
+	<select id="selectByMobile" resultType="cn.xdh.entity.Admin">
+        select * from xdh_admin where mobile = #{mobile}
+    </select>
+
+
+</mapper>

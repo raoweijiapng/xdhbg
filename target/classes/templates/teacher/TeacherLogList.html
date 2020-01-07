@@ -135,6 +135,11 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -146,6 +151,18 @@
                     <div class="widget am-cf">
                         <div class="widget-head am-cf">
                             <div class="widget-title  am-cf">教师日志列表</div>
+                        </div>
+                        <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                            <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                <!--搜索框-->
+                                <input id="searchContent" type="text" class="am-form-field" placeholder="请输入操作进行搜索">
+                                <span class="am-input-group-btn">
+                                    <a href="#" id="search"
+                                       class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search"
+                                       type="button">
+                                    </a>
+                                </span>
+                            </div>
                         </div>
                         <div class="widget-body  am-fr">
                             <div class="am-u-sm-12">
@@ -176,11 +193,20 @@
 
                                 <div class="am-fr">
                                     <div class="am-fr">
-                                        <ul class="am-pagination tpl-pagination">
+                                        <!--                                        正常分页-->
+                                        <ul th:if="${likeName}==0" class="am-pagination tpl-pagination">
                                             <li><a th:href="@{/teacher/Log/1}">«</a></li>
-                                            <li th:each="page:${totalPageList}"><a
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a
                                                     th:href="@{/teacher/Log/}+${page}" th:text="${page}"></a></li>
                                             <li><a th:href="@{/teacher/Log/}+${totalPage}">»</a></li>
+                                        </ul>
+                                        <!--                                        模糊查询分页-->
+                                        <ul th:if="${likeName}==1" class="am-pagination tpl-pagination">
+                                            <li><a th:href="@{/teacherLog/like/1/}+${action}">«</a></li>
+                                            <li class="" th:classappend="${page}==${p}?'am-active' :''"
+                                                th:each="page:${totalPageList}"><a th:href="@{/teacherLog/like/}+${page}+'/'+${action}" th:text="${page}"></a></li>
+                                            <li><a th:href="@{/teacherLog/like/}+${totalPage}+'/'+${action}">»</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -199,7 +225,17 @@
 <script src="/assets/js/app.js"></script>
 <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.js}"></script>
 <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.css}">
-
+<!--模糊搜索-->
+<script>
+    $("#search").click(function () {
+        var searchContent = $("#searchContent").val().trim();
+        if (searchContent == "") {
+            alert("请输入操作进行搜索");
+        } else {
+            $("#search").attr("href", "/teacherLog/like/1/" + searchContent);
+        }
+    });
+</script>
 </body>
 
 </html>

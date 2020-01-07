@@ -59,6 +59,7 @@ public class StudentController {
         model.addAttribute("totalPageList",totalPageList);
         model.addAttribute("StudentList", undergraduateStudentList);
         model.addAttribute("likeName",0);
+        model.addAttribute("p",page);
         return "teacher/UndergraduateStudentList";
     }
 
@@ -88,6 +89,7 @@ public class StudentController {
         model.addAttribute("totalPageList",totalPageList);
         model.addAttribute("StudentList", graduateStudentList);
         model.addAttribute("likeName",0);
+        model.addAttribute("p",page);
         return "teacher/GraduateStudentList";
     }
 
@@ -98,7 +100,6 @@ public class StudentController {
         model.addAttribute("classList",classList);
         return "teacher/StudentAdd";
     }
-
 
     //接受添加学生页面发来的参数,并封装成学生对象
     @PostMapping("/student/add")
@@ -149,6 +150,7 @@ public class StudentController {
         model.addAttribute("StudentList", StudentList);
         model.addAttribute("likeName",1);
         model.addAttribute("name",username);
+        model.addAttribute("p",page);
         if (is_graduate==0){
             return "teacher/UndergraduateStudentList";
         }else{
@@ -195,6 +197,9 @@ public class StudentController {
         return studentservice.batchAddStudent(request,suffixName,excelFile);
     }
 
+
+    //学生端的代码
+
     @GetMapping("/student.index")
     public ModelAndView toIndex(){
         ModelAndView mav = new ModelAndView();
@@ -224,13 +229,33 @@ public class StudentController {
             //System.out.println(usefulDataList);
             ModelAndView mav = new ModelAndView();
             //所在城市省市县
-            int province_id = (Integer) usefulDataList.get(0).get("province_id");
-            int city_id = (Integer) usefulDataList.get(0).get("city_id");
-            int area_id = (Integer) usefulDataList.get(0).get("area_id");
+            int province_id = 1;
+            int city_id = 37;
+            int area_id = 567;
+            if(usefulDataList.get(0).get("province_id") == null ){
+
+
+            }else{
+                province_id = (Integer) usefulDataList.get(0).get("province_id");
+                city_id = (Integer) usefulDataList.get(0).get("city_id");
+                area_id = (Integer) usefulDataList.get(0).get("area_id");
+            }
+
+
             //实际工作省市县
-            int aim_province_id = (Integer) usefulDataList.get(0).get("aim_province_id");
-            int aim_city_id = (Integer) usefulDataList.get(0).get("aim_city_id");
-            int aim_area_id = (Integer) usefulDataList.get(0).get("aim_area_id");
+
+            int aim_province_id = 1;
+            int aim_city_id = 37;
+            int aim_area_id = 567;
+            if(usefulDataList.get(0).get("aim_province_id")==null){
+
+            }else{
+                aim_province_id = (Integer) usefulDataList.get(0).get("aim_province_id");
+                aim_city_id = (Integer) usefulDataList.get(0).get("aim_city_id");
+                aim_area_id = (Integer) usefulDataList.get(0).get("aim_area_id");
+
+            }
+
             //所在城市省市县
             String province = studentservice.getNameByProvinceid(province_id);
             String city = studentservice.getNameByCityid(city_id);
@@ -273,9 +298,16 @@ public class StudentController {
         List<Map<String, Object>> usefulDataList = studentservice.getUsefulData(id);
         ModelAndView mav = new ModelAndView();
         //实际工作省市县
-        int aim_province_id = (Integer)usefulDataList.get(0).get("aim_province_id");
-        int aim_city_id = (Integer)usefulDataList.get(0).get("aim_city_id");
-        int aim_area_id = (Integer) usefulDataList.get(0).get("aim_area_id");
+        int aim_province_id = 1;
+        int aim_city_id = 37;
+        int aim_area_id = 567;
+        if(usefulDataList.get(0).get("aim_province_id")==null){
+
+        }else {
+            aim_province_id = (Integer)usefulDataList.get(0).get("aim_province_id");
+            aim_city_id = (Integer)usefulDataList.get(0).get("aim_city_id");
+            aim_area_id = (Integer) usefulDataList.get(0).get("aim_area_id");
+        }
         String aimProvince = studentservice.getNameByAimProvinceid(aim_province_id);
         String aimCity = studentservice.getNameByAimCityid(aim_city_id);
         String aimArea = studentservice.getNameByAimAreaid(aim_area_id);
@@ -290,20 +322,26 @@ public class StudentController {
         return mav;
     }
 
-    @PostMapping("/updatestudent/{id}")
-    public ModelAndView updataData(@PathVariable("id") int id,
+    @PostMapping("/updatestudent/")
+    public ModelAndView updataData(@RequestParam("id")int id,
                                    @RequestParam("password")String password,
                                    @RequestParam("birth")String birth,
                                    @RequestParam("graduate_school")String graduate_school,
                                    @RequestParam("stage_id")String stage_id,
                                    @RequestParam("province_id")int province_id,
                                    @RequestParam("city_id")int city_id,
-                                   @RequestParam("area_id")int area_id) throws ParseException {
+                                   @RequestParam("area_id")int area_id,
+                                   @RequestParam("address")String address) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //System.out.println(password);
         long birthday =  sdf.parse(birth).getTime()/1000;
-        String md5password = SomeMethods.md5(password);
-        studentservice.updateData(id,md5password,birthday,graduate_school,stage_id,province_id,city_id,area_id);
-        List<Map<String, Object>> usefulData2 = studentservice.getUsefulData(id);
+        if (password == ""){
+            studentservice.updateOther(id,birthday, graduate_school, stage_id, province_id, city_id, area_id, address);
+        }else {
+            String md5password = SomeMethods.md5(password);
+            studentservice.updateData(id, md5password, birthday, graduate_school, stage_id, province_id, city_id, area_id, address);
+        }
+        //List<Map<String, Object>> usefulData2 = studentservice.getUsefulData(id);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("redirect:/list");
         return mav;

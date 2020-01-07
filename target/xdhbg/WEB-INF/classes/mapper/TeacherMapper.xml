@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdh.dao.TeacherDao">
+	<!-->根据手机号和密码查找教师<-->
+	<select id="selectByPhoneAndPassword" resultType="cn.xdh.entity.Teacher">
+		select * from xdh_teacher where mobile = #{mobile} and password = #{password}
+	</select>
+
+	<!-->查询所有教师数量<-->
+	<select id="selectAllNumber" resultType="Integer">
+		select count(*) from xdh_teacher
+	</select>
+
+	<select id="selectTeacherClass" resultType="cn.xdh.entity.TeacherClass">
+		select c.class_name ,t.name,c.add_time,c.teacher_id,c.id,c.is_graduate from xdh_teacher t ,xdh_class c where c.teacher_id = t.id
+	</select>
+
+	<select id="selectTeacherMobile" resultType="cn.xdh.entity.Teacher">
+        select * from xdh_teacher where mobile = #{mobile}
+    </select>
+
+    <select id="selectTeacherByMobileAndId" resultType="cn.xdh.entity.Teacher">
+        select * from xdh_teacher where mobile = #{mobile} and id != #{id}
+    </select>
+
+    <select id="selectByTeacher" resultType="cn.xdh.entity.Teacher">
+        select * from xdh_teacher where id = #{id}
+    </select>
+
+    <select id="selectAllTeacher" resultType="cn.xdh.entity.Teacher">
+        select * from xdh_teacher
+    </select>
+
+	<delete id="deleteByTeacher" parameterType="int">
+        delete from xdh_teacher where id = #{id}
+    </delete>
+
+	<insert id="insertByTeacher" keyProperty="id">
+        insert into xdh_teacher (name, mobile, password, add_time, add_ip)
+        values (#{name},#{mobile},#{password},#{add_time},#{add_ip})
+    </insert>
+
+
+    <update id="updateByTeacher"  parameterType="cn.xdh.entity.Teacher">
+        UPDATE
+            xdh_teacher
+        SET
+            name = ${'"'+name+'"'},
+            mobile= ${mobile},
+            password= ${'"'+password+'"'}
+        where
+            id = ${id}
+    </update>
+
+    <!-->增加教师操作日志<-->
+    <insert id="addTeacherLog" parameterType="cn.xdh.entity.TeacherLog">
+		insert into xdh_teacher_log
+		(teacher_id, teacher_name, action, add_time,add_ip)
+    	values
+    	(#{teacher_id},#{teacher_name},#{action},#{add_time},#{add_ip})
+	</insert>
+
+    <!-->查看教师操作日志<-->
+    <select id="selectTeacherLog" resultType="cn.xdh.entity.TeacherLog">
+		select * from xdh_teacher_log where teacher_id = #{teacher_id} order by add_time desc
+	</select>
+
+    <!--模糊查询教师日志-->
+    <select id="selectTeacherLogLikeAction" resultType="cn.xdh.entity.TeacherLog">
+		SELECT *
+		FROM  xdh_teacher_log
+		WHERE teacher_id = #{teacher_id}
+		and `action` like CONCAT('%',#{action},'%')
+		order by add_time desc
+	</select>
+
+
+
+</mapper>

@@ -137,6 +137,11 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -240,7 +245,7 @@
                                         <td th:each="name : ${names}" th:if="${work.student_id}==${name.id}">
                                             [[${name.username}]]
                                         </td>
-                                        <td th:text="${work.name}"></td>
+                                        <td th:utext="${#strings.abbreviate(work.name,10)}" th:title="${work.name}"></td>
                                         <td><a th:href="${work.url}">作品地址</a></td>
                                         <td th:text="${#dates.format(work.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
                                         <td>

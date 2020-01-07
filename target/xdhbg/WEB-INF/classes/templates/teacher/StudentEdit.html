@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>兄弟会管理系统</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <script src="/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css"/>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/js/jquery.min.js"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.css}">
+    <style>
+        #box a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body data-type="widgets">
+<script src="/assets/js/theme.js"></script>
+<div class="am-g tpl-g" id="box">
+    <!-- 头部 -->
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                <img src="/assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+            </a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 侧边切换 -->
+            <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span></span>
+            </div>
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="#">欢迎你 &nbsp;
+                            <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                                  th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                        </a>
+                    </li>
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="/loginout">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+            <div class="tpl-skiner-content-title">
+                选择主题
+            </div>
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 侧边导航栏 -->
+    <div class="left-sidebar">
+        <!-- 用户信息 -->
+        <div class="tpl-sidebar-user-panel">
+            <div class="tpl-user-panel-slide-toggleable">
+                <span class="user-panel-logged-in-text">
+                    <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                    <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                          th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a href="/teacher.index">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher/Log/1">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 日志管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/noticeManage">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 公告管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title active">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 学生管理
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico sidebar-nav-sub-ico-rotate"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/Undergraduate/1}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生信息
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/add/view}" class="sub-active">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 新增学生
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/exeperiences?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生心得
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/works?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生作品
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+
+        <div class="container-fluid am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-9">
+                    <div class="page-header-heading"><span class="am-icon-home page-header-heading-icon"></span>修改学员
+                    </div>
+                    <p class="page-header-description">请修改必要的信息</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row-content am-cf">
+            <div class="row">
+
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title am-fl" th:if="${student.is_graduate}==0">修改表单:毕业状态提交后不可修改,如果只想更换班级,后三条随意填写即可</div>
+                            <div class="widget-function am-fr">
+                                <a href="javascript:;" class="am-icon-cog"></a>
+                            </div>
+                        </div>
+                        <div class="widget-body am-fr">
+
+                            <form class="am-form tpl-form-border-form tpl-form-border-br" autocomplete="off">
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">姓名<span class="tpl-form-line-small-title">name</span></label>
+                                    <div class="am-u-sm-9" id="username" th:text="${student.username}">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">性别<span
+                                            class="tpl-form-line-small-title">sex</span></label>
+                                    <div class="am-u-sm-9" th:text="${student.sex}==0?'女':'男'">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">电话号码<span class="tpl-form-line-small-title">phone</span></label>
+                                    <div class="am-u-sm-9" th:text="${student.mobile}">
+                                    </div>
+                                </div>
+
+                                <div th:if="${student.is_graduate}==0" class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">是否毕业<span class="tpl-form-line-small-title">graduate</span></label>
+                                    <div class="am-u-sm-9">
+                                        <select id="graduate" name="graduate" data-am-selected style="display: none;">
+                                            <option value="0" selected>未毕业</option>
+                                            <option value="1" >已毕业</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" th:if="${student.is_graduate}==1">
+                                    <label class="am-u-sm-3 am-form-label">是否毕业<span class="tpl-form-line-small-title">graduate</span></label>
+                                    <div class="am-u-sm-9" th:text="已毕业">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" th:if="${student.is_graduate}==0">
+                                    <label class="am-u-sm-3 am-form-label">班级 <span class="tpl-form-line-small-title">class</span></label>
+                                    <div class="am-u-sm-9">
+                                        <select id="classId" name="class_id" data-am-selected style="display: none;">
+                                            <option th:if="${xdhClass.id}==${student.class_id}" th:each="xdhClass:${xdhClass}" th:value="${xdhClass.id}" th:text="${xdhClass.class_name}" selected>男
+                                            </option>
+                                            <option th:if="${xdhClass.id}!=${student.class_id}" th:each="xdhClass:${xdhClass}" th:value="${xdhClass.id}" th:text="${xdhClass.class_name}">男
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" th:if="${student.is_graduate}==1">
+                                    <label class="am-u-sm-3 am-form-label">班级<span class="tpl-form-line-small-title">class</span></label>
+                                    <div class="am-u-sm-9" th:text="${xdhClassName.class_name}">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">所在城市<span class="tpl-form-line-small-title">graduate</span></label>
+                                    <div class="am-u-sm-9">
+                                        <select id="province" name="province" data-am-selected style="display: none;">
+                                            <!--                                                循环出省级-->
+                                            <option value="-1">点击选择...</option>
+                                            <option th:value="${cityList.id}" th:each="cityList:${cityList}"
+                                                    th:text="${cityList.name}">省级
+                                            </option>
+                                        </select>
+                                        <select id="city" name="city" data-am-selected style="display: none;">
+                                            <!--循环出市级-->
+                                        </select>
+                                        <select id="area" name="area" data-am-selected style="display: none;">
+                                            <!--循环出县级-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">就业单位 <span class="tpl-form-line-small-title">company</span></label>
+                                    <div class="am-u-sm-9">
+                                        <input th:value="${student.company}" type="text" placeholder="请输入学员就业单位"
+                                               name="company" id="company">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">薪资<span class="tpl-form-line-small-title">salary</span></label>
+                                    <div class="am-u-sm-9">
+                                        <input th:value="${student.salary}" type="text" placeholder="请输入学员薪资"
+                                               name="salary" id="salary">
+                                        <small>请填写数字或小数类型</small>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <button type="button" class="am-btn am-btn-primary tpl-btn-bg-color-success"
+                                                id="edit" th:attr="editUrl=@{/student/edit/}+${student.id}">修改
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<script src="/assets/js/amazeui.min.js"></script>
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<!--查询市级城市-->
+<script>
+    $("#province").change(function () {
+        var id = $("#province").val();
+        $("#city").html("");
+        var x = '<option value="-1">点击选择...</option>';
+        $("#city").append(x);
+        $.get("/province/" + id,
+            function (data) {
+                if (data && data.length > 0) {
+                    for (var i = 0, len = data.length; i < len; i++) {
+                        var option = '<option value="' + data[i].id + '">'
+                            + data[i].name + '</option>';
+                        $("#city").append(option);
+                    }
+                }
+            },
+            "JSON");
+    });
+</script>
+<!--查询县级城市-->
+<script>
+    $("#city").change(function () {
+        var id = $("#city").val();
+        $("#area").html("");
+        var x = '<option value="-1">点击选择...</option>';
+        $("#area").append(x);
+        $.get("/city/" + id,
+            function (data) {
+                if (data && data.length > 0) {
+                    for (var i = 0, len = data.length; i < len; i++) {
+                        var option = '<option value="' + data[i].id + '">'
+                            + data[i].name + '</option>';
+                        $("#area").append(option);
+                    }
+                }
+            },
+            "JSON");
+    });
+</script>
+<!--提交修改-->
+<script>
+    $("#edit").click(function () {
+        var graduate = $("#graduate").val();
+        var username = $("#username").text();
+        var company = $("#company").val().trim();
+        var salary = $("#salary").val().trim();
+        var province = $("#province").val();
+        var city = $("#city").val();
+        var area = $("#area").val();
+        var class_id = $("#classId").val();
+        if (company == "" || province == -1 || city == -1 || area == -1) {
+            alert("请将信息填写完整");
+        } else if (salary == "" || isNaN(salary)) {
+            alert("薪资栏请填写数字");
+        } else {
+            $.ajax({
+                url: $(this).attr("editUrl"),
+                type: "put",
+                data: {
+                    class_id: class_id,
+                    is_graduate: graduate,
+                    username: username,
+                    company: company,
+                    salary: salary,
+                    aim_province_id: province,
+                    aim_city_id: city,
+                    aim_area_id: area
+                }
+            });
+            alert("修改成功");
+            window.location.href = "/student/Undergraduate/1";//成功后跳转回学生列表页面
+        }
+    })
+</script>
+</body>
+
+</html>

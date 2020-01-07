@@ -32,6 +32,8 @@ public class ExeperienceServiceImpl implements ExeperienceService {
         return exeperienceDao.selectAll();
     }
 
+
+
     //根据学生id查询
     @Override
     public List<Exeperience> selectByStudent_id(int id) {
@@ -59,6 +61,11 @@ public class ExeperienceServiceImpl implements ExeperienceService {
         //将日志实体类添加到日志表中
         teacherDao.addTeacherLog(teacherLog);
         return exeperienceDao.deleteById(id);
+    }
+
+    @Override
+    public Exeperience selectById(int id) {
+        return exeperienceDao.selectById(id);
     }
 
     @Override

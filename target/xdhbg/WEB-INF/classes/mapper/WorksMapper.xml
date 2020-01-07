@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdh.dao.WorksDao">
+
+
+    <select id="selectById" resultType="cn.xdh.entity.Works">
+        select * from xdh_works where student_id=#{id}
+    </select>
+
+    <select id="selectAll" resultType="cn.xdh.entity.Works">
+        select * from xdh_works
+    </select>
+    <select id="deleteById" resultType="cn.xdh.entity.Works">
+        delete from xdh_works where id = #{id}
+    </select>
+    <select id="selectByWorkName" resultType="cn.xdh.entity.Works">
+        select * from xdh_works where xdh_works.name like CONCAT('%',#{name},'%')
+    </select>
+
+
+
+
+    <select id="selectWorks" resultType="cn.xdh.entity.Works" parameterType="int">
+        select * from xdh_works where student_id = #{student_id}
+    </select>
+
+    <select id="selectWorksById" resultType="cn.xdh.entity.Works" parameterType="int">
+        select * from xdh_works where id = #{id}
+    </select>
+
+    <select id="likeSelectWorks" resultType="cn.xdh.entity.Works">
+        select * from xdh_works where xdh_works.name like concat(concat('%',#{name},'%')) and student_id=#{student_id}
+
+    </select>
+
+    <select id="selectWorksId" resultType="int">
+        select id from xdh_works
+    </select>
+
+    <delete id="deleteWorks" parameterType="int" >
+        delete from xdh_works where id = #{id}
+    </delete>
+
+    <update id="updateWorks" >
+        update xdh_works set name = #{name},url = #{url} where id= #{id}
+    </update>
+
+    <insert id="insertWorks" parameterType="cn.xdh.entity.Works">
+        replace into xdh_works set id = #{id},student_id = #{student_id},name = #{name},url = #{url},add_time = #{add_time}
+    </insert>
+
+
+
+
+</mapper>

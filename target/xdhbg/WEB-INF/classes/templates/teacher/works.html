@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<link>
+<meta charset="utf-8">
+<base href="/">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>兄弟会管理系统</title>
+<meta name="description" content="这是一个 index 页面">
+<meta name="keywords" content="index">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="renderer" content="webkit">
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<link rel="icon" type="image/png" href="assets/i/favicon.png">
+<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+<meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+<script src="assets/js/echarts.min.js"></script>
+<link rel="stylesheet" href="assets/css/amazeui.min.css"/>
+<link rel="stylesheet" href="assets/css/amazeui.datatables.min.css"/>
+<link rel="stylesheet" href="assets/css/app.css">
+<script src="assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.min.js"></script>
+<script th:src="@{/assets/js/works.js}"></script>
+<script src="assets/js/jquery.min.js"></script>
+
+</head>
+
+<body data-type="widgets">
+<input id="price" type="hidden" th:value="${price}">
+
+<script src="assets/js/theme.js"></script>
+<div class="am-g tpl-g">
+    <!-- 头部 -->
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                <img src="/assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+            </a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 侧边切换 -->
+            <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span></span>
+            </div>
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="#">欢迎你 &nbsp;
+                            <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                        </a>
+                    </li>
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="/loginout">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+            <div class="tpl-skiner-content-title">
+                选择主题
+            </div>
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 侧边导航栏 -->
+    <div class="left-sidebar">
+        <!-- 用户信息 -->
+        <div class="tpl-sidebar-user-panel">
+            <div class="tpl-user-panel-slide-toggleable">
+                    <span class="user-panel-logged-in-text">
+                        <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                        <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                        </span>
+                    </span>
+            </div>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a href="/teacher.index">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher/Log/1">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 日志管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/noticeManage">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 公告管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title active">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 学生管理
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico sidebar-nav-sub-ico-rotate"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub" style="display: block;">
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/Undergraduate/1}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生信息
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/add/view}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 新增学生
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/exeperiences?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生心得
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/works?pageNum=1" class="sub-active">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生作品
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+        <div class="row-content am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title  am-cf"><h1>学生作品</h1></div>
+
+
+                        </div>
+                        <div class="widget-body  am-fr">
+
+                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                                <div class="am-form-group">
+                                    <div class="am-btn-toolbar">
+                                        <div class="am-btn-group am-btn-group-xs">
+                                            <!--                                                <button type="button" class="am-btn am-btn-default am-btn-success"><span class="am-icon-plus"></span> 新增</button>-->
+                                            <!--                                                <a href="teacher/works?pageNum=1&username=">显示所有</a>-->
+                                            <a style="color: #ffffaa;" href="teacher/works?pageNum=1">显示所有</a>
+                                            <a id="break" style="color: #ffffaa;" th:if="${backfill}==null"
+                                               th:href="@{teacher/works(pageNum=${currentPage})}">刷新</a>
+                                            <a id="break" style="color: #ffffaa;" th:if="${backfill}"
+                                               th:href="@{teacher/work(pageNum=${currentPage},username=${backfill})}">刷新</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <script>
+
+    if($("#price").val()==0){
+        window.location.href = $("#break").attr("href");
+    }
+</script>
+
+
+                            <!--下拉列表-->
+                            <div class="am-u-sm-12 am-u-md-6 am-u-lg-3">
+                                <div class="am-form-group tpl-table-list-select">
+                                    <!--<select data-am-selected="{btnSize: 'sm'}">
+                                        <option value="1">暂时没用</option>
+                                        <option value="1">1</option>
+                                        <option value="1">2</option>
+                                        <option value="1">3</option>
+                                        <option value="1">4</option>
+                                        <option value="1">5</option>
+                                        <option value="1">6</option>
+                                    </select>-->
+                                </div>
+                            </div>
+                            <!--下拉列表-->
+
+
+                            <!--搜索框-->
+
+                            <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
+                                <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                    <form method="get" action="/teacher/work" id="form">
+                                        <input type="hidden" name="pageNum" value="1">
+                                        <input type="text" name="username" placeholder="根据学生姓名/作品名查询" class="am-form-field" id="searchInput"
+                                               th:value="${backfill}">
+                                    </form>
+                                    <span class="am-input-group-btn">
+                                            <button style="height:38px;"
+                                                    class=" tpl-table-list-field am-btn-success am-btn-default am-btn am-icon-search"
+                                                    onclick="javascript:return inputTest()"></button>
+                                        </span>
+                                </div>
+                            </div>
+                            <!--搜索框-->
+
+
+                            <div class="am-u-sm-12">
+                                <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black "
+                                       id="example-r">
+                                    <thead>
+                                    <tr>
+                                        <th><h2>批量删除</h2></th>
+                                        <th><h2>姓名</h2></th>
+                                        <th><h2>作品名</h2></th>
+                                        <th><h2>作品地址</h2></th>
+                                        <th><h2>添加时间</h2></th>
+                                        <th><h2>操作</h2></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:if="${pd}==1">
+                                        <td align="center" colspan="6"><h1>查无此人</h1></td>
+                                    </tr>
+                                    <tr th:if="${works.isEmpty()}">
+                                        <td align="center" colspan="6"><h1>暂无数据</h1></td>
+                                    </tr>
+                                    <tr th:if="${works} and ${pd}!=1"  th:each="work : ${works}">
+                                        <td style="text-align:left; padding-left:20px;">
+                                            <input type="checkbox" class="check" name="id[]" th:value="${work.id}"/>
+                                        </td>
+                                        <td th:each="name : ${names}" th:if="${work.student_id}==${name.id}">
+                                            [[${name.username}]]
+                                        </td>
+                                        <td th:utext="${#strings.abbreviate(work.name,10)}" th:title="${work.name}"></td>
+                                        <td><a th:href="${work.url}">作品地址</a></td>
+                                        <td th:text="${#dates.format(work.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                        <td>
+                                            <button class="btn am-btn-group-sm am-btn-danger" th:value="@{/teacher/work/}+${work.id}" onclick="delone(this.value)">删除
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <!-- more data -->
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+
+
+
+                            <div class="am-u-lg-12 am-cf" style="position: relative;top:10px;">
+
+                                <!--  全选的jq代码  -->
+
+                                <button id="all" style="color: #000000;margin-top: 20px">全选</button>
+                                <button onclick="DelSelect()" style="color: #000000;margin-top: 20px">批量删除</button>
+                                <div class="am-fr" >
+
+                                    <ul class="am-pagination tpl-pagination">
+                                        <!-- 首页 -->
+                                        <li th:if="${currentPage == 1}">
+                                            <a href="javascript:;">首页</a>
+                                        </li>
+
+                                        <li th:if="(${currentPage > 1})">
+                                            <a th:href="@{/teacher/workpage(pageNum=1,username=${backfill})}">首页</a>
+                                        </li>
+
+
+                                        <li th:if="${currentPage == 1}">
+                                            <a href="javascript:;">«</a>
+                                        </li>
+                                        <li th:if="${currentPage > 1}">
+                                            <a th:href="@{/teacher/workpage(pageNum=${currentPage - 1},username=${backfill})}">«</a>
+                                        </li>
+
+
+                                        <th:block th:if="${generalPage>0 && generalPage<= 4}"
+                                                  th:each="i : ${#numbers.sequence(1,generalPage)}">
+                                            <li th:if="${currentPage == i}" class="am-active"><span
+                                                    th:text="${i}"></span></li>
+                                            <li th:if="${currentPage != i}"><a
+                                                    th:href="@{/teacher/workpage(pageNum=${i},username=${backfill})}"
+                                                    th:text="${i}"></a></li>
+                                        </th:block>
+
+                                        <th:block th:if="${generalPage > 4}">
+                                            <th:block th:if="${(currentPage - (2/2)) < 3}"
+                                                      th:each="i : ${#numbers.sequence(1,2 + 2 )}">
+                                                <li th:if="${currentPage == i}" class="am-active"><span
+                                                        th:text="${i}"></span></li>
+                                                <li th:if="${currentPage != i}"><a
+                                                        th:href="@{/teacher/workpage(pageNum=${i},username=${backfill})}"
+                                                        th:text="${i}"></a></li>
+                                            </th:block>
+
+
+                                            <li th:if="${(currentPage - (2/2)) >= 3}"><a>...</a></li>
+
+                                            <th:block
+                                                    th:if="${((currentPage - (2/2))>=3) && (currentPage < (generalPage - 3))}"
+                                                    th:each="i : ${#numbers.sequence(currentPage - 1,currentPage+2)}">
+                                                <li th:if="${currentPage == i}" class="am-active"><span
+                                                        th:text="${i}"></span></li>
+                                                <li th:if="${currentPage != i}"><a
+                                                        th:href="@{/teacher/workpage(pageNum=${i},username=${backfill})}"
+                                                        th:text="${i}"></a></li>
+                                            </th:block>
+
+
+                                            <li th:if="${currentPage < (generalPage - 3)}"><a>...</a></li>
+                                            <th:block th:if="${currentPage >= (generalPage - 3)}"
+                                                      th:each="i : ${#numbers.sequence(generalPage - 3,generalPage)}">
+                                                <li th:if="${currentPage == i}" class="am-active"><span
+                                                        th:text="${i}"></span></li>
+                                                <li th:if="${currentPage != i}"><a
+                                                        th:href="@{/teacher/workpage(pageNum=${i},username=${backfill})}"
+                                                        th:text="${i}"></a></li>
+                                            </th:block>
+                                        </th:block>
+
+
+                                        <li th:if="${currentPage >= generalPage}"><a href="javascript:;">»</a></li>
+                                        <li th:if="${currentPage < generalPage}"><a
+                                                th:href="@{/teacher/workpage(pageNum=${currentPage}+1,username=${backfill})}">»</a>
+                                        </li>
+
+
+                                        <li th:if="${generalPage>0 && currentPage >= generalPage}"><a
+                                                href="javascript:;">末页</a></li>
+                                        <li th:if="${currentPage < generalPage}"><a
+                                                th:href="@{/teacher/workpage(pageNum=${generalPage},username=${backfill})}">末页</a>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="assets/js/amazeui.min.js"></script>
+<script src="assets/js/amazeui.datatables.min.js"></script>
+<script src="assets/js/dataTables.responsive.min.js"></script>
+<script src="assets/js/app.js"></script>
+<!--全选删除-->
+<script>
+                                    $("#all").click(function () {
+                                        var buttonValue = document.getElementById('all').innerText;
+                                        if (buttonValue == "全选") {
+                                            $(".check").prop("checked", true);
+                                            $("#all").text("取消全选")
+                                        } else {
+                                            $(".check").prop("checked", false);
+                                            $("#all").text('全选')
+                                        }
+                                    });
+
+                                    function DelSelect() {
+                                        var Checkbox = false;
+                                        $("input[name='id[]']").each(function () {
+                                            if (this.checked == true) {
+                                                Checkbox = true;
+                                            }
+                                        });
+                                        if (Checkbox) {
+                                            var t = confirm("您确认要删除选中的内容吗？");
+                                            if (t == false) {
+                                                return false;
+                                            } else {
+                                                var checkedID = "";
+                                                $("input[name='id[]']").each(function () {
+                                                    if (this.checked == true) {
+                                                        checkedID += this.value + ",";
+                                                    }
+                                                });
+                                                //window.location.replace("/teacher/worksmulti?id=" + checkedID);
+                                                $.ajax({
+                                                    url: "/teacher/worksmulti/" + checkedID,
+                                                    type: "DELETE",
+                                                    success: function () {
+                                                        location.reload();
+                                                    }
+                                                });
+                                            }
+                                        } else {
+                                            alert("请选择您要删除的内容!");
+                                            return false;
+                                        }
+                                    }
+                                </script>
+
+</body>
+
+</html>

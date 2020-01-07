@@ -19,6 +19,8 @@ public interface ExeperienceService {
     List<Exeperience> selectByStudent_id(int id);
     //根据id删除
     Integer deleteById(int id, HttpServletRequest request);
+    //根据id查看心得
+    Exeperience selectById(int id);
 
 
     // 遍历所有心得

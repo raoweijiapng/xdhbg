@@ -137,16 +137,24 @@
                         </div>
                         <div class="widget-body  am-fr">
                             <div class="am-u-sm-12">
-                                <form th:action="@{'/adminupdateteacher/'+${teacherId}}" method="Post" class="am-form tpl-form-line-form">
+                                <form th:attr="url='/adminupdateteacher/'+${teacherId}" method="Post" class="am-form tpl-form-line-form" autocomplete="off" id="form">
+
+                                    <input type="hidden" name="id" id="id" th:value="${teacherId}"/>
                                     <label class="am-u-sm-3 am-form-label">教师姓名:</label>
                                     <div class="am-u-sm-9">
-                                    <b><td th:if="${selectByTeacher.getId()}==${teacherId}" th:text="${selectByTeacher.name}"></td></b></div><br/><br/>
+                                        <input type="text" name="name" id="name" th:if="${selectByTeacher.getId()}==${teacherId}" th:value="${selectByTeacher.name}"/>
+<!--                                        <b><td th:if="${selectByTeacher.getId()}==${teacherId}" th:text="${'原姓名:'+selectByTeacher.name}"></td></b><br/><br/>-->
+
+                                    </div>
                                     <label class="am-u-sm-3 am-form-label">教师手机号:</label>
-                                    <div class="am-u-sm-9"><input type="text" name="mobile" id="mobile"/></div><br/><br/>
+                                    <div class="am-u-sm-9"><input type="text" name="mobile" id="mobile" th:if="${selectByTeacher.getId()}==${teacherId}" th:value="${selectByTeacher.mobile}"/>
+                                    </div><br/><br/>
                                     <label class="am-u-sm-3 am-form-label">教师密码:</label>
-                                    <div class="am-u-sm-9"><input type="text" name="password" id="psd"/></div><br/><br/>
+                                    <div class="am-u-sm-9"><input type="password" name="password" id="psd"/></div><br/><br/>
+                                    <label class="am-u-sm-3 am-form-label">确认密码:</label>
+                                    <div class="am-u-sm-9"><input type="password" name="password" id="psd2"/></div><br/><br/>
                                     <div class="am-u-sm-4 am-form-label">
-                                    <input id="btn" class="am-btn am-btn-primary tpl-btn-bg-color-success " onclick="javascript:return p_update()" type="submit" value="修改"/>
+                                        <input id="btn3" class="am-btn am-btn-primary tpl-btn-bg-color-success " type="button" value="修改"/>
                                     </div>
                                 </form>
                             </div>

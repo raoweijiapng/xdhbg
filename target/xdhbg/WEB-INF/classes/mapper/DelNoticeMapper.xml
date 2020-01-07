@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdh.dao.DelNoticeDao">
+
+	<select id="delNoticeDao" resultType="Integer">
+		delete from xdh_notice where id = #{id}
+	</select>
+
+
+
+
+
+</mapper>

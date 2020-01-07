@@ -1,20 +1,20 @@
 package cn.xdh.entity;
 
-        import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-        import java.util.Date;
+import java.util.Date;
 
 public class Notice {
     private int id;
     private String notice;
     //    @JsonFormat(pattern="yyyy-MM-dd")
-    private int add_time;
+    private Long add_time;
 
     public Notice() {
     }
 
 
-    public Notice(int id, String notice, int add_time) {
+    public Notice(int id, String notice, Long add_time) {
         this.id = id;
         this.notice = notice;
         this.add_time = add_time;
@@ -37,16 +37,16 @@ public class Notice {
     }
 
 
-    public int getAdd_time() {
+    public Long getAdd_time() {
         return add_time;
     }
 
-    public void setAdd_time(int add_time) {
+    public void setAdd_time(Long add_time) {
         this.add_time = add_time;
     }
 
     public Date getDateTime(){
-        Long timeDateStamp = (long)getAdd_time()*1000;
+        Long timeDateStamp = getAdd_time()*1000;
         return new Date(timeDateStamp);
     }
 

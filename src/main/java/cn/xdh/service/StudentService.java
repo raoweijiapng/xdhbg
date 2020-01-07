@@ -52,7 +52,8 @@ public interface StudentService {
 
     List<XdhClass> selectClassByUndergraduate();
 
-    //
+    List<Student> selectStudentByClass(int class_id);
+
     public List<String> selectUsername();
 
     public int selectIdByPhone(String mobie);
@@ -68,8 +69,9 @@ public interface StudentService {
 
     public List<Map<String,Object>> getUsefulData(int id);
 
-    public void updateData(@Param("id") int id, String password, long birthday, String graduate_school, String stage_id, int province_id, int city_id, int area_id);
+    public void updateData(int id, String password, long birthday, String graduate_school, String stage_id, int province_id, int city_id, int area_id,String address);
 
+    public void updateOther(int id, long birthday, String graduate_school, String stage_id, int province_id, int city_id, int area_id,String address);
 
     //    三级联动 获取省名
 

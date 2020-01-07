@@ -4,7 +4,6 @@ cn\xdh\dao\ExeperienceDao.class
 cn\xdh\service\impl\WorksServiceImpl.class
 cn\xdh\entity\Exeperience.class
 cn\xdh\service\impl\ExeperienceServiceImpl.class
-cn\xdh\util\MyDate.class
 cn\xdh\RunBoot.class
 cn\xdh\web\ExeperienceController.class
 cn\xdh\service\ExeperienceService.class

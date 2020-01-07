@@ -4,7 +4,7 @@
 <mapper namespace="cn.xdh.dao.ExeperienceDao">
 
 
-    <select id="selectByStudent_id" resultType="cn.xdh.entity.Exeperience">
+    <select id="selectByStudent_id" resultType="cn.xdh.entity.Exeperience" parameterType="integer">
         select * from xdh_experience where student_id=#{id}
     </select>
 
@@ -28,5 +28,8 @@
         insert into xdh_experience (student_id, content, add_time) values (#{student_id},#{content},#{add_time});
     </insert>
 
+    <select id="selectById" resultType="cn.xdh.entity.Exeperience">
+        select * from xdh_experience where id = #{id}
+    </select>
 
 </mapper>

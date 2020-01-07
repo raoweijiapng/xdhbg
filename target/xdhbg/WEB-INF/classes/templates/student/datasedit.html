@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>修改学生信息</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/js/jquery.min.js"></script>
+
+</head>
+<style>
+    #box a{
+        text-decoration: none;
+    }
+</style>
+
+<body data-type="widgets">
+    <script src="/assets/js/theme.js"></script>
+    <div class="am-g tpl-g" id="box">
+        <!-- 头部 -->
+        <header>
+            <!-- logo -->
+            <div class="am-fl tpl-header-logo">
+                <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                    <img src="/assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+                </a>
+            </div>
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-switch-button am-icon-list">
+                    <span></span>
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 欢迎语 -->
+                        <li class="am-text-sm tpl-header-navbar-welcome">
+                            <a href="#">欢迎你 &nbsp;
+                                <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                            </a>
+                        </li>
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="/loginout">
+                                <span class="am-icon-sign-out"></span> 退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </header>
+        <!-- 风格切换 -->
+        <div class="tpl-skiner">
+            <div class="tpl-skiner-toggle am-icon-cog">
+            </div>
+            <div class="tpl-skiner-content">
+                <div class="tpl-skiner-content-bar">
+                    <span class="skiner-color skiner-black" data-color="theme-black"></span>
+                </div>
+            </div>
+        </div>
+        <!-- 侧边导航栏 -->
+        <div class="left-sidebar">
+            <!-- 用户信息 -->
+            <div class="tpl-sidebar-user-panel">
+                <div class="tpl-user-panel-slide-toggleable">
+                   <span class="user-panel-logged-in-text">
+                        <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                        <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                        </span>
+                   </span>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+            <ul class="sidebar-nav">
+               <li class="sidebar-nav-link">
+                    <a th:href="@{/student.index}">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                    </a>
+                </li>
+
+                <li class="sidebar-nav-link">
+                    <a th:href="@{/list}" class="active">
+                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 学生信息
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a th:href="@{/worklist/1}">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 作品列表
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a th:href="@{/selectExperience}">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 心得体会
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="tpl-content-wrapper">
+            <div class="row-content am-cf">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf">
+                            <div class="widget-head am-cf">
+                                <div class="widget-title am-fl"><h2><span class="am-icon-clipboard page-header-heading-icon"></span> 学生信息 <small>修改</small></h2></div>
+                            </div>
+                            <div class="widget-body am-fr">
+                                <form class="am-form tpl-form-border-form tpl-form-border-br" th:action="@{/updatestudent/}" method="post">
+<!--                                    <input type="hidden" name="_method" value="put"/>-->
+<!--                                    <input type="hidden" name="id" th:value="${edit['id']}">-->
+                                    <!--             用户名          -->
+                                    <input type="hidden" name="id" th:value="${edits['id']}">
+
+                                    <div class="am-form-group">
+                                        <label  class="am-u-sm-3 am-form-label" >用户名 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['username']}">显示数据库username</span>
+                                            <small>&nbsp;</small>
+                                        </div>
+                                    </div>
+                                    <!--             登录账号          -->
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label" >登录手机号 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['mobile']}">显示数据库mobile</span>
+                                            <small>&nbsp;</small>
+                                        </div>
+                                    </div>
+                                    <!--             密码          -->
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label" >密码 : </label>
+                                        <div class="am-u-sm-9">
+                                            <input type="password" class="tpl-form-input" name="password" id="password">
+                                            <small> &nbsp;</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group" th:if="${edits['birthday']} != null">
+                                        <label class="am-u-sm-3 am-form-label">生日 : </label>
+                                        <div class="am-u-sm-9">
+                                            <input  name="birth" type="text" class="birthday am-form-field tpl-form-no-bg" th:value="${#dates.format(edits['birthday']*1000,'yyyy-MM-dd ')}" placeholder="生日  (可更改)" data-am-datepicker="" >
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <div class="am-form-group" th:if="${edits['birthday']} == null">
+                                        <label class="am-u-sm-3 am-form-label">生日 : </label>
+                                        <div class="am-u-sm-9">
+                                            <input name="birth" type="text" class="birthday am-form-field tpl-form-no-bg" placeholder="生日  (可更改)" data-am-datepicker="" >
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--             入学日期          -->
+                                    <div class="am-form-group" th:if="${edits['join_study_time']}">
+                                        <label  class="am-u-sm-3 am-form-label">入学日期 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${#dates.format(edits['join_study_time']*1000,'yyyy-MM-dd  HH:mm:ss')}">显示数据库日期</span>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--             毕业日期          -->
+                                    <div class="am-form-group" th:if="${edits['graduate_time']}" >
+                                        <label class="am-u-sm-3 am-form-label">毕业日期 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${#dates.format(edits['graduate_time']*1000,'yyyy-MM-dd  HH:mm:ss')}">显示数据库日期</span>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--             毕业院校          -->
+                                    <div class="am-form-group">
+                                        <label  class="am-u-sm-3 am-form-label" >毕业院校 : </label>
+                                        <div class="am-u-sm-9">
+                                            <input type="text" name="graduate_school" class="tpl-form-input" id="graduate_school" th:value="${edits['graduate_school']}" placeholder="请输入毕业院校  (可更改)">
+                                            <small> &nbsp;</small>
+                                        </div>
+                                    </div>
+
+
+                                    <!--   所在城市 省市   -->
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">所在城市 : </label>
+                                        <div class="am-u-sm-9">
+                                            <select id="province" name="province_id" data-am-selected style="display: none;">
+                                                <!--循环出省级-->
+                                                <option value="-1" >点击选择...</option>
+                                                <option th:value="${province['id']}" th:each="province:${provinceList}" th:text="${province['name']}">省级</option>
+                                            </select>
+                                            <select id="city" name="city_id" data-am-selected style="display: none;">
+                                                <!--循环出市级-->
+                                            </select>
+                                            <select id="area" name="area_id" data-am-selected style="display: none;">
+                                                <!--循环出县级-->
+                                            </select>
+                                            <br>
+                                            <!--   详细地址  -->
+                                            <small> &nbsp;</small>
+                                            <input type="text" name="address" id="address" placeholder="地址详情" th:value="${edits['address']}">
+
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+
+                                    <!--  班级  -->
+                                    <div class="am-form-group">
+                                        <label  class="am-u-sm-3 am-form-label">语种班级 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['class_name']}">显示数据库班级</span>
+                                            </select>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+
+                                    <!--  阶段  -->
+                                    <div class="am-form-group">
+                                        <label  class="am-u-sm-3 am-form-label">学习进度 : </label>
+                                        <div class="am-u-sm-9">
+                                            <select id="stage_id" name="stage_id" data-am-selected="{searchBox: 1}" style="display: none;">
+                                                <option th:value="1">一阶段</option>
+                                                <option th:value="2">二阶段</option>
+                                                <option th:value="3">三阶段</option>
+                                                <option th:value="4">四阶段</option>
+                                                <option th:value="5">五阶段</option>
+                                            </select>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--  是否毕业  -->
+                                    <div class="am-form-group">
+                                        <label  class="am-u-sm-3 am-form-label">是否毕业 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['is_graduate']} !=null ?'已毕业':'未毕业'">显示数据库is_graduate</span>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--   实际工作城市   -->
+                                    <div class="am-form-group">
+
+                                        <label class="am-u-sm-3 am-form-label">工作城市 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['aimProvince']}">显示数据库aim_city.....</span>
+                                            <span th:text="${edits['aimCity']}"></span>
+                                            <span th:text="${edits['aimArea']}"></span>
+                                            <br>
+                                            <!--   详细地址  -->
+                                            <small> &nbsp;</small>
+                                            <span th:text="${edits['aim_address']}">显示数据库aim_address</span>
+
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--      工作单位      -->
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">工作单位 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['company']}">显示数据库company</span>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <!--      薪资      -->
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">薪资 : </label>
+                                        <div class="am-u-sm-9">
+                                            <span th:text="${edits['salary']}">显示数据可salary</span>
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <div class="am-u-sm-9 am-u-sm-push-3">
+                                            <button id="updatestudent" type="submit"  class="am-btn am-btn-primary tpl-btn-bg-color-success" >提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="tst">
+        123123123132
+    </div>
+    </div>
+    <script src="/assets/js/amazeui.min.js"></script>
+    <script src="/assets/js/amazeui.datatables.min.js"></script>
+    <script src="/assets/js/dataTables.responsive.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <!--查询市级城市-->
+    <script>
+        $("#province").change(function () {
+            var id = $("#province").val();
+            $("#city").html("");
+            var x = '<option value="-1">点击选择...</option>';
+            $("#city").append(x);
+            $.ajax({
+                url:"/stuprovince/"+id,
+                type:"GET",
+                dataType:"JSON",
+                success:function (data) {
+                    for ( var i = 0, len = data.length; i < len; i++) {
+                        var option = '<option value="' + data[i].id + '">'
+                            + data[i].name + '</option>';
+                        $("#city").append(option);
+                    }
+                }
+            })
+        });
+    </script>
+    <!--查询县级城市-->
+    <script>
+        $("#city").change(function () {
+            var id = $("#city").val();
+            $("#area").html("");
+            var x = '<option value="-1">点击选择...</option>';
+            $("#area").append(x);
+            $.get("/stucity/"+id,
+                function (data) {
+                    if (data && data.length > 0) {
+                        for ( var i = 0, len = data.length; i < len; i++) {
+                            var option = '<option value="' + data[i].id + '">'
+                                + data[i].name + '</option>';
+                            $("#area").append(option);
+                        }
+                    }
+
+                },
+                "JSON");
+        });
+
+        $("#updatestudent").click(function () {
+            var flag = true;
+            var errinfo = "";
+            var birthday = $(".birthday").val();
+            if (birthday == null) {
+                flag = false;
+                errinfo += '\n生日不能为空';
+            }
+            var graduate_school = $("#graduate_school").val();
+            if (graduate_school == null) {
+                flag = false;
+                errinfo += '\毕业院校不能为空';
+            }
+            var province = $("#province").val();
+            if (province == null) {
+                flag = false;
+                errinfo += '\n省份不能为空';
+            }
+            var city = $("#city").val();
+            if (city == null) {
+                flag = false;
+                errinfo += '\n市不能为空';
+            }
+            var area = $("#area").val();
+            if (area == null) {
+                flag = false;
+                errinfo += '\n区县不能为空';
+            }
+            var address = $("#address").val();
+            if (area == null) {
+                flag = false;
+                errinfo += '\n详细地址不能为空';
+            }
+            if(!flag){
+                alert(errinfo);
+                return false;
+            }else {
+                //全写完了啊
+                return true;
+            }
+        })
+
+    </script>
+</body>
+
+</html>

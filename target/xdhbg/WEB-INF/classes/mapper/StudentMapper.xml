@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdh.dao.StudentDao">
+	<!-->根据手机号和密码查找学生<-->
+	<select id="selectByPhoneAndPassword" resultType="cn.xdh.entity.Student">
+		select * from xdh_student where mobile = #{mobile} and password = #{password}
+	</select>
+
+	<!-->根据所有学生数量<-->
+	<select id="selectAllNumber" resultType="Integer">
+		select count(*) from xdh_student
+	</select>
+
+	<select id="selectByMobile" resultType="cn.xdh.entity.Student">
+        select * from xdh_student where mobile = #{mobile}
+    </select>
+
+	<select id="getAllStudentByGraduate" resultType="cn.xdh.entity.Student">
+		select *
+		from xdh_student
+		where is_graduate = #{is_graduate,jdbcType=TINYINT}
+		order by join_study_time;
+	</select>
+
+	<select id="getStudentByUndergraduate" resultType="java.util.HashMap">
+		select
+			s.id,s.username,s.sex,s.mobile,c.class_name,s.stage_id,s.address,s.join_study_time,
+			s.graduate_school
+		from
+			xdh_student s
+		left join
+			xdh_class c
+		on
+			s.class_id = c.id
+		where
+			s.is_graduate = 0
+		ORDER BY
+			s.join_study_time
+		desc;
+	</select>
+
+	<select id="getStudentByGraduate" resultType="java.util.HashMap">
+		select
+			s.id,s.username,s.sex,s.mobile,c.class_name,s.company,s.salary,
+			s.graduate_time,s.aim_province_id,s.aim_city_id,s.aim_area_id
+		from
+			xdh_student s
+		left join
+			xdh_class c
+		on
+			s.class_id = c.id
+		where
+			s.is_graduate = 1
+		ORDER BY
+			s.graduate_time
+		desc;
+	</select>
+
+
+
+	<select id="selectStudentByMobile" resultType="cn.xdh.entity.Student">
+		select *
+		from xdh_student
+		where mobile = #{mobile,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectStudentById" resultType="cn.xdh.entity.Student">
+		select *
+		from xdh_student
+		where id = #{id}
+	</select>
+
+	<select id="selectStudentLikeUsername" resultType="java.util.HashMap">
+		SELECT s.id,s.username,s.sex,s.mobile,c.class_name,s.stage_id,s.address,
+		s.join_study_time,s.graduate_school,s.stage_id,s.address,s.company,s.salary,
+		s.graduate_time,s.aim_province_id,s.aim_city_id,s.aim_area_id
+		FROM  xdh_student s
+		left join xdh_class c
+		on s.class_id = c.id
+		WHERE   s.is_graduate = #{is_graduate}
+		and s.username like CONCAT('%',#{username},'%')
+	</select>
+
+	<select id="selectProvince" resultType="cn.xdh.entity.City">
+		SELECT *
+		FROM  citys
+		WHERE level = 1
+	</select>
+
+	<select id="selectAllNameAndId" resultType="cn.xdh.entity.Student">
+        select username,id from xdh_student
+    </select>
+
+	<select id="selectIdAndNameByName" resultType="cn.xdh.entity.Student">
+        select id,username from xdh_student where username like CONCAT('%',#{username},'%')
+    </select>
+
+
+	<select id="selectCityByUpId" resultType="cn.xdh.entity.City">
+		SELECT *
+		FROM  citys
+		WHERE upid = #{upid}
+	</select>
+
+	<select id="selectAreaByUpId" resultType="cn.xdh.entity.City">
+		SELECT *
+		FROM  citys
+		WHERE upid = #{upid}
+	</select>
+
+
+	<select id="selectCityById" resultType="java.lang.String">
+		SELECT name
+		FROM  citys
+		WHERE id = #{id}
+	</select>
+
+	<select id="selectClassByUndergraduate" resultType="cn.xdh.entity.XdhClass">
+		SELECT *
+		FROM  xdh_class
+		WHERE is_graduate = 0
+	</select>
+
+
+	<insert id="addStudent" parameterType="cn.xdh.entity.Student">
+		insert into xdh_student
+		(username, password, mobile, join_study_time,is_graduate,stage_id,sex,class_id)
+    	values
+    	(#{username},#{password},#{mobile},#{join_study_time},#{is_graduate},#{stage_id},#{sex},#{class_id})
+	</insert>
+
+	<delete id="deleteStudent" parameterType="int">
+		delete from xdh_student where id = #{id}
+	</delete>
+
+
+	<update id="updateStudent" parameterType="cn.xdh.entity.Student">
+		update xdh_student set
+		is_graduate = #{is_graduate},
+		company = #{company},
+		class_id=#{class_id},
+		salary = #{salary,jdbcType=DECIMAL},
+		aim_province_id = #{aim_province_id},
+		aim_city_id = #{aim_city_id},
+		aim_area_id = #{aim_area_id},
+		graduate_time = #{graduate_time}
+		where id = #{id}
+	</update>
+
+
+	<select id="selectUsername"  resultType="string">
+		select s.username from xdh_student s, xdh_works w where w.student_id = s.id
+	</select>
+
+	<select id="selectIdByUsername" parameterType="string" resultType="int">
+		select id from xdh_student where username = #{username}
+	</select>
+
+	<select id="selectIdByPhone" parameterType="string" resultType="int">
+		select id from xdh_student where mobile = #{mobile}
+	</select>
+
+	<!-- 查询数据库中公告信息-->
+	<select id="getNotices" resultType="cn.xdh.entity.Notice">
+		select * from xdh_notice ORDER BY add_time DESC LIMIT 8
+	</select>
+
+	<!-- 查询数据库中学生信息-->
+	<select id="getDatas" resultType="cn.xdh.entity.Student">
+		SELECT * FROM xdh_student WHERE id = #{id}
+	</select>
+
+	<!-- 查询学生id查询学生信息 -->
+	<select id="getUsefulData" resultType="java.util.HashMap">
+			select
+			student.id,student.username,student.mobile,student.password
+			,student.birthday,student.join_study_time,student.graduate_time,
+			student.province_id,student.city_id,student.area_id,student.address
+			,class.class_name,student.progress,student.is_graduate,student.company
+			 ,student.salary,student.aim_province_id,student.aim_city_id,student.aim_area_id
+			 ,student.aim_address,student.stage_id ,student.graduate_school from xdh_student student inner join xdh_class class on student.class_id = class.id where student.id = #{id}
+	</select>
+
+	<update id="updateData" parameterType="java.util.HashMap" >
+		UPDATE xdh_student SET password=#{password},birthday=#{birthday}
+		,graduate_school=#{graduate_school},stage_id=#{stage_id}
+		,province_id=#{province_id},city_id=#{city_id},area_id=#{area_id},address=#{address} WHERE ID=#{id}
+		<!-- 属性字段名区分大小写 -->
+	</update>
+
+	<update id="updateOther" parameterType="java.util.HashMap" >
+		UPDATE xdh_student SET birthday=#{birthday}
+		,graduate_school=#{graduate_school},stage_id=#{stage_id}
+		,province_id=#{province_id},city_id=#{city_id},area_id=#{area_id},address=#{address} WHERE ID=#{id}
+		<!-- 属性字段名区分大小写 -->
+	</update>
+
+	<select id="getProvinceName" resultType="java.util.HashMap">
+		SELECT * FROM citys WHERE level = 1
+	</select>
+
+	<select id="getCityName" resultType="java.util.HashMap">
+		SELECT * FROM citys WHERE UPID = #{id}
+	</select>
+
+	<select id="getAreaName" resultType="java.util.HashMap">
+		SELECT * FROM citys WHERE UPID = #{id}
+	</select>
+
+	<!--  学生信息页面获取到省市县的名字	-->
+
+	<select id="getNameByProvinceid" resultType="java.lang.String">
+		SELECT NAME FROM citys WHERE ID = #{province_id}
+	</select>
+
+
+	<select id="getNameByCityid" resultType="java.lang.String">
+		SELECT NAME FROM citys WHERE ID = #{city_id}
+	</select>
+
+
+	<select id="getNameByAreaid" resultType="java.lang.String">
+		SELECT NAME FROM citys  WHERE ID = #{area_id}
+	</select>
+
+	<!--	教师填写毕业以后实际工作城市-->
+	<select id="getNameByAimProvinceid" resultType="java.lang.String">
+		SELECT NAME FROM citys WHERE ID = #{aim_province_id}
+	</select>
+
+	<select id="getNameByAimCityid" resultType="java.lang.String">
+		SELECT NAME FROM citys WHERE ID = #{aim_city_id}
+	</select>
+
+	<select id="getNameByAimAreaid" resultType="java.lang.String">
+		SELECT NAME FROM citys  WHERE ID = #{aim_area_id}
+	</select>
+
+
+	<select id="selectStudentByClass" resultType="cn.xdh.entity.Student">
+        select *
+        from xdh_student
+        where class_id = #{class_id}
+    </select>
+
+</mapper>

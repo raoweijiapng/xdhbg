@@ -137,6 +137,11 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -226,16 +231,22 @@
                                     <tr th:if="${exeperiences.isEmpty()}">
                                         <td align="center" colspan="5"><h1>暂无数据</h1></td>
                                     </tr>
-                                    <tr th:if="${exeperiences} and ${pd}!=1" th:each="exeper : ${exeperiences}">
-                                        <td style="text-align:left; padding-left:20px;">
+                                    <tr  th:if="${exeperiences} and ${pd}!=1" th:each="exeper : ${exeperiences}">
+                                        <td style="vertical-align:middle; text-align:left; padding-left:20px;">
                                             <input type="checkbox" class="check" name="id[]" value="" id="id[]" th:value="${exeper.id}"/>
                                         </td>
-                                        <td th:each="name : ${names}" th:if="${exeper.student_id}==${name.id}">[[${name.username}]]</td>
-                                        <td th:text="${exeper.content}"></td>
-                                        <td th:text="${#dates.format(exeper.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
-<!--                                        <td><a th:href="@{teacher/exeperience/}+${exeper.id}" onclick="javascript:return del()">删除</a></td>-->
+                                        <td style="vertical-align:middle;" th:each="name : ${names}" th:if="${exeper.student_id}==${name.id}">[[${name.username}]]</td>
+
+
                                         <td>
-                                            <button class="btn am-btn-group-sm am-btn-danger" th:value="@{/teacher/exeperience/}+${exeper.id}" onclick="delone(this.value)">删除
+                                            <a th:href="@{/teacher/exeper(id=${exeper.id})}" th:text="点击查看" ></a>
+                                        </td>
+
+
+                                        <td style="vertical-align:middle;" th:text="${#dates.format(exeper.add_time*1000, 'yyyy-MM-dd HH:mm:ss')}"></td>
+<!--                                        <td><a th:href="@{teacher/exeperience/}+${exeper.id}" onclick="javascript:return del()">删除</a></td>-->
+                                        <td style="vertical-align:middle;">
+                                            <button class="btn am-btn-group-sm am-btn-danger" th:value="@{'/teacher/exeperience/'+${exeper.id}}" onclick="delone(this.value)">删除
                                             </button>
                                         </td>
                                     </tr>

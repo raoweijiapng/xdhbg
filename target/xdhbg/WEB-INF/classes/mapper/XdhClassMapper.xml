@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.xdh.dao.XdhClassDao">
+    <!--selectByXdhClass为之后其他文件内类名-->
+    <select id="selectByXdhClass" resultType="cn.xdh.entity.XdhClass">
+        select * from xdh_class
+    </select>
+
+    <select id="selectClassByNameAndId" resultType="cn.xdh.entity.XdhClass">
+        select * from xdh_class where class_name = #{class_name} and id != #{id}
+    </select>
+    
+    <select id="selectByClassName" resultType="cn.xdh.entity.XdhClass">
+        select * from xdh_class where class_name = #{class_name}
+    </select>
+    
+    <delete id="deleteByXdhClass" parameterType="int">
+        delete from xdh_class where id = #{id}
+    </delete>
+    
+    <insert id="insertByXdhClass" keyProperty="id">
+        insert into xdh_class (id,class_name,add_time,teacher_id,is_graduate)
+        values (null,#{class_name},#{add_time},#{teacher_id},#{is_graduate})
+    </insert>
+
+    <update id="updateByXdhClass"  parameterType="cn.xdh.entity.XdhClass">
+        UPDATE
+            xdh_class
+        SET
+            class_name = ${'"'+class_name+'"'},
+            teacher_id = ${teacher_id},
+            is_graduate = ${is_graduate}
+        where
+            id = ${id}
+    </update>
+</mapper>

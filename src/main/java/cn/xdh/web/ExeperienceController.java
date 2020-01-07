@@ -15,7 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -38,6 +42,18 @@ public class ExeperienceController {
     @Autowired
     private StudentServiceImpl studentServiceimpl;
 
+
+    /**
+     * 显示详细心得
+     * @return
+     */
+    @GetMapping("/teacher/exeper")
+    public String showExeper(int id,Model model){
+        System.out.println(id);
+        Exeperience exeperience = exeperienceServiceImpl.selectById(id);
+        model.addAttribute("exeper",exeperience);
+        return "teacher/exepershow";
+    }
 
     /**
      * 显示所有学生作品
@@ -151,45 +167,80 @@ public class ExeperienceController {
         }
     }
 
+    //学生端心得代码
 
     @RequestMapping(value = "/selectExperience", method = RequestMethod.GET)
-    public String toEditor(Model model, Experience experience){
+    public ModelAndView toEditor(Model model, Experience experience, HttpServletRequest request, HttpServletResponse response) {
         //获取心得集合
-        List<Experience> experienceList = exeperienceServiceImpl.selectExperience();
-        int i = 1;
-        //循环 修改显示在列表的 心得编号 可以注释 查看 不修改之前的效果
-        for (Experience e:experienceList){
-            e.setId(i);
-            i++;
+        Cookie[] cookies = request.getCookies();
+        int student_id = 0;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    student_id = Integer.parseInt(cookie.getValue());
+                }
+            }
+            List<Exeperience> exeperienceList = exeperienceServiceImpl.selectByStudent_id(student_id);
+            //循环 修改显示在列表的 心得编号 可以注释 查看 不修改之前的效果
+            model.addAttribute("experience", exeperienceList);
+            return new ModelAndView("student/experienceList");
+        } else {
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out.println("<script>");
+            out.println("alert('请先登录,再进行操作!');");
+            out.println("</script>");
+            return new ModelAndView("redirect:/");
         }
-        model.addAttribute("experience",experienceList);
-        return "student/experienceList";
     }
 
     @GetMapping("/selectExperience/{id}")
     public ModelAndView deleteExperience(@PathVariable("id")int id){
         //获取当前所有心得
-        List<Experience> experienceList = exeperienceServiceImpl.selectExperience();
         //因为修改了 id 而且修改的id正好是 experienceList集合下标减一 所以 按照这个删除
-        exeperienceServiceImpl.deleteExperience(experienceList.get(id-1).getId());
+        exeperienceServiceImpl.deleteExperience(id);
         return new ModelAndView("redirect:");
     }
 
     @PostMapping("/insertExperience")
-    public ModelAndView insertExperience(String context) throws ParseException {
+    public ModelAndView insertExperience(String context,HttpServletResponse response,HttpServletRequest request) throws ParseException {
 
         // 获取当前时间 的int
         Date add_time = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String format = sdf.format(add_time);
-        int add_time1 =(int) (sdf.parse(format).getTime()/1000);
-        //获取心得集合
-        List<Experience> experienceList = exeperienceServiceImpl.selectExperience();
-        //设置要增加的心得  get(int index) 获取位于index的值 获取的id表示比最大心得编号+1
-        Experience experience = new Experience(experienceList.get(experienceList.size()-1).getId()+1,
-                experienceList.get(0).getStudent_id(),context,add_time1);
-        int i = exeperienceServiceImpl.insertExperience(experience);
-        return new ModelAndView("redirect:/selectExperience");
+        Long add_time1 =(sdf.parse(format).getTime()/1000);
+        //获取cookie的id
+        Cookie[] cookies = request.getCookies();
+        int student_id = 0;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("id")) {
+                    student_id = Integer.parseInt(cookie.getValue());
+                }
+            }
+            //设置要增加的心得  get(int index) 获取位于index的值 获取的id表示比最大心得编号+1
+            Experience experience = new Experience(student_id, context, add_time1);
+            int i = exeperienceServiceImpl.insertExperience(experience);
+            return new ModelAndView("redirect:/selectExperience");
+        }else{
+            response.setContentType("text/html; charset=utf-8");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out.println("<script>");
+            out.println("alert('请先登录,再进行操作!');");
+            out.println("</script>");
+            return new ModelAndView("redirect:/");
+        }
     }
 
     @GetMapping("/toEditor")

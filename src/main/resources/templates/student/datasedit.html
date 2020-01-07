@@ -123,10 +123,12 @@
                                 <div class="widget-title am-fl"><h2><span class="am-icon-clipboard page-header-heading-icon"></span> 学生信息 <small>修改</small></h2></div>
                             </div>
                             <div class="widget-body am-fr">
-                                <form id="editform" class="am-form tpl-form-border-form tpl-form-border-br" th:action="@{'/updatestudent/'+${edits['id']}}" method="post">
+                                <form class="am-form tpl-form-border-form tpl-form-border-br" th:action="@{/updatestudent/}" method="post">
 <!--                                    <input type="hidden" name="_method" value="put"/>-->
 <!--                                    <input type="hidden" name="id" th:value="${edit['id']}">-->
                                     <!--             用户名          -->
+                                    <input type="hidden" name="id" th:value="${edits['id']}">
+
                                     <div class="am-form-group">
                                         <label  class="am-u-sm-3 am-form-label" >用户名 : </label>
                                         <div class="am-u-sm-9">
@@ -146,21 +148,29 @@
                                     <div class="am-form-group">
                                         <label class="am-u-sm-3 am-form-label" >密码 : </label>
                                         <div class="am-u-sm-9">
-                                            <input type="password" class="tpl-form-input" name="password" id="password" th:value="${edits['password']}">
+                                            <input type="password" class="tpl-form-input" name="password" id="password">
                                             <small> &nbsp;</small>
                                         </div>
                                     </div>
 
-                                    <div class="am-form-group">
+                                    <div class="am-form-group" th:if="${edits['birthday']} != null">
                                         <label class="am-u-sm-3 am-form-label">生日 : </label>
                                         <div class="am-u-sm-9">
-                                            <input id="birthday" name="birth" type="text" class="am-form-field tpl-form-no-bg" th:value="${#dates.format(edits['birthday']*1000,'yyyy-MM-dd ')}" placeholder="生日  (可更改)" data-am-datepicker="" >
+                                            <input  name="birth" type="text" class="birthday am-form-field tpl-form-no-bg" th:value="${#dates.format(edits['birthday']*1000,'yyyy-MM-dd ')}" placeholder="生日  (可更改)" data-am-datepicker="" >
+                                        </div>
+                                        <small> &nbsp;</small>
+                                    </div>
+
+                                    <div class="am-form-group" th:if="${edits['birthday']} == null">
+                                        <label class="am-u-sm-3 am-form-label">生日 : </label>
+                                        <div class="am-u-sm-9">
+                                            <input name="birth" type="text" class="birthday am-form-field tpl-form-no-bg" placeholder="生日  (可更改)" data-am-datepicker="" >
                                         </div>
                                         <small> &nbsp;</small>
                                     </div>
 
                                     <!--             入学日期          -->
-                                    <div class="am-form-group">
+                                    <div class="am-form-group" th:if="${edits['join_study_time']}">
                                         <label  class="am-u-sm-3 am-form-label">入学日期 : </label>
                                         <div class="am-u-sm-9">
                                             <span th:text="${#dates.format(edits['join_study_time']*1000,'yyyy-MM-dd  HH:mm:ss')}">显示数据库日期</span>
@@ -169,7 +179,7 @@
                                     </div>
 
                                     <!--             毕业日期          -->
-                                    <div class="am-form-group">
+                                    <div class="am-form-group" th:if="${edits['graduate_time']}" >
                                         <label class="am-u-sm-3 am-form-label">毕业日期 : </label>
                                         <div class="am-u-sm-9">
                                             <span th:text="${#dates.format(edits['graduate_time']*1000,'yyyy-MM-dd  HH:mm:ss')}">显示数据库日期</span>
@@ -205,7 +215,7 @@
                                             <br>
                                             <!--   详细地址  -->
                                             <small> &nbsp;</small>
-                                            <input type="text" placeholder="地址详情" th:value="${edits['address']}">
+                                            <input type="text" name="address" id="address" placeholder="地址详情" th:value="${edits['address']}">
 
                                         </div>
                                         <small> &nbsp;</small>
@@ -242,7 +252,7 @@
                                     <div class="am-form-group">
                                         <label  class="am-u-sm-3 am-form-label">是否毕业 : </label>
                                         <div class="am-u-sm-9">
-                                            <span th:text="${edits['graduate_time']} !=null ?'已毕业':'未毕业'">显示数据库is_graduate</span>
+                                            <span th:text="${edits['is_graduate']} !=null ?'已毕业':'未毕业'">显示数据库is_graduate</span>
                                         </div>
                                         <small> &nbsp;</small>
                                     </div>
@@ -286,7 +296,7 @@
 
                                     <div class="am-form-group">
                                         <div class="am-u-sm-9 am-u-sm-push-3">
-                                            <button id="submit" class="am-btn am-btn-primary tpl-btn-bg-color-success" >提交</button>
+                                            <button id="updatestudent" type="submit"  class="am-btn am-btn-primary tpl-btn-bg-color-success" >提交</button>
                                         </div>
                                     </div>
                                 </form>
@@ -346,44 +356,50 @@
                 },
                 "JSON");
         });
-    </script>
-    <script>
 
-/*        $("#submit").click(function () {
-            var id = $("#id").val();
-            var password = $("#password").val();
-            var birthday = $("#birthday").val();
-            var stage_id  = $("#stage_id").val();
+        $("#updatestudent").click(function () {
+            var flag = true;
+            var errinfo = "";
+            var birthday = $(".birthday").val();
+            if (birthday == null) {
+                flag = false;
+                errinfo += '\n生日不能为空';
+            }
             var graduate_school = $("#graduate_school").val();
-            var province_id = $("#province").val();
-            var city_id = $("#city").val();
-            var area_id = $("#area").val();
+            if (graduate_school == null) {
+                flag = false;
+                errinfo += '\毕业院校不能为空';
+            }
+            var province = $("#province").val();
+            if (province == null) {
+                flag = false;
+                errinfo += '\n省份不能为空';
+            }
+            var city = $("#city").val();
+            if (city == null) {
+                flag = false;
+                errinfo += '\n市不能为空';
+            }
+            var area = $("#area").val();
+            if (area == null) {
+                flag = false;
+                errinfo += '\n区县不能为空';
+            }
+            var address = $("#address").val();
+            if (area == null) {
+                flag = false;
+                errinfo += '\n详细地址不能为空';
+            }
+            if(!flag){
+                alert(errinfo);
+                return false;
+            }else {
+                //全写完了啊
+                return true;
+            }
+        })
 
-            $.ajax({
-                url:$("#editform").attr("editUrl"),
-                type:"POST",
-                data:{
-                    "id":id,
-                    "password":password,
-                    "birth":birthday,
-                    "stage_id":stage_id,
-                    "graduate_school":graduate_school,
-                    "province_id":province_id,
-                    "city_id":city_id,
-                    "area_id":area_id
-                },
-                success : function(result){
-                    alert("提交数据成功");
-                },
-                error : function(e){
-                    alert("提交数据失败");
-                }
-            });
-
-
-        })*/
     </script>
-
 </body>
 
 </html>

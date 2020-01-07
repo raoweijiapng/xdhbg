@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>兄弟会管理系统</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="icon" type="image/png" href="assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI" />
+    <script src="assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="assets/css/amazeui.min.css" />
+    <link rel="stylesheet" href="assets/css/amazeui.datatables.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css">
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .new-notice{
+            display: none;
+            position: relative;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 300px;
+            background-color: #4b5357;
+            overflow: hidden;
+            color: #fff;
+        }
+        .notice-content {
+            margin: 20px 0 0 20px;
+        }
+        .notice-content textarea {
+            color: #000;
+        }
+        .release {
+            width: 60px;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            height: 30px;
+        }
+        .release button {
+            color: #000;
+            border: none;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            line-height: 30px;
+        }
+    </style>
+</head>
+
+<body data-type="widgets">
+    <script src="assets/js/theme.js"></script>
+    <div class="am-g tpl-g">
+        <!-- 头部 -->
+        <header>
+            <!-- logo -->
+            <div class="am-fl tpl-header-logo">
+                <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                    <img src="/assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+                </a>
+            </div>
+            <!-- 右侧内容 -->
+            <div class="tpl-header-fluid">
+                <!-- 侧边切换 -->
+                <div class="am-fl tpl-header-switch-button am-icon-list">
+                    <span></span>
+                </div>
+                <!-- 其它功能-->
+                <div class="am-fr tpl-header-navbar">
+                    <ul>
+                        <!-- 欢迎语 -->
+                        <li class="am-text-sm tpl-header-navbar-welcome">
+                            <a href="#">欢迎你 &nbsp;
+                                <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                            </a>
+                        </li>
+                        <!-- 退出 -->
+                        <li class="am-text-sm">
+                            <a href="/loginout">
+                                <span class="am-icon-sign-out"></span> 退出
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </header>
+        <!-- 风格切换 -->
+        <div class="tpl-skiner">
+            <div class="tpl-skiner-toggle am-icon-cog">
+            </div>
+            <div class="tpl-skiner-content">
+                <div class="tpl-skiner-content-title">
+                    选择主题
+                </div>
+                <div class="tpl-skiner-content-bar">
+                    <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                    <span class="skiner-color skiner-black" data-color="theme-black"></span>
+                </div>
+            </div>
+        </div>
+        <!-- 侧边导航栏 -->
+        <div class="left-sidebar">
+            <!-- 用户信息 -->
+            <div class="tpl-sidebar-user-panel">
+                <div class="tpl-user-panel-slide-toggleable">
+                    <span class="user-panel-logged-in-text">
+                        <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                        <span th:each="cookie :${#httpServletRequest.getCookies()}" th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <!-- 菜单 -->
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-link">
+                    <a href="/teacher.index">
+                        <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/teacher/Log/1">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 日志管理
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/noticeManage"  class="active">
+                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 公告管理
+                    </a>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="javascript:;" class="sidebar-nav-sub-title">
+                        <i class="am-icon-table sidebar-nav-link-logo"></i> 学生管理
+                        <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico"></span>
+                    </a>
+                    <ul class="sidebar-nav sidebar-nav-sub">
+                        <li class="sidebar-nav-link">
+                            <a th:href="@{/student/Undergraduate/1}">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生信息
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a th:href="@{/student/add/view}">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 新增学生
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="/teacher/exeperiences?pageNum=1">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生心得
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-link">
+                            <a href="/teacher/works?pageNum=1">
+                                <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生作品
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="sidebar-nav-link">
+                    <a href="/teacher.knowledge">
+                        <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 内容区域 -->
+        <div id="content" class="tpl-content-wrapper">
+            <div class="row-content am-cf">
+                <div class="row">
+                    <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                        <div class="widget am-cf">
+                            <!-- 公告头部 -->
+                            <div class="widget-head am-cf">
+                                <div class="widget-title  am-cf">公告列表</div>
+                            </div>
+                            <!-- 公告主体区域 -->
+                            <div class="widget-body  am-fr">
+                                <!-- 左上新增和保存 -->
+                                <div class="am-u-sm-12 am-u-md-6 am-u-lg-6">
+                                    <div class="am-form-group">
+                                        <div class="am-btn-toolbar">
+                                            <div class="am-btn-group am-btn-group-xs">
+                                                <button type="button" class="am-btn am-btn-default am-btn-success" @click="showNotice"><span class="am-icon-plus"></span> 新增</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 右上搜索 -->
+                                <div class="am-u-sm-12 am-u-md-12 am-u-lg-3" style="float: right;">
+                                    <div class="am-input-group am-input-group-sm tpl-form-border-form cl-p">
+                                        <input type="text" class="am-form-field ">
+                                        <span class="am-input-group-btn">
+                                            <button class="am-btn  am-btn-default am-btn-success tpl-table-list-field am-icon-search" type="button" @click="selectNotice"></button>
+                                        </span>
+                                    </div>
+                                </div>
+                                
+                                <!-- 公告模块 -->
+                                <div class="am-u-sm-12">
+                                    <!-- 公告 -->
+                                    <table width="100%" class="am-table am-table-compact am-table-striped tpl-table-black " id="example-r">
+                                        <!-- 公告头部 -->
+                                        <thead>
+                                            <tr>
+                                                <th>公告内容</th>
+                                                <th>时间</th>
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- 每条公告内容 -->
+                                            <tr class="gradeX" v-for="item in noticeShow.dataShow">
+<!--                                                <td th:text="${noticeData}"></td>-->
+                                                <td>{{item.notice}}</td>
+                                                <td>{{new Date(item.add_time*1000).toLocaleDateString()}}</td>
+                                                <!-- 公告的操作 -->
+                                                <td>
+                                                    <div class="tpl-table-black-operation">
+                                                        <a href="javascript:;" class="tpl-table-black-operation-del" :id="item.id" @click="delNotice(item.id)">
+                                                            <i class="am-icon-trash"></i> 删除
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <!-- more data -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- 页数模块 -->
+                                <div class="am-u-lg-12 am-cf">
+                                    <div class="am-fr">
+                                        <!-- 页数 -->
+                                        <ul class="am-pagination tpl-pagination" id="ind">
+                                            <!-- class="am-disabled" -->
+                                            <li ><a href="#" @click="prePage">«</a></li>
+
+                                            <li class="" v-for="(item, index) in noticeShow.buttonShow" ><a href="#" @click="toPage(item, index)">{{item}}</a><li>
+                                        <!-- <li v-for="(item, index) in noticeShow.totalPage" :id="index"><a href="#" @click="toPage(index)">{{index + 1}}</a></li>-->
+                                            <!-- <li class="am-active"><a href="#">1</a></li>
+                                            <li><a href="#">2</a></li>
+                                            <li><a href="#">3</a></li>
+                                            <li><a href="#">4</a></li>
+                                            <li><a href="#">5</a></li> -->
+                                            <li><a href="#" @click="nextPage">»</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--增加公告-->
+                <div class="new-notice">
+                    <form action="noticeManage" id="suNotice" method="post">
+                        <div class="notice-content">
+                            公告内容：<textarea name="noticeContent" id="cont" cols="100" rows="10"></textarea>
+                        </div>
+
+                        <div class="release"><button>发布</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="assets/js/amazeui.min.js"></script>
+    <script src="assets/js/amazeui.datatables.min.js"></script>
+    <script src="assets/js/dataTables.responsive.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script type="text/javascript" th:inline="javascript">
+        String.prototype.trim = function () {
+            return this.replace(/(^\s*)|(\s*$)/g, "");
+        }
+        var data1 = [[${noticeData}]];
+        console.log(data1)
+        // data1 = eval(data1);
+        // function tryapitest(){
+        //     $.ajax({
+        //         url:"/aNoticeManage",
+        //         type:"get",
+        //         dataType:"json",
+        //         success: function(data) {
+        //             noticeData = data;
+        //         },
+        //         error: function(XMLHttpRequest, textStatus, errorThrown) {
+        //             alert(XMLHttpRequest.status);
+        //             alert(XMLHttpRequest.readyState);
+        //             alert(textStatus);
+        //         },
+        //     })
+        // }
+        var ajaxData= $("#noticeContent2").val();
+        var cont = new Vue({
+            el: "#content",
+            data: {
+                noticeContent:[],
+                noticeShow: {
+                    totalPage: [],
+                    //每页显示的数据的分组
+                    pageSize: 5,
+                    //一页显示的数量
+                    pageNum: 1,
+                    // 总页数
+                    dataShow: "",
+                    //当前显示的数据
+                    currentPage: 0,
+                    //默认当前显示第一页
+
+                    totalPage2: [],
+                    buttonSize: 5,
+                    buttonNum: 1,
+                    buttonShow: "",
+                    buttonPage: 0,
+                    // 默认当前显示页
+                    buttonNumber: 1
+                    // 默认当前显示按钮
+                },
+
+            },
+            methods: {  
+                        //下一页
+                        nextPage: function(){
+                            var vm = this.noticeShow;
+                            //右最大
+                            if (vm.currentPage == vm.pageNum - 2) $("#ind li:last").addClass("am-disabled");
+                            //不能超过最大页
+                            if (vm.currentPage == vm.pageNum - 1) return;
+                            vm.dataShow = vm.totalPage[++vm.currentPage]
+                            // var  =1;
+                            if (vm.currentPage%5 == 0 && vm.currentPage!=0) {
+                                vm.buttonShow = vm.totalPage2[++vm.buttonPage];
+                                vm.buttonNumber = 1;
+                                $("#ind li").eq(vm.buttonNumber).addClass("am-active");
+                                $("#ind li").eq(vm.buttonNumber).siblings().removeClass("am-active")
+                            }else {
+                                $("#ind li").eq(++vm.buttonNumber).addClass("am-active");
+                                $("#ind li").eq(vm.buttonNumber).siblings().removeClass("am-active")
+                            }
+                            // 点击下一页的时候移除左键失效样式
+                            $("#ind li").eq(0).removeClass("am-disabled");
+                        },
+                        //上一页
+                        prePage: function(event){
+                            var vm = this.noticeShow;
+                            //如果下一页没有了则添加不能点击样式
+                            if (vm.currentPage-1 == 0) $("#ind li").eq(0).addClass("am-disabled");
+                            //页数不能小于0  改一下
+                            if (vm.currentPage == 0) return;
+
+                                //vm.currentPage%5 == 0 && vm.currentPage!=0
+                            if (vm.buttonNumber == 1&& vm.currentPage!=0 ) {
+                                vm.buttonShow = vm.totalPage2[--vm.buttonPage];
+                                //因为vue是异步的，让dom渲染完再调用下面的函数，否则将会造成找不到新渲染的dom
+                                this.$nextTick(function () {
+                                    vm.buttonNumber = 5;
+                                    // $("#ind li").eq(5).addClass("am-active");
+                                    $("#ind li").eq(5).addClass(function () {
+                                        console.log("成功")
+                                        return "am-active";
+                                    });
+                                    $("#ind li").eq(5).siblings().removeClass("am-active");
+                                })
+
+                            }else {
+                                console.log("---------------------------");
+                                console.log(vm.buttonNumber);
+                                $("#ind li").eq(--vm.buttonNumber).addClass("am-active");
+                                $("#ind li").eq(vm.buttonNumber).siblings().removeClass("am-active")
+                            }
+                            vm.dataShow = vm.totalPage[--vm.currentPage]
+                            $("#ind li:last").removeClass("am-disabled");
+                        },
+                        //点击页
+                toPage: function(page,index){
+                    var vm = this.noticeShow;
+                    //当前显示的页面
+                    vm.currentPage = page-1;
+                    //当前点击的按钮
+                    vm.buttonNumber = index+1;
+
+                    //如果上一页没有了则添加不能点击样式，否则当点击其他页移除
+                    if (page == 1)
+                        $("#ind li").eq(0).addClass("am-disabled");
+                    else {
+                        $("#ind li").eq(0).removeClass("am-disabled");
+                    }
+                    vm.dataShow = vm.totalPage[vm.currentPage];
+
+                    //到最大页右键不能点击 否则移除
+                    if (vm.currentPage == vm.pageNum - 1)
+                        $("#ind li:last").addClass("am-disabled");
+                    else
+                        $("#ind li:last").removeClass("am-disabled");
+
+                    //添加当前页的点击样式
+                    $("#ind li").eq(vm.buttonNumber).addClass("am-active")
+                    $("#ind li").eq(vm.buttonNumber).siblings().removeClass("am-active")
+                },
+                        showNotice: function () {
+                            $(".new-notice").css("display","block");
+                            $(".row").css("display","none");
+                        },
+                        // 增加
+                        submitNotice: function () {
+                            var time = Date.parse(new Date());
+                            var newNotice = $("#cont").val().trim();
+                            $.ajax({
+                                url:"/noticeManage",
+                                type:"post",
+                                dataType:"json",
+                                contentType : "application/json",
+                                success: function(data) {
+                                    alert("susses");
+                                    console.log("succes");
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                    alert(XMLHttpRequest.status);
+                                    alert(XMLHttpRequest.readyState);
+                                    alert(textStatus);
+                                },
+                                data: {
+                                    newNotice:newNotice,
+                                    time:time
+                                }
+                            })
+                        },
+                        // 删除
+                        delNotice: function (e) {
+                           var judge = confirm("是否确认删除？(注意：删除后无法恢复！)");
+                           if (judge) {
+                               console.log(e);
+                               $.ajax({
+                                    url:"/delManage/"+e,
+                                    type:"get",
+                                    dataType:"json",
+                                   // contentType : "application/json",
+                                    success: function(data) {
+                                        alert("删除成功");
+                                        window.location.href="/noticeManage"
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert(XMLHttpRequest.status);
+                                        alert(XMLHttpRequest.readyState);
+                                        alert(textStatus);
+                                    },
+                                })
+                           }
+                        },
+                        selectNotice: function () {
+                            var contN = $(".am-form-field").val().trim();
+                            $(".am-form-field").val(contN);
+                            var vm = this.noticeShow;
+                            var that =this;
+                            //如果为空则显示全部
+                            if (!contN) {
+                                $.ajax({
+                                    url:"/aNoticeManage",
+                                    type:"get",
+                                    dataType:"json",
+                                    success: function(data) {
+                                        // noticeData = data;
+                                        console.log("-------------------")
+                                        console.log(data)
+                                        //内容总页数
+                                        vm.pageNum = Math.ceil(data.length / vm.pageSize) || 1 ;
+                                        // 页码总页数
+                                        vm.buttonNum = Math.ceil(vm.pageNum / vm.pageSize) || 1 ;
+                                        // 总页码
+                                        var buttonNum =0;
+                                        var buttonData = [];
+                                        // 清空数组
+                                        vm.totalPage =[];
+                                        vm.totalPage2 =[];
+                                        vm.dataShow = [];
+                                        vm.buttonShow = [];
+                                        vm.currentPage = 0;
+                                        vm.buttonPage = 0;
+                                        vm.buttonNumber = 1;
+                                        //把获取的数据按一页显示的内容进行切片然后分组
+                                        console.log("页数"+vm.pageNum)
+                                        for (var i = 0; i < vm.pageNum; i++) {
+                                            vm.totalPage[i] = data.slice(vm.pageSize * i, vm.pageSize * (i + 1))
+                                            buttonNum++
+                                        }
+                                        console.log(vm.totalPage);
+                                        //制作页码数据
+                                        for (var i =1; i <= buttonNum; i++) {
+                                            buttonData.push(i);
+                                        }
+                                        for (var i = 0; i < vm.buttonNum; i++) {
+                                            vm.totalPage2[i] = buttonData.slice(vm.buttonSize * i, vm.buttonSize * (i + 1))
+                                        }
+                                        //取值
+                                        vm.dataShow = vm.totalPage[vm.currentPage];
+                                        vm.buttonShow = vm.totalPage2[vm.buttonPage];
+                                        that.$nextTick(function () {
+                                                //第一页页数默认有样式
+                                                 $("#ind li").eq(1).addClass("am-active")
+                                                $("#ind li").eq(1).siblings().removeClass("am-active");
+                                                 //刚进入默认左键无效
+                                                 $("#ind li").eq(0).addClass("am-disabled");
+                                                 // $("#ind li").eq(1).addClass("am-disabled");
+                                                $("#ind li:last").removeClass("am-disabled");
+                                        })
+                                    },
+                                    error: function(XMLHttpRequest) {
+                                            alert(XMLHttpRequest.status);
+                                            alert(XMLHttpRequest.readyState);
+                                    },
+                                })
+                                return;
+                            }
+                            // 搜索
+                            $.ajax({
+                                url:"/selectNotice/"+contN,
+                                type:"get",
+                                dataType:"json",
+                               // contentType : "application/json",
+                                success: function(data) {
+                                    // noticeData = data;
+                                    console.log("-------------------")
+                                    console.log(data)
+                                    //内容总页数
+                                    vm.pageNum = Math.ceil(data.length / vm.pageSize) || 1 ;
+                                    // 页码总页数
+                                    vm.buttonNum = Math.ceil(vm.pageNum / vm.pageSize) || 1 ;
+                                    // 总页码
+                                    var buttonNum =0;
+                                    var buttonData = [];
+                                    // 初始化
+                                    vm.totalPage =[];
+                                    vm.totalPage2 =[];
+                                    vm.dataShow = [];
+                                    vm.buttonShow = [];
+                                    vm.currentPage = 0;
+                                    vm.buttonPage = 0;
+                                        vm.buttonNumber = 1;
+                                    //把获取的数据按一页显示的内容进行切片然后分组
+                                    console.log("页数"+vm.pageNum)
+                                    for (var i = 0; i < vm.pageNum; i++) {
+                                        vm.totalPage[i] = data.slice(vm.pageSize * i, vm.pageSize * (i + 1))
+                                        buttonNum++
+                                    }
+                                    console.log(vm.totalPage);
+                                    //制作页码数据
+                                    for (var i =1; i <= buttonNum; i++) {
+                                        buttonData.push(i);
+                                    }
+                                    for (var i = 0; i < vm.buttonNum; i++) {
+                                        vm.totalPage2[i] = buttonData.slice(vm.buttonSize * i, vm.buttonSize * (i + 1))
+                                    }
+                                    //取值
+                                    vm.dataShow = vm.totalPage[vm.currentPage];
+                                    vm.buttonShow = vm.totalPage2[vm.buttonPage];
+                                    console.log("123456")
+                                    that.$nextTick(function () {
+                                        //第一页页数默认有样式
+                                             $("#ind li").eq(1).addClass("am-active")
+                                            $("#ind li").eq(1).siblings().removeClass("am-active");
+                                             //刚进入默认左键无效
+                                             $("#ind li").eq(0).addClass("am-disabled");
+                                         $("#ind li:last").removeClass("am-disabled");
+                                    })
+                                },
+                                error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                    alert(XMLHttpRequest.status);
+                                    alert(XMLHttpRequest.readyState);
+                                    alert(textStatus);
+                                },
+                            })
+                        }
+                    },
+
+                    //分页数据处理
+            created: function () {
+                        // tryapitest();
+                        console.log(this.noticeContent)
+                        var vm = this.noticeShow;
+                        var that =this
+                        $.ajax({
+                            url:"/aNoticeManage",
+                            type:"get",
+                            dataType:"json",
+                            success: function(data) {
+                                // noticeData = data;
+                                console.log("-------------------")
+                                console.log(data)
+                                //内容总页数
+                                vm.pageNum = Math.ceil(data.length / vm.pageSize) || 1 ;
+                                // 页码总页数
+                                vm.buttonNum = Math.ceil(vm.pageNum / vm.pageSize) || 1 ;
+                                // 总页码
+                                var buttonNum =0;
+                                var buttonData = [];
+                                // 清空数组
+                                vm.totalPage =[];
+                                vm.totalPage2 =[];
+                                vm.dataShow = [];
+                                vm.buttonShow = [];
+                                vm.currentPage = 0;
+                                vm.buttonPage = 0;
+                                        vm.buttonNumber = 1;
+                                //把获取的数据按一页显示的内容进行切片然后分组
+                                console.log("页数"+vm.pageNum)
+                                for (var i = 0; i < vm.pageNum; i++) {
+                                    vm.totalPage[i] = data.slice(vm.pageSize * i, vm.pageSize * (i + 1))
+                                    buttonNum++
+                                }
+                                //制作页码数据
+                                for (var i =1; i <= buttonNum; i++) {
+                                    buttonData.push(i);
+                                }
+                                for (var i = 0; i < vm.buttonNum; i++) {
+                                    vm.totalPage2[i] = buttonData.slice(vm.buttonSize * i, vm.buttonSize * (i + 1))
+                                }
+                                //取值
+                                vm.dataShow = vm.totalPage[vm.currentPage];
+                                vm.buttonShow = vm.totalPage2[vm.buttonPage];
+                                that.$nextTick(function () {
+                                    //第一页页数默认有样式
+                                         $("#ind li").eq(1).addClass("am-active")
+                                        $("#ind li").eq(1).siblings().removeClass("am-active");
+                                         //刚进入默认左键无效
+                                         $("#ind li").eq(0).addClass("am-disabled");
+                                         //去掉右键无效
+                                         $("#ind li:last").removeClass("am-disabled");
+                                })
+                            },
+                            error: function(XMLHttpRequest) {
+                                    alert(XMLHttpRequest.status);
+                                    alert(XMLHttpRequest.readyState);
+                            },
+                        })
+
+                    },
+            // mounted:function () {
+            // //第一页页数默认有样式
+            //              $("#ind li").eq(1).addClass("am-active")
+            //              //刚进入默认左键无效
+            //              $("#ind li").eq(0).addClass("am-disabled");
+            //     }
+
+        })
+
+
+
+    </script>
+</body>
+
+</html>
