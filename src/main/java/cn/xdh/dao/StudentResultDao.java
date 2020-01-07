@@ -13,4 +13,6 @@ public interface StudentResultDao {
     Student selectStudentNameById(@Param("id") int id);
 
     List<PaperAndTest> selectPaperAndTest(PaperAndTest paperAndTest);
+    
+    List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest);
 }

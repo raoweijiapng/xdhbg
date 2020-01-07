@@ -10,4 +10,6 @@ public interface StudentResultService {
     Student selectStudentNameById(int id);
 
     List<PaperAndTest> selectPaperAndTest(PaperAndTest paperAndTest);
+
+    List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest);
 }

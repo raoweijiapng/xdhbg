@@ -27,7 +27,6 @@ public class StudentResultController {
     public ModelAndView selectStudentResult(@Param("id") Integer id, Model model, PaperAndTest paperAndTest) {
         Student selectStudentNameById = studentResultServiceimpl.selectStudentNameById(id);
         List<PaperAndTest> paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
-        System.out.println(paperAndTest1);
         model.addAttribute("paperAndTest1",paperAndTest1);
         model.addAttribute("studentId",id);
         model.addAttribute("selectStudentNameById",selectStudentNameById);
@@ -35,11 +34,10 @@ public class StudentResultController {
     }
 
     @GetMapping(value="/studentTest.studentResultList")
-    public ModelAndView selectStudentResultToList(@Param("id") Integer id, Model model, PaperAndTest paperAndTest) {
+    public ModelAndView selectStudentResultToList(@Param("id") Integer id,Model model, PaperAndTest paperAndTest) {
         Student selectStudentNameById = studentResultServiceimpl.selectStudentNameById(id);
-        List<PaperAndTest> paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
-        System.out.println(paperAndTest1);
-        model.addAttribute("paperAndTest1",paperAndTest1);
+        List<PaperAndTest> selectPaperToList = studentResultServiceimpl.selectPaperToList(paperAndTest);
+        model.addAttribute("selectPaperToList",selectPaperToList);
         model.addAttribute("studentId",id);
         model.addAttribute("selectStudentNameById",selectStudentNameById);
         return new ModelAndView("studentTest/studentResultList");

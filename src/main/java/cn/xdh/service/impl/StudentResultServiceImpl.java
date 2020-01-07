@@ -26,4 +26,10 @@ public class StudentResultServiceImpl implements StudentResultService {
         List<PaperAndTest> selectPaperAndTest = studentResultDao.selectPaperAndTest(paperAndTest);
         return selectPaperAndTest;
     }
+
+    @Override
+    public List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest) {
+        List<PaperAndTest> selectPaperToList = studentResultDao.selectPaperToList(paperAndTest);
+        return selectPaperToList;
+    }
 }

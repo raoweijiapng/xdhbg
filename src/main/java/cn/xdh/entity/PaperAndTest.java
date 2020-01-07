@@ -6,7 +6,7 @@ public class PaperAndTest {
     private String name;
     private int class_id;
     //选择题分数
-    private int choice_qustion_score;
+    private int choice_question_score;
     //简答题分数
     private int short_answer_score;
     //总分
@@ -39,7 +39,7 @@ public class PaperAndTest {
         this.teacher_id = teacher_id;
         this.name = name;
         this.class_id = class_id;
-        this.choice_qustion_score = choice_qustion_score;
+        this.choice_question_score = choice_qustion_score;
         this.short_answer_score = short_answer_score;
         this.total_score = total_score;
         this.state = state;
@@ -86,11 +86,11 @@ public class PaperAndTest {
     }
 
     public int getChoice_qustion_score() {
-        return choice_qustion_score;
+        return choice_question_score;
     }
 
     public void setChoice_qustion_score(int choice_qustion_score) {
-        this.choice_qustion_score = choice_qustion_score;
+        this.choice_question_score = choice_qustion_score;
     }
 
     public int getShort_answer_score() {
@@ -188,7 +188,7 @@ public class PaperAndTest {
                 ", teacher_id=" + teacher_id +
                 ", name='" + name + '\'' +
                 ", class_id=" + class_id +
-                ", choice_qustion_score=" + choice_qustion_score +
+                ", choice_question_score=" + choice_question_score +
                 ", short_answer_score=" + short_answer_score +
                 ", total_score=" + total_score +
                 ", state=" + state +
