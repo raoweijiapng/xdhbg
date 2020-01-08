@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClassDao {
     //获取所有班级数量
-    public int selectAllNumber();
+     int selectAllNumber();
 
-    public XdhClass selectClassById(int id);
+    XdhClass selectClassById(int id);
 }

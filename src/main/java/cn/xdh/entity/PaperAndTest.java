@@ -26,6 +26,8 @@ public class PaperAndTest {
     private Long hand_time;
     //分数
     private int score;
+    //所用时间用时
+    private Long used_time;
     //试卷id
     private int test_id;
     //批卷时间 0未批阅 >0已批阅,在成绩页面中只需>0
@@ -34,12 +36,12 @@ public class PaperAndTest {
     public PaperAndTest() {
     }
 
-    public PaperAndTest(int id, int teacher_id, String name, int class_id, int choice_qustion_score, int short_answer_score, int total_score, int state, Long test_time, Long start_time, Long end_time, int student_id, Long hand_time, int score, int test_id, long marking_time) {
+    public PaperAndTest(int id, int teacher_id, String name, int class_id, int choice_question_score, int short_answer_score, int total_score, int state, Long test_time, Long start_time, Long end_time, int student_id, Long hand_time, int score, Long used_time, int test_id, long marking_time) {
         this.id = id;
         this.teacher_id = teacher_id;
         this.name = name;
         this.class_id = class_id;
-        this.choice_question_score = choice_qustion_score;
+        this.choice_question_score = choice_question_score;
         this.short_answer_score = short_answer_score;
         this.total_score = total_score;
         this.state = state;
@@ -49,6 +51,7 @@ public class PaperAndTest {
         this.student_id = student_id;
         this.hand_time = hand_time;
         this.score = score;
+        this.used_time = used_time;
         this.test_id = test_id;
         this.marking_time = marking_time;
     }
@@ -85,12 +88,12 @@ public class PaperAndTest {
         this.class_id = class_id;
     }
 
-    public int getChoice_qustion_score() {
+    public int getChoice_question_score() {
         return choice_question_score;
     }
 
-    public void setChoice_qustion_score(int choice_qustion_score) {
-        this.choice_question_score = choice_qustion_score;
+    public void setChoice_question_score(int choice_question_score) {
+        this.choice_question_score = choice_question_score;
     }
 
     public int getShort_answer_score() {
@@ -165,6 +168,14 @@ public class PaperAndTest {
         this.score = score;
     }
 
+    public Long getUsed_time() {
+        return used_time;
+    }
+
+    public void setUsed_time(Long used_time) {
+        this.used_time = used_time;
+    }
+
     public int getTest_id() {
         return test_id;
     }
@@ -198,6 +209,7 @@ public class PaperAndTest {
                 ", student_id=" + student_id +
                 ", hand_time=" + hand_time +
                 ", score=" + score +
+                ", used_time=" + used_time +
                 ", test_id=" + test_id +
                 ", marking_time=" + marking_time +
                 '}';

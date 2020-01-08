@@ -6,10 +6,6 @@
     <select id="selectByXdhClass" resultType="cn.xdh.entity.XdhClass">
         select * from xdh_class
     </select>
-    
-    <select id="selectClassNameById" resultType="cn.xdh.entity.XdhClass">
-        select * from xdh_class where id = #{id}
-    </select>
 
     <select id="selectClassByNameAndId" resultType="cn.xdh.entity.XdhClass">
         select * from xdh_class where class_name = #{class_name} and id != #{id}
