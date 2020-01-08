@@ -429,13 +429,77 @@ public class TeacherController {
     //添加试题
     @PostMapping("/teacheraddquestion")
     @ResponseBody
-    public Map<String,Object> goaddquestion(){
-        questionsServiceimpl.findBySubject_idAndStage_id(subject_id,stage_id);
+    public Map<String,Object> goaddquestion(Question question,HttpServletRequest request){
+        question.setAdd_time(SomeMethods.getCurrentTime());
+        List<Question> questionList = questionsServiceimpl.selectQuestionByTitle(question.getTitle());
         //System.out.println(knowledgelist);
         Map<String,Object> map = new HashMap<>();
-        return map;
+        if (questionList.isEmpty()) {
+            //3是添加成功
+            questionsServiceimpl.addQuestion(question);
+            //获取cookie中的老师信息
+            String action = "添加试题";
+            Cookie[] cookies = request.getCookies();
+            String mobile = null;
+            String password = null;
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("mobile")) {
+                        mobile = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("password")) {
+                        password = cookie.getValue();
+                    }
+
+                }
+                Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+                TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+                //将日志实体类添加到日志表中
+                teacherServiceimpl.addTeacherLog(teacherLog);
+                map.put("msg","success");
+                return map;
+            }else {
+                map.put("msg","cookiefailed");
+                return map;
+            }
+        }else {
+            map.put("msg","failed");
+            return map;
+        }
+
     }
 
+
+    //批量添加试题
+    @PostMapping("/teacher/addquestion/{suffixName}")
+    @ResponseBody
+    public Msg addAllQuestion(@RequestParam("ExcelFile") MultipartFile excelFile, HttpServletRequest request, @PathVariable String suffixName) throws Exception {
+        //获取cookie中的老师信息
+        String action = "批量添加试题";
+        Cookie[] cookies = request.getCookies();
+        String mobile = null;
+        String password = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("mobile")) {
+                    mobile = cookie.getValue();
+                }
+                if (cookie.getName().equals("password")) {
+                    password = cookie.getValue();
+                }
+            }
+            Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+            TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+            //将日志实体类添加到日志表中
+            teacherServiceimpl.addTeacherLog(teacherLog);
+            return questionsServiceimpl.batchAddQuestion(request, suffixName, excelFile);
+        }else{
+            Msg msg = new Msg();
+            msg.setMsg("cookie为空");
+            return msg;
+        }
+
+    }
 
 
 }

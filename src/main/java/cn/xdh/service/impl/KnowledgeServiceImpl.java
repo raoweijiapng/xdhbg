@@ -86,17 +86,17 @@ public class KnowledgeServiceImpl implements KnowledgeService {
             return msg;
         }
 
-        System.out.println(list);
+        //System.out.println(list);
         for (int i=0; i < list.size(); i++) {
             List<Knowledge> Knowledgelist = knowledgerepository.getByTitle(list.get(i).getTitle());
-            System.out.println(Knowledgelist);
+            //System.out.println(Knowledgelist);
             if (!Knowledgelist.isEmpty()) {
                 msg.setMsg("知识点\"" + list.get(i).getTitle() + "\"已存在,添加失败,在他之前的已添加成功,请勿重复添加");
                 return msg;
             } else {
                 knowledgerepository.addKnowledge(list.get(i).getSubject_id(), list.get(i).getStage_id(), list.get(i).getTitle(), list.get(i).getAdd_time());
             }
-            System.out.println(list.get(i));
+            //System.out.println(list.get(i));
         }
         msg.setMsg("添加所有知识点成功");
         return msg;
@@ -114,6 +114,7 @@ public class KnowledgeServiceImpl implements KnowledgeService {
     public int deleteKnowledge(int id) {
         return  knowledgerepository.deleteKnowledge(id);
     }
+
 
 
 }
