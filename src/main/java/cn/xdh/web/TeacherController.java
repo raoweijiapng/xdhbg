@@ -516,42 +516,55 @@ public class TeacherController {
     public ModelAndView goupdateqQuestionview(@PathVariable Integer id){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teacher/updateQuestion");
-        mav.getModel().put("knowledgeid",id);
+        Question question = questionsServiceimpl.getQuestionById(id);
+        mav.addObject("question",question);
         return mav;
     }
 
     //提交修改试题的数据并返回状态
     @PostMapping("/teacherupdatequestion")
     @ResponseBody
-    public Map<String,Object> goupdateQuestion(Knowledge knowledge,HttpServletRequest request){
+    public Map<String,Object> goupdateQuestion(int id,int type_id,String title,
+            int score,String optionA,String optionB,String optionC,String optionD,
+            String answer,HttpServletRequest request){
+        //System.out.println(title);
+        List<Question> questionList = questionsServiceimpl.selectQuestionByTitle(title);
         Map<String,Object> map = new HashMap<>();
-        String action = "修改知识点";
-        Cookie[] cookies = request.getCookies();
-        String mobile = null;
-        String password = null;
-        if (cookies != null) {
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("mobile")) {
-                    mobile = cookie.getValue();
+        if (questionList.isEmpty()) {
+            String action = "修改试题";
+            Cookie[] cookies = request.getCookies();
+            String mobile = null;
+            String password = null;
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("mobile")) {
+                        mobile = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("password")) {
+                        password = cookie.getValue();
+                    }
                 }
-                if (cookie.getName().equals("password")) {
-                    password = cookie.getValue();
+                Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+                TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+                //将日志实体类添加到日志表中
+                teacherServiceimpl.addTeacherLog(teacherLog);
+                //System.out.println(type_id);
+                if (type_id == 1){
+                    //System.out.println(title+": "+optionA+": "+optionB+": "+optionC+": "+optionD+": "+answer+": "+score+": "+id);
+                    questionsServiceimpl.updateChooseQuestion(title,optionA,optionB,optionC,optionD,answer,score,SomeMethods.getCurrentTime(),id);
                 }
-            }
-            Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
-            TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
-            //将日志实体类添加到日志表中
-            teacherServiceimpl.addTeacherLog(teacherLog);
-            int result = knowledgeServiceImpl.updateKnowledge(knowledge.getSubject_id(),knowledge.getStage_id(),knowledge.getTitle(),SomeMethods.getCurrentTime(),knowledge.getId());
-            if (result == 1){
+                if (type_id == 2){
+                    //System.out.println(title+": "+answer+": "+score+": "+id);
+                    questionsServiceimpl.updateWriterQuestion(title,answer,score,SomeMethods.getCurrentTime(),id);
+                }
                 map.put("msg","success");
                 return map;
             }else{
-                map.put("msg","failed");
+                map.put("msg","cookiefailed");
                 return map;
             }
         }else {
-            map.put("msg","cookiefailed");
+            map.put("msg","failed");
             return map;
         }
 
@@ -560,9 +573,17 @@ public class TeacherController {
 
     //删除试题
     @GetMapping("/teacher.deletequestionview/{id}")
-    public ModelAndView godeletequestionview(@PathVariable Integer id){
-        knowledgeServiceImpl.deleteKnowledge(id);
-        return new ModelAndView("redirect:/teacher.knowledge");
+    public Map<String,Object> godeletequestionview(@PathVariable Integer id){
+        int result = knowledgeServiceImpl.deleteKnowledge(id);
+        Map<String,Object> map = new HashMap<>();
+        if (result == 1){
+            map.put("msg","success");
+            return map;
+        }else {
+            map.put("msg","failed");
+            return map;
+        }
+
     }
 
 

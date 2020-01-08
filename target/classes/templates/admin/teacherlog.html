@@ -216,15 +216,15 @@
                                                 <!-- ... -->
                                                 <li th:if="${(current - (2/2)) >= 3}"><a>...</a></li>
 
-                                                <th:block th:if="${((current - (2/2))>=3) && (current <= (total - 3))}"
+                                                <th:block th:if="${((current - (2/2))>=3) && (current <= (total - 2))}"
                                                           th:each="i : ${#numbers.sequence(current - 1,current+2)}">
                                                     <li th:if="${current == i}" class="am-active"><span th:text="${i}"></span></li>
                                                     <li th:if="${current != i}"><a th:href="@{/admin.teacherlog(page=${i},type=${type},lookname=${lookname})}" th:text="${i}"></a></li>
                                                 </th:block>
 
                                                 <!-- ... -->
-                                                <li th:if="${current <= (total - 3)}"><a>...</a></li>
-                                                <th:block th:if="${current > (total - 3)}" th:each="i : ${#numbers.sequence(total - 3,total)}">
+                                                <li th:if="${current <= (total - 2)}"><a>...</a></li>
+                                                <th:block th:if="${current > (total - 2)}" th:each="i : ${#numbers.sequence(total - 2,total)}">
                                                     <li th:if="${current == i}" class="am-active"><span th:text="${i}"></span></li>
                                                     <li th:if="${current != i}"><a th:href="@{/admin.teacherlog(page=${i},type=${type},lookname=${lookname})}" th:text="${i}"></a></li>
                                                 </th:block>
@@ -235,8 +235,8 @@
                                             <li th:if="${current < total}"><a th:href="@{/admin.teacherlog(page=${current+1},type=${type},lookname=${lookname})}">»</a></li>
 
                                             <!-- 最后一页 -->
-                                            <li th:if="${total>1 && current == total}"><a href="#">末页</a></li>
-                                            <li th:if="${total>1 && current != total}"><a th:href="@{/admin.teacherlog(page=${total},type=${type},lookname=${lookname})}">末页</a></li>
+                                            <li th:if="${total>=1 && current == total}"><a href="#">末页</a></li>
+                                            <li th:if="${total>=1 && current != total}"><a th:href="@{/admin.teacherlog(page=${total},type=${type},lookname=${lookname})}">末页</a></li>
 
                                         </ul>
                                     </div>
