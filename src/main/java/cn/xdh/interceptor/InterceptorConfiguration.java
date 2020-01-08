@@ -18,7 +18,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
 
         //教师的拦截地址
-        registry.addInterceptor(teacherinterceptor).addPathPatterns("/teacher.index");
+        registry.addInterceptor(teacherinterceptor).addPathPatterns("/teacher.**");
+        registry.addInterceptor(teacherinterceptor).addPathPatterns("/teacher**");
         registry.addInterceptor(teacherinterceptor).addPathPatterns("/teacher/**");
         registry.addInterceptor(teacherinterceptor).addPathPatterns("/aNoticeManage");
         registry.addInterceptor(teacherinterceptor).addPathPatterns("/noticeManage");

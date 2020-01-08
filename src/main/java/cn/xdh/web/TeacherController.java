@@ -382,7 +382,7 @@ public class TeacherController {
 
     }
 
-    //跳转到修改知识点的页面
+    //删除知识点
     @GetMapping("/teacher.deleteknowledgeview/{id}")
     public ModelAndView godeleteKnowledgeview(@PathVariable Integer id){
         knowledgeServiceImpl.deleteKnowledge(id);
@@ -391,18 +391,28 @@ public class TeacherController {
 
     //跳转到试题列表的页面
     @GetMapping("/teacher.question")
-    public ModelAndView goquestionview(@RequestParam(name="type",required=false,defaultValue="all")String type,
+    public ModelAndView goquestionview(HttpServletRequest request,
+            @RequestParam(name="type",required=false,defaultValue="all")String type,
                                        @RequestParam(name="page",required=false,defaultValue="1")int page,
                                        @RequestParam(name="size",required=false,defaultValue="2")int size){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teacher/question");
+        String lookname = request.getParameter("lookname");
+        if (lookname == null) {
+        }else {
+            lookname = lookname.replaceAll(" ", "");
+        }
         Page<Question> questions = null;
-        questions = questionsServiceimpl.getAllQuestion(page - 1, size);
+        if (type.equals("likename")){
+            questions = questionsServiceimpl.getAllQuestionBy(page - 1,size,lookname);
+        }else {
+            questions = questionsServiceimpl.getAllQuestion(page - 1, size);
+        }
         mav.getModel().put("current", questions.getNumber()+1);
         mav.getModel().put("total", questions.getTotalPages());
         mav.addObject("questions",questions.getContent());
         mav.getModel().put("type", type);
-        //mav.getModel().put("lookname", lookname);
+        mav.getModel().put("lookname", lookname);
         return mav;
     }
 
@@ -499,6 +509,60 @@ public class TeacherController {
             return msg;
         }
 
+    }
+
+    //跳转到修改试题的页面
+    @GetMapping("/teacher.updatequestionview/{id}")
+    public ModelAndView goupdateqQuestionview(@PathVariable Integer id){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("teacher/updateQuestion");
+        mav.getModel().put("knowledgeid",id);
+        return mav;
+    }
+
+    //提交修改试题的数据并返回状态
+    @PostMapping("/teacherupdatequestion")
+    @ResponseBody
+    public Map<String,Object> goupdateQuestion(Knowledge knowledge,HttpServletRequest request){
+        Map<String,Object> map = new HashMap<>();
+        String action = "修改知识点";
+        Cookie[] cookies = request.getCookies();
+        String mobile = null;
+        String password = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("mobile")) {
+                    mobile = cookie.getValue();
+                }
+                if (cookie.getName().equals("password")) {
+                    password = cookie.getValue();
+                }
+            }
+            Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+            TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+            //将日志实体类添加到日志表中
+            teacherServiceimpl.addTeacherLog(teacherLog);
+            int result = knowledgeServiceImpl.updateKnowledge(knowledge.getSubject_id(),knowledge.getStage_id(),knowledge.getTitle(),SomeMethods.getCurrentTime(),knowledge.getId());
+            if (result == 1){
+                map.put("msg","success");
+                return map;
+            }else{
+                map.put("msg","failed");
+                return map;
+            }
+        }else {
+            map.put("msg","cookiefailed");
+            return map;
+        }
+
+    }
+
+
+    //删除试题
+    @GetMapping("/teacher.deletequestionview/{id}")
+    public ModelAndView godeletequestionview(@PathVariable Integer id){
+        knowledgeServiceImpl.deleteKnowledge(id);
+        return new ModelAndView("redirect:/teacher.knowledge");
     }
 
 
