@@ -1,8 +1,6 @@
 package cn.xdh.dao;
 
-import cn.xdh.entity.Teacher;
 import cn.xdh.entity.XdhClass;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository

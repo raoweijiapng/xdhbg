@@ -1,17 +1,12 @@
 package cn.xdh.web;
-import	java.util.ArrayList;
 
 import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
-import cn.xdh.entity.Teacher;
 import cn.xdh.service.impl.StudentResultServiceImpl;
-import jdk.nashorn.internal.ir.RuntimeNode;
 import org.apache.ibatis.annotations.Param;
-import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 

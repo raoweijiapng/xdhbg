@@ -2,7 +2,6 @@ package cn.xdh.dao;
 
 import cn.xdh.entity.Admin;
 import cn.xdh.entity.AdminLog;
-import cn.xdh.entity.Student;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
