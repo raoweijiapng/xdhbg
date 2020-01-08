@@ -13,6 +13,6 @@ public interface XdhClassRepository extends JpaSpecificationExecutor<TeacherClas
     @Query(nativeQuery = true, value = "select xdh_class.class_name ,xdh_teacher.name,xdh_class.add_time,xdh_class.teacher_id,xdh_class.id,xdh_class.is_graduate from xdh_teacher,xdh_class where xdh_class.teacher_id = xdh_teacher.id")
     Page<TeacherClass> getAllTeacherClass(Pageable pageable);
 
-    @Query(nativeQuery = true, value = "select t.* from (select xdh_class.class_name ,xdh_teacher.name,xdh_class.add_time,xdh_class.teacher_id,xdh_class.id,xdh_class.is_graduate from xdh_teacher,xdh_class where xdh_class.teacher_id = xdh_teacher.id) as t where t.class_name like %?1% or t.name like %?1%")
+    @Query(nativeQuery = true, value = "select t.* from (select xdh_class.class_name ,xdh_teacher.name,xdh_class.add_time,xdh_class.teacher_id,xdh_class.id,xdh_class.is_graduate from xdh_teacher,xdh_class where xdh_class.teacher_id = xdh_teacher.id) t where t.class_name like %?1% or t.name like %?1%")
     Page<TeacherClass> getAllTeacherClassBy(String lookname,Pageable pageable);
 }

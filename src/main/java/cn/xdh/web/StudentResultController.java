@@ -1,10 +1,13 @@
 package cn.xdh.web;
+import	java.util.ArrayList;
 
 import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
 import cn.xdh.entity.Teacher;
 import cn.xdh.service.impl.StudentResultServiceImpl;
+import jdk.nashorn.internal.ir.RuntimeNode;
 import org.apache.ibatis.annotations.Param;
+import org.junit.runner.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,5 +44,22 @@ public class StudentResultController {
         model.addAttribute("studentId",id);
         model.addAttribute("selectStudentNameById",selectStudentNameById);
         return new ModelAndView("studentTest/studentResultList");
+    }
+
+
+    @GetMapping(value="/studentTest.studentResultSearch")
+    public ModelAndView selectPaperToLookname(@Param("id") Integer id,@Param("lookname") String lookname,Model model,PaperAndTest paperAndTest) {
+        Student selectStudentNameById = studentResultServiceimpl.selectStudentNameById(id);
+        if (lookname== ""){
+            List<PaperAndTest> paperAndTest1 = studentResultServiceimpl.selectPaperAndTest(paperAndTest);
+            model.addAttribute("paperAndTest1",paperAndTest1);
+        }else {
+            List<PaperAndTest> selectPaperToLookname = studentResultServiceimpl.selectPaperToLookname(id ,lookname);
+            model.addAttribute("paperAndTest1",selectPaperToLookname);
+        }
+        model.addAttribute("selectStudentNameById",selectStudentNameById);
+        model.addAttribute("studentId",id);
+        return new ModelAndView("studentTest/studentResult");
+        
     }
 }

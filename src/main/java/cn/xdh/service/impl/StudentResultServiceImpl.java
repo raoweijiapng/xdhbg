@@ -4,6 +4,7 @@ import cn.xdh.dao.StudentResultDao;
 import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
 import cn.xdh.service.StudentResultService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,11 @@ public class StudentResultServiceImpl implements StudentResultService {
     public List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest) {
         List<PaperAndTest> selectPaperToList = studentResultDao.selectPaperToList(paperAndTest);
         return selectPaperToList;
+    }
+
+    @Override
+    public List<PaperAndTest> selectPaperToLookname(@Param("id") Integer id, @Param("lookname") String lookname) {
+        List<PaperAndTest> selectPaperToLookname = studentResultDao.selectPaperToLookname(id,lookname);
+        return selectPaperToLookname;
     }
 }

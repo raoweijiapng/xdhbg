@@ -26,4 +26,6 @@ public interface ClassService {
     XdhClass selectByClassName(String class_name);
 
     XdhClass selectClassById(int id);
+
+    XdhClass selectClassNameById(int id);
 }

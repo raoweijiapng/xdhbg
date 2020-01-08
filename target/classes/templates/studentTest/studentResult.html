@@ -155,9 +155,11 @@
                         <div class="widget-head am-cf">
                             <div class="widget-title  am-cf">我的成绩</div>
                         </div>
-                        <div class="widget-body  am-fr">
+                        <div class="widget-body  am-cf">
                             <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
-                                <p th:text="${selectStudentNameById.username}"></p>
+                                <span class="am-fl" th:text="${selectStudentNameById.username}"></span>
+                                <span class="am-fr" id="stuId" th:text="${selectStudentNameById.id}"></span>
+                                <span class="am-fr">学号:</span>
                             </div>
                         </div>
                         <div class="am-u-sm-12 am-u-md-12 am-u-lg-3">
@@ -171,7 +173,7 @@
                         </div>
                         <ul>
                             <li class="tpl-user-card am-text-center testlist" th:each="paperandtest:${paperAndTest1}">
-                                <a style="color: #ffffdd" th:href="'/studentTest.studentResultList?id='+${paperandtest.id}">
+                                <a style="color: #ffffdd" th:href="'/studentTest.studentResultList?id='+${paperandtest.id}+'&student_id='+${paperandtest.student_id}">
                                     <div class="am-text-center" th:text="${paperandtest.name}"></div>
                                     <div class="am-text-center" th:text="'总分:'+${paperandtest.total_score}"></div>
                                     <div class="am-text-center" style="color: red;font-size: 35px; font-weight: bold"
@@ -191,9 +193,10 @@
 <script src="/assets/js/app.js"></script>
 <script src="/assets/js/operate.js"></script>
 <script>
+    var stuId = $("#stuId").text();
     $("#lookfor").click(function () {
         var likeask = $("#lookname").val();
-        window.location.href = "/studentTest.studentResult?type=likename&lookname=" + likeask;
+        window.location.href = "/studentTest.studentResultSearch?id="+stuId+"&lookname=" + likeask;
     })
 </script>
 </body>

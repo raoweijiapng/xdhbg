@@ -15,4 +15,7 @@ public interface StudentResultDao {
     List<PaperAndTest> selectPaperAndTest(PaperAndTest paperAndTest);
     
     List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest);
+    
+    
+    List<PaperAndTest> selectPaperToLookname(@Param("id") Integer id,@Param("lookname") String lookname);
 }

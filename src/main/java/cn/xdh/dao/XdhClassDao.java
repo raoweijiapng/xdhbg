@@ -19,4 +19,6 @@ public interface XdhClassDao {
     XdhClass selectByClassName(String class_name);
 
     XdhClass selectClassByNameAndId(XdhClass xdhClass);
+
+    XdhClass selectClassNameById(int id);
 }
