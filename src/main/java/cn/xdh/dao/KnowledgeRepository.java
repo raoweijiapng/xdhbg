@@ -1,6 +1,7 @@
 package cn.xdh.dao;
 
 import cn.xdh.entity.Knowledge;
+import cn.xdh.entity.Question;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -31,5 +32,10 @@ public interface KnowledgeRepository extends JpaSpecificationExecutor<Knowledge>
     @Transactional
     @Query(value = "delete from xdh_knowledges_point where id=?1",nativeQuery = true)
     int deleteKnowledge(int id);
+
+    @Query(value = "select xdh_knowledges_point.id,xdh_knowledges_point.subject_id,xdh_knowledges_point.stage_id,xdh_knowledges_point.title,xdh_knowledges_point.add_time from xdh_knowledges_point where subject_id = ?1 and stage_id = ?2",nativeQuery = true)
+    List<Knowledge> getAllBySubject_idAndStage_id(int subject_id, int stage_id);
+
+
 
 }

@@ -19,10 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.soap.SOAPMessage;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author victor
@@ -408,6 +405,37 @@ public class TeacherController {
         //mav.getModel().put("lookname", lookname);
         return mav;
     }
+
+
+    //跳转到增加试题的页面
+    @GetMapping("/teacher.addquestionview")
+    public ModelAndView goquestionList(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("teacher/AddQuestion");
+        return mav;
+    }
+
+
+    //添加试题的选择知识点
+    @PostMapping("/teacherselectknowledge")
+    @ResponseBody
+    public List<Knowledge> goselectKnowledge(int subject_id,int stage_id){
+        List<Knowledge> knowledgelist = questionsServiceimpl.findBySubject_idAndStage_id(subject_id,stage_id);
+        //System.out.println(knowledgelist);
+        return knowledgelist;
+    }
+
+
+    //添加试题
+    @PostMapping("/teacheraddquestion")
+    @ResponseBody
+    public Map<String,Object> goaddquestion(){
+        questionsServiceimpl.findBySubject_idAndStage_id(subject_id,stage_id);
+        //System.out.println(knowledgelist);
+        Map<String,Object> map = new HashMap<>();
+        return map;
+    }
+
 
 
 }

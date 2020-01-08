@@ -311,23 +311,23 @@
 </script>
 <!--查询县级城市-->
 <script>
-    $("#city").change(function () {
-        var id = $("#city").val();
-        $("#area").html("");
-        var x = '<option value="-1">点击选择...</option>';
-        $("#area").append(x);
-        $.get("/city/" + id,
-            function (data) {
-                if (data && data.length > 0) {
-                    for (var i = 0, len = data.length; i < len; i++) {
-                        var option = '<option value="' + data[i].id + '">'
-                            + data[i].name + '</option>';
-                        $("#area").append(option);
+        $("#city").change(function () {
+            var id = $("#city").val();
+            $("#area").html("");
+            var x = '<option value="-1">点击选择...</option>';
+            $("#area").append(x);
+            $.get("/city/" + id,
+                function (data) {
+                    if (data && data.length > 0) {
+                        for (var i = 0, len = data.length; i < len; i++) {
+                            var option = '<option value="' + data[i].id + '">'
+                                + data[i].name + '</option>';
+                            $("#area").append(option);
+                        }
                     }
-                }
-            },
-            "JSON");
-    });
+                },
+                "JSON");
+        });
 </script>
 <!--提交修改-->
 <script>

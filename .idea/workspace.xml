@@ -2,24 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="237bd48b-7369-4caf-b9a7-4a13016f7b9a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/KnowledgeRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/dao/KnowledgeRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cn/xdh/web/TeacherController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/xdh/web/TeacherController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/AddKnowledge.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/AddKnowledge.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/GraduateStudentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/GraduateStudentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentAdd.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentAdd.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/StudentEdit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/TeacherLogList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/TeacherLogList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/UndergraduateStudentList.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/UndergraduateStudentList.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/exeperience.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/exeperience.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/exepershow.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/exepershow.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/knowledge.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/knowledge.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/noticeManage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/noticeManage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/teacher/works.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/teacher/works.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/dao/KnowledgeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/dao/KnowledgeRepository.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cn/xdh/web/TeacherController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/xdh/web/TeacherController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/knowledge.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/knowledge.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/teacher/StudentEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/teacher/StudentEdit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +111,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/assets/img" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/teacher" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -137,8 +126,8 @@
       <recent name="cn.xdh.dao" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\raowe\IdeaProjects\xdhbg\src\main\resources\static\assets\img" />
       <recent name="C:\Users\raowe\IdeaProjects\xdhbg\src\main\resources\templates\teacher" />
+      <recent name="C:\Users\raowe\IdeaProjects\xdhbg\src\main\resources\static\assets\img" />
       <recent name="C:\Users\raowe\IdeaProjects\xdhbg\src\main\resources\static\assets\js" />
       <recent name="C:\Users\raowe\IdeaProjects\xdhbg\src\main\java\cn\xdh\web" />
       <recent name="C:\Users\raowe\IdeaProjects\xdhbg\src\main\java\cn\xdh\entity" />
@@ -214,7 +203,9 @@
       <workItem from="1578373940225" duration="2657000" />
       <workItem from="1578376616109" duration="5689000" />
       <workItem from="1578382335331" duration="12023000" />
-      <workItem from="1578397747007" duration="493000" />
+      <workItem from="1578397747007" duration="9793000" />
+      <workItem from="1578408218470" duration="999000" />
+      <workItem from="1578443223296" duration="1495000" />
     </task>
     <task id="LOCAL-00001" summary="最新">
       <created>1577708158616</created>
@@ -279,7 +270,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578385796344</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="教师端的试题管理v1.0">
+      <created>1578398367632</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1578398367632</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +313,8 @@
     <MESSAGE value="教师端知识点列表" />
     <MESSAGE value="教师端的知识点列表" />
     <MESSAGE value="教师端的知识点管理v1.0" />
-    <option name="LAST_COMMIT_MESSAGE" value="教师端的知识点管理v1.0" />
+    <MESSAGE value="教师端的试题管理v1.0" />
+    <option name="LAST_COMMIT_MESSAGE" value="教师端的试题管理v1.0" />
     <option name="GROUP_MULTIFILE_MERGE_BY_DIRECTORY" value="true" />
   </component>
   <component name="WindowStateProjectService">
@@ -347,42 +346,42 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="436" y="105" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1577954913723" />
-    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578385785613">
+    <state x="184" y="0" key="CommitChangelistDialog2" timestamp="1578398366245">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578385785613" />
-    <state width="1483" height="412" key="GridCell.Tab.0.bottom" timestamp="1578398294050">
+    <state x="184" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1578398366245" />
+    <state width="1483" height="412" key="GridCell.Tab.0.bottom" timestamp="1578443986660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578398294050" />
-    <state width="1483" height="412" key="GridCell.Tab.0.center" timestamp="1578398294050">
+    <state width="1483" height="412" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578443986660" />
+    <state width="1483" height="412" key="GridCell.Tab.0.center" timestamp="1578443986660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578398294050" />
-    <state width="1483" height="412" key="GridCell.Tab.0.left" timestamp="1578398294049">
+    <state width="1483" height="412" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1578443986660" />
+    <state width="1483" height="412" key="GridCell.Tab.0.left" timestamp="1578443986660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578398294049" />
-    <state width="1483" height="412" key="GridCell.Tab.0.right" timestamp="1578398294050">
+    <state width="1483" height="412" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1578443986660" />
+    <state width="1483" height="412" key="GridCell.Tab.0.right" timestamp="1578443986660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578398294050" />
-    <state width="1483" height="412" key="GridCell.Tab.1.bottom" timestamp="1578398294051">
+    <state width="1483" height="412" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1578443986660" />
+    <state width="1483" height="412" key="GridCell.Tab.1.bottom" timestamp="1578443986661">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578398294051" />
-    <state width="1483" height="412" key="GridCell.Tab.1.center" timestamp="1578398294050">
+    <state width="1483" height="412" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1578443986661" />
+    <state width="1483" height="412" key="GridCell.Tab.1.center" timestamp="1578443986660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1578398294050" />
-    <state width="1483" height="412" key="GridCell.Tab.1.left" timestamp="1578398294050">
+    <state width="1483" height="412" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1578443986660" />
+    <state width="1483" height="412" key="GridCell.Tab.1.left" timestamp="1578443986660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1578398294050" />
-    <state width="1483" height="412" key="GridCell.Tab.1.right" timestamp="1578398294051">
+    <state width="1483" height="412" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1578443986660" />
+    <state width="1483" height="412" key="GridCell.Tab.1.right" timestamp="1578443986661">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1483" height="412" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1578398294051" />
+    <state width="1483" height="412" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1578443986661" />
     <state width="1483" height="247" key="GridCell.Tab.2.bottom" timestamp="1578373924803">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -403,19 +402,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="402" y="63" key="MultipleFileMergeDialog/0.0.1536.824@0.0.1536.824" timestamp="1578382996301" />
-    <state x="451" y="143" key="Vcs.Push.Dialog.v2" timestamp="1578385800101">
+    <state x="451" y="143" key="Vcs.Push.Dialog.v2" timestamp="1578398370465">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="451" y="143" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578385800101" />
+    <state x="451" y="143" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1578398370465" />
     <state x="451" y="181" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1577160283655" />
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1578313269847">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="93" y="93" width="1350" height="638" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1536.824@0.0.1536.824" timestamp="1578313269847" />
-    <state x="406" y="201" key="com.intellij.ide.util.TipDialog" timestamp="1578397855710">
+    <state x="406" y="201" key="com.intellij.ide.util.TipDialog" timestamp="1578443230632">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="406" y="201" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578397855710" />
+    <state x="406" y="201" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1578443230632" />
     <state x="701" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577160283655" />
     <state x="701" y="411" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032@0.0.1920.1032" timestamp="1577160283655" />
     <state x="341" y="183" key="run.anything.popup" timestamp="1577777952138">
