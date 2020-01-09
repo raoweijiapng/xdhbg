@@ -572,13 +572,37 @@ public class TeacherController {
 
 
     //删除试题
-    @GetMapping("/teacher.deletequestionview/{id}")
-    public Map<String,Object> godeletequestionview(@PathVariable Integer id){
-        int result = knowledgeServiceImpl.deleteKnowledge(id);
+    @GetMapping("/teacher.deletequestionview")
+    @ResponseBody
+    public Map<String,Object> godeletequestionview(@RequestParam(value = "id") int id,HttpServletRequest request){
+        //System.out.println(id);
+        int result = questionsServiceimpl.deleteQuestionById(id);
+        //System.out.println(result);
         Map<String,Object> map = new HashMap<>();
         if (result == 1){
-            map.put("msg","success");
-            return map;
+            String action = "删除试题";
+            Cookie[] cookies = request.getCookies();
+            String mobile = null;
+            String password = null;
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("mobile")) {
+                        mobile = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("password")) {
+                        password = cookie.getValue();
+                    }
+                }
+                Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+                TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+                //将日志实体类添加到日志表中
+                teacherServiceimpl.addTeacherLog(teacherLog);
+                map.put("msg","success");
+                return map;
+            }else {
+                map.put("msg","cookiefailed");
+                return map;
+            }
         }else {
             map.put("msg","failed");
             return map;

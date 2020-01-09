@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>兄弟会管理系统</title>
+    <meta name="description" content="这是一个 index 页面">
+    <meta name="keywords" content="index">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="icon" type="image/png" href="/assets/i/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/assets/i/app-icon72x72@2x.png">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <script src="/assets/js/echarts.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/amazeui.min.css"/>
+    <link rel="stylesheet" href="/assets/css/amazeui.datatables.min.css"/>
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <script src="/assets/js/jquery.min.js"></script>
+    <script th:src="@{/webjars/jquery-form/3.51/jquery.form.js} "></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.css}">
+    <style>
+        #box a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body data-type="widgets">
+<script src="/assets/js/theme.js"></script>
+<div class="am-g tpl-g" id="box">
+    <!-- 头部 -->
+    <header>
+        <!-- logo -->
+        <div class="am-fl tpl-header-logo">
+            <a href="http://www.itxdl.cn/xdh/" target="_blank">
+                <img src="/assets/img/logo.png" alt="" style="width:100%;height: 87%;margin: 0;">
+            </a>
+        </div>
+        <!-- 右侧内容 -->
+        <div class="tpl-header-fluid">
+            <!-- 侧边切换 -->
+            <div class="am-fl tpl-header-switch-button am-icon-list">
+                <span></span>
+            </div>
+            <!-- 其它功能-->
+            <div class="am-fr tpl-header-navbar">
+                <ul>
+                    <!-- 欢迎语 -->
+                    <li class="am-text-sm tpl-header-navbar-welcome">
+                        <a href="#">欢迎你 &nbsp;
+                            <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                                  th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                                </span>
+                        </a>
+                    </li>
+                    <!-- 退出 -->
+                    <li class="am-text-sm">
+                        <a href="/loginout">
+                            <span class="am-icon-sign-out"></span> 退出
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </header>
+    <!-- 风格切换 -->
+    <div class="tpl-skiner">
+        <div class="tpl-skiner-toggle am-icon-cog">
+        </div>
+        <div class="tpl-skiner-content">
+            <div class="tpl-skiner-content-title">
+                选择主题
+            </div>
+            <div class="tpl-skiner-content-bar">
+                <span class="skiner-color skiner-white" data-color="theme-white"></span>
+                <span class="skiner-color skiner-black" data-color="theme-black"></span>
+            </div>
+        </div>
+    </div>
+    <!-- 侧边导航栏 -->
+    <div class="left-sidebar">
+        <!-- 用户信息 -->
+        <div class="tpl-sidebar-user-panel">
+            <div class="tpl-user-panel-slide-toggleable">
+                <span class="user-panel-logged-in-text">
+                    <i class="am-icon-circle-o am-text-success tpl-user-panel-status-icon"></i>
+                    <span th:each="cookie :${#httpServletRequest.getCookies()}"
+                          th:if="${cookie.getName().equals('name')}" th:text="${cookie.getValue()}">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <!-- 菜单 -->
+        <ul class="sidebar-nav">
+            <li class="sidebar-nav-link">
+                <a href="/teacher.index">
+                    <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher/Log/1">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 日志管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/noticeManage">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 公告管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="javascript:;" class="sidebar-nav-sub-title">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 学生管理
+                    <span class="am-icon-chevron-down am-fr am-margin-right-sm sidebar-nav-sub-ico sidebar-nav-sub-ico-rotate"></span>
+                </a>
+                <ul class="sidebar-nav sidebar-nav-sub">
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/Undergraduate/1}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生信息
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a th:href="@{/student/add/view}">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 新增学生
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/exeperiences?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生心得
+                        </a>
+                    </li>
+                    <li class="sidebar-nav-link">
+                        <a href="/teacher/works?pageNum=1">
+                            <span class="am-icon-angle-right sidebar-nav-link-logo"></span> 学生作品
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.knowledge">
+                    <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
+                </a>
+            </li>
+            <li class="sidebar-nav-link">
+                <a href="/teacher.question" class="active">
+                    <i class="am-icon-table sidebar-nav-link-logo"></i> 试题管理
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 内容区域 -->
+    <div class="tpl-content-wrapper">
+        <div class="row-content am-cf">
+            <div class="row">
+                <div class="am-u-sm-12 am-u-md-12 am-u-lg-12">
+                    <div class="widget am-cf">
+                        <div class="widget-head am-cf">
+                            <div class="widget-title am-fl">添加试题</div>
+                        </div>
+                        <div class="widget-body am-fr">
+                            <form class="am-form tpl-form-border-form tpl-form-border-br" method="post" th:action="@{/teacheraddknowledge}">
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">试题类型 </label>
+                                    <div class="am-u-sm-9">
+                                        <select id="type_id" name="type_id" data-am-selected style="display: none;">
+                                            <option th:value="1" th:text="选择题" selected></option>
+                                            <option th:value="2" th:text="简答题"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">所属类别 </label>
+                                    <div class="am-u-sm-9">
+                                        <select id="subject_id" name="subject_id" data-am-selected style="display: none;">
+                                            <option th:value="-1" th:text="点击选择..."></option>
+                                            <option th:value="1" th:text="Java"></option>
+                                            <option th:value="0" th:text="PHP"></option>
+                                            <option th:value="2" th:text="Python"></option>
+                                        </select>
+                                        <select id="stage_id" name="stage_id" data-am-selected style="display: none;">
+                                            <option th:value="-1" th:text="点击选择..."></option>
+                                            <option th:value="1">第一阶段</option>
+                                            <option th:value="2">第二阶段</option>;
+                                            <option th:value="3">第三阶段</option>;
+                                            <option th:value="4">第四阶段</option>;
+                                            <option th:value="5">第五阶段</option>;
+                                        </select>
+                                        <select id="point_id" name="point_id" data-am-selected style="display: none;">
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">试题名称 </label>
+                                    <div class="am-u-sm-9">
+                                        <input id="title" type="text" placeholder="请填写试题..." name="title">
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" id="choosequestion" style="display: block">
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">试题选项 </label>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">A: </label>
+                                        <div class="am-u-sm-4" style="float: left">
+                                            <input id="optionA" type="text" name="optionA">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">B: </label>
+                                        <div class="am-u-sm-4" style="float: left">
+                                            <input id="optionB" type="text" name="optionB">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">C: </label>
+                                        <div class="am-u-sm-4" style="float: left">
+                                            <input id="optionC" type="text" name="optionC">
+                                        </div>
+                                    </div>
+
+                                    <div class="am-form-group">
+                                        <label class="am-u-sm-3 am-form-label">D: </label>
+                                        <div class="am-u-sm-4" style="float: left">
+                                            <input id="optionD" type="text" name="optionD">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" id="choosequestionresult" style="display: block">
+                                    <label class="am-u-sm-3 am-form-label">选择题答案 </label>
+                                    <div class="am-u-sm-9">
+                                        <select id="chooseanswer" name="answer" data-am-selected style="display: none;">
+                                            <option th:value="-1" th:text="点击选择..."></option>
+                                            <option th:value="A" th:text="A"></option>
+                                            <option th:value="B" th:text="B"></option>
+                                            <option th:value="C" th:text="C"></option>
+                                            <option th:value="D" th:text="D"></option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group" id="writerquestionresult" style="display: none">
+                                    <label class="am-u-sm-3 am-form-label">答案 </label>
+                                    <div class="am-u-sm-9">
+                                        <textarea rows="10" id="writeranswer" placeholder="请输入答案内容"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">分值 </label>
+                                    <div class="am-u-sm-3" style="float: left">
+                                        <input id="score" type="text" placeholder="请填写分值...">
+                                    </div>
+                                </div>
+
+
+                                <div class="am-form-group">
+                                    <div class="am-u-sm-9 am-u-sm-push-3">
+                                        <button id="issubmit" class="am-btn am-btn-primary tpl-btn-bg-color-success" onclick="return false;">
+                                            提交
+                                        </button>
+                                        <button id="SubmitExcelFile" type="button" onclick="return false;"
+                                                class="am-btn am-btn-primary tpl-btn-bg-color-success">
+                                            <i class="am-icon-cloud-upload"></i>批量导入
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="am-form-group">
+                                    <label class="am-u-sm-3 am-form-label">批量添加模板 <span class="tpl-form-line-small-title">model</span></label>
+                                    <div class="am-u-sm-9">
+                                        <img src="" th:src="@{/assets/img/questions.png}" alt="">
+                                    </div>
+                                    <div class="am-u-sm-9">
+                                        <small>添加前,请确定模板格式是否一致</small>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <!-- 文件上传-->
+                            <form method="post" style="display: none" th:attr="url=@{/teacher/addquestion/}"
+                                  enctype="multipart/form-data" id="ExcelForm">
+                                <input id="filepath" name="ExcelFile" type="file" size="30" value=""
+                                       style="font-size:14px"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<script src="/assets/js/amazeui.min.js"></script>
+
+<script src="/assets/js/amazeui.datatables.min.js"></script>
+<script src="/assets/js/dataTables.responsive.min.js"></script>
+<script src="/assets/js/app.js"></script>
+<script>
+    /*知识点的选择*/
+    $("#subject_id").change(function () {
+        var subject_id = $("#subject_id").val();
+        var stage_id = $("#stage_id").val();
+        $("#point_id").html("");
+        var x = '<option value="-1">点击选择...</option>';
+        $("#point_id").append(x);
+        if (subject_id != "-1" && stage_id != "-1") {
+            $.ajax({
+                type: "POST",
+                url: "/teacherselectknowledge",
+                data: {
+                    subject_id: parseInt(subject_id),
+                    stage_id: parseInt(stage_id),
+                }, //发送到服务器的参数
+                success: function (result) {
+                    console.log(result);
+                    if (result && result.length > 0) {
+                        for (var i = 0; i < result.length; i++) {
+                            var option = '<option value="' + result[i].id + '">'
+                                + result[i].title + '</option>';
+                            $("#point_id").append(option);
+                        }
+                    }else {
+                        alert("知识点为空!")
+                    }
+                },
+                error: function () {
+                    alert("获取知识点发生错误,请稍后再试!")
+                }
+            });
+        }
+    });
+    /*知识点的选择*/
+    $("#stage_id").change(function () {
+        var stage_id = $("#stage_id").val();
+        var subject_id = $("#subject_id").val();
+        $("#point_id").html("");
+        var x = '<option value="-1">点击选择...</option>';
+        $("#point_id").append(x);
+        if (subject_id != "-1" && stage_id != "-1") {
+            $.ajax({
+                type: "POST",
+                url: "/teacherselectknowledge",
+                data: {
+                    subject_id: parseInt(subject_id),
+                    stage_id: parseInt(stage_id),
+                }, //发送到服务器的参数
+                success: function (result) {
+                    if (result && result.length > 0) {
+                        for (var i = 0; i < result.length; i++) {
+                            var option = '<option value="' + result[i].id + '">'
+                                + result[i].title + '</option>';
+                            $("#point_id").append(option);
+                        }
+                    }else {
+                        alert("知识点为空!")
+                    }
+                },
+                error: function () {
+                    alert("获取知识点发生错误,请稍后再试!")
+                }
+            });
+        }
+    });
+
+    /*试题类型的选择*/
+    $("#type_id").change(function () {
+        var type_id = $("#type_id").val();
+        if (type_id == "1"){
+            $("#choosequestion").css("display","block");
+            $("#choosequestionresult").css("display","block");
+            $("#writerquestionresult").css("display","none");
+        }
+        if (type_id == "2"){
+            $("#writerquestionresult").css("display","block");
+            $("#choosequestion").css("display","none");
+            $("#choosequestionresult").css("display","none");
+        }
+    });
+
+    /*提交的单击事件*/
+    $("#issubmit").click(function () {
+        var type_id = $("#type_id").val();
+        var subject_id = $("#subject_id").val();
+        var stage_id = $("#stage_id").val();
+        var title = $("#title").val().trim();
+        var point_id = $("#point_id").val();
+        var score = $("#score").val();
+        if (type_id == "1"){
+            var optionA = $("#optionA").val().trim();
+            var optionB = $("#optionB").val().trim();
+            var optionC = $("#optionC").val().trim();
+            var optionD = $("#optionD").val().trim();
+            var chooseanswer = $("#chooseanswer").val();
+            if (title == "") {
+                alert("添加失败,请填写试题内容")
+                return false;
+            } else if (subject_id == "-1" || stage_id == "-1" || point_id == "-1") {
+                alert("添加失败,所属知识点类别不能为空");
+                return false;
+            } else if (optionA == "" || optionB == "" || optionC == "" || optionD == ""){
+                alert("添加失败,选择题选项不能为空");
+                return false;
+            } else if (chooseanswer == "-1"){
+                alert("添加失败,选择题答案不能为空");
+                return false;
+            } else if (score == ""){
+                alert("添加失败,分值不能为空");
+                return false;
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/teacheraddquestion",
+                    data: {
+                        type_id: parseInt(type_id),
+                        subject_id: parseInt(subject_id),
+                        stage_id: parseInt(stage_id),
+                        title: title,
+                        point_id: parseInt(point_id),
+                        score: score,
+                        optionA: optionA,
+                        optionB: optionB,
+                        optionC: optionC,
+                        optionD: optionD,
+                        answer: chooseanswer
+                    }, //发送到服务器的参数
+                    success: function (result) {
+                        if (result.msg == "success") {
+                            window.location.href = "/teacher.question";
+                        } else if (result.msg == "cookiefailed") {
+                            alert("请先登录");
+                            window.location.href = "/";
+                        } else {
+                            alert("试题已存在,请重新添加!");
+                            window.location.href = "/teacher.addquestionview";
+                        }
+                    }
+                });
+            }
+        }
+
+        if (type_id == "2"){
+            var writeranswer = $("#writeranswer").val();
+            if (title == "") {
+                alert("添加失败,请填写试题内容")
+                return false;
+            } else if (subject_id == "-1" || stage_id == "-1" || point_id == "-1") {
+                alert("添加失败,所属知识点类别不能为空");
+                return false;
+            } else if (writeranswer == ""){
+                alert("添加失败,简答题答案不能为空");
+                return false;
+            } else if (score == ""){
+                alert("添加失败,分值不能为空");
+                return false;
+            } else {
+                $.ajax({
+                    type: "post",
+                    url: "/teacheraddquestion",
+                    data: {
+                        type_id: parseInt(type_id),
+                        subject_id: parseInt(subject_id),
+                        stage_id: parseInt(stage_id),
+                        title: title,
+                        point_id: parseInt(point_id),
+                        score: score,
+                        answer: writeranswer
+                    }, //发送到服务器的参数
+                    success: function (result) {
+                        if (result.msg == "success") {
+                            window.location.href = "/teacher.question";
+                        } else if (result.msg == "cookiefailed") {
+                            alert("请先登录");
+                            window.location.href = "/";
+                        } else {
+                            alert("试题已存在,请重新添加!");
+                            window.location.href = "/teacher.addquestionview";
+                        }
+                    }
+                });
+            }
+        }
+
+    });
+
+
+    $("#SubmitExcelFile").click(function () {
+        $("#filepath").trigger("click");
+    });
+
+    $("#filepath").change(function () {
+        var fileName = $("#filepath").val();
+        var suffixName = fileName.substr(fileName.indexOf("."));
+        var option = {
+            url: $("#ExcelForm").attr("url") + suffixName,
+            type: 'POST',
+            dataType: "json",
+            clearForm: true,
+            success: function (data) {
+                if (data.msg=="添加所有试题成功"){
+                    alert(data.msg);
+                    window.location.href="/teacher.question";
+                }else if (data.msg=="cookie为空"){
+                    alert("请先登录!");
+                    window.location.href="/";
+                }else {
+                    alert(data.msg);
+                    window.location.href="/teacher.addquestionview";
+                }
+            }
+        };
+        if (fileName == "") {
+            alert("请上传Excel文件");
+        } else if (suffixName == ".xls" || suffixName == ".xlsx") {
+            $("#ExcelForm").ajaxSubmit(option);
+        } else {
+            alert("请上传Excel文件");
+        }
+    });
+</script>
+
+</body>
+
+</html>
