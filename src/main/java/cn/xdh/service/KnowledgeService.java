@@ -28,5 +28,6 @@ public interface KnowledgeService {
     //删除知识点
     public int deleteKnowledge(int id);
 
-
+    //根据id查询知识点
+    public Knowledge getKnowledgeById(int id);
 }

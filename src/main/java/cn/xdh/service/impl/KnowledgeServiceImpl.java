@@ -115,6 +115,11 @@ public class KnowledgeServiceImpl implements KnowledgeService {
         return  knowledgerepository.deleteKnowledge(id);
     }
 
+    //根据id查询知识点
+    @Override
+    public Knowledge getKnowledgeById(int id){
+        return knowledgerepository.getKnowledgeById(id);
+    }
 
 
 }

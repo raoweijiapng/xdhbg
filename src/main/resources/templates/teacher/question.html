@@ -131,7 +131,7 @@
                     </ul>
                 </li>
                 <li class="sidebar-nav-link">
-                    <a href="/teacher.question">
+                    <a href="/teacher.knowledge">
                         <i class="am-icon-wpforms sidebar-nav-link-logo"></i> 知识点管理
                     </a>
                 </li>
@@ -200,7 +200,7 @@
                                                         <a th:href="@{'/teacher.updatequestionview/'+${question.getId()}}">
                                                             <i class="am-icon-pencil"></i> 编辑
                                                         </a>
-                                                        <a href="javascript: deletequestion();" class="tpl-table-black-operation-del delquestion" th:attr="questionid=${question.getId()}">
+                                                        <a href="javascript:;" class="tpl-table-black-operation-del delquestion" th:attr="questionid=${question.getId()}">
                                                             <i class="am-icon-trash"></i> 删除
                                                         </a>
                                                     </div>
@@ -290,8 +290,8 @@
 
         });
 
-        function deletequestion() {
-            var questionid = $(".delquestion").attr("questionid");
+        $(".delquestion").click(function() {
+            var questionid = $(this).attr("questionid");
             if(confirm("确定要删除吗")) {
                 $.ajax({
                     type: "get",
@@ -301,17 +301,17 @@
                     },
                     success: function (result) {
                         if (result.msg == "success") {
-                            location.reload(true);
+                            window.location.reload();
                         } else if (result.msg == "cookiefailed"){
                             window.location.href="/";
                         } else {
                             alert("删除失败,请重新删除!");
-                            location.reload(true);
+                            window.location.reload();
                         }
                     }
                 });
             }
-        }
+        });
 
 
     </script>

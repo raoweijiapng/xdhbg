@@ -170,16 +170,16 @@
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-form-label">试题类型 </label>
-                                    <div class="am-u-sm-9">
-                                        <span th:if="${question.getType_id()} == 1">选择题</span>
-                                        <span th:if="${question.getType_id()} == 2">简答题</span>
+                                    <div class="am-u-sm-9" style="padding: 5px 10px 0px 0px;">
+                                        <span th:if="${question.getType_id()} == 1" >选择题</span>
+                                        <span th:if="${question.getType_id()} == 2" >简答题</span>
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-form-label">试题 </label>
-                                    <div class="am-u-sm-9">
-                                        <input id="title" type="text" th:value="${question.getTitle()}" name="title">
+                                    <div class="am-u-sm-9" style="padding: 5px 10px 0px 0px;">
+                                        <span th:text="${question.getTitle()}"></span>
                                     </div>
                                 </div>
 
@@ -271,7 +271,6 @@
      $("#issubmit").click(function () {
          var id = $("#questionid").val();
          var type_id = $("#typeid").val();
-         var title = $("#title").val().trim();
          var score = $("#score").val().trim();
          if (type_id == "1"){
              var optionA = $("#optionA").val().trim();
@@ -279,10 +278,7 @@
              var optionC = $("#optionC").val().trim();
              var optionD = $("#optionD").val().trim();
              var chooseanswer = $("#chooseanswer").val();
-             if (title == "") {
-                 alert("修改试题内容不能为空")
-                 return false;
-             } else if (optionA == "" || optionB == "" || optionC == "" || optionD == ""){
+             if (optionA == "" || optionB == "" || optionC == "" || optionD == ""){
                  alert("修改选择题选项不能为空");
                  return false;
              } else if (score == ""){
@@ -295,7 +291,6 @@
                      data: {
                          id: parseInt(id),
                          type_id: parseInt(type_id),
-                         title: title,
                          score: parseInt(score),
                          optionA: optionA,
                          optionB: optionB,
@@ -321,10 +316,7 @@
 
          if (type_id == "2"){
              var writeranswer = $("#writeranswer").val();
-             if (title == "") {
-                 alert("修改试题名不能为空")
-                 return false;
-             } else if (writeranswer == ""){
+             if (writeranswer == ""){
                  alert("修改简答题答案不能为空");
                  return false;
              } else if (score == ""){
@@ -337,7 +329,6 @@
                      data: {
                          id: parseInt(id),
                          type_id: parseInt(type_id),
-                         title: title,
                          score: parseInt(score),
                          answer: writeranswer
                      }, //发送到服务器的参数
@@ -349,7 +340,7 @@
                              window.location.href = "/";
                          } else {
                              alert("修改失败,请重新输入!");
-                             window.location.href = $("#issubmit").attr("url");
+                             window.location.reload();
                          }
                      }
                  });

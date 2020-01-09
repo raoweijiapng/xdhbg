@@ -165,19 +165,19 @@
                         <div class="widget-body am-fr">
                             <form class="am-form tpl-form-border-form tpl-form-border-br" method="post" th:action="@{/teacheraddknowledge}">
 
-                                <input style="display: none" id="knowledgeid" th:value="${knowledgeid}">
-
+                                <input th:value="${knowledge.getId()}" id="knowledgeid" style="display:none;">
+                                
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-form-label">所属类别 </label>
                                     <div class="am-u-sm-9">
                                         <select id="subject_id" name="subject_id" data-am-selected style="display: none;">
-                                            <option th:value="-1" th:text="请选择..."></option>
+                                            <option th:value="${knowledge.getSubject_id()}" th:text="原选择"></option>
                                             <option th:value="1" th:text="Java"></option>
                                             <option th:value="0" th:text="PHP"></option>
                                             <option th:value="2" th:text="Python"></option>
                                         </select>
                                         <select id="stage_id" name="stage_id" data-am-selected style="display: none;">
-                                            <option th:value="0" th:text="请选择..."></option>
+                                            <option th:value="${knowledge.getStage_id()}" th:text="原选择"></option>
                                             <option th:value="1" th:text="第一阶段"></option>
                                             <option th:value="2" th:text="第二阶段"></option>
                                             <option th:value="3" th:text="第三阶段"></option>
@@ -190,13 +190,13 @@
                                 <div class="am-form-group">
                                     <label class="am-u-sm-3 am-form-label">知识点 </label>
                                     <div class="am-u-sm-9">
-                                        <input id="title" type="text" placeholder="请填写知识点..." name="title">
+                                        <input id="title" type="text" th:value="${knowledge.getTitle()}" name="title">
                                     </div>
                                 </div>
 
                                 <div class="am-form-group">
                                     <div class="am-u-sm-9 am-u-sm-push-3">
-                                        <button id="issubmit" th:attr="url=@{'/teacher.updateknowledgeview/'+${knowledgeid}}" class="am-btn am-btn-primary tpl-btn-bg-color-success" onclick="return false;">
+                                        <button id="issubmit" class="am-btn am-btn-primary tpl-btn-bg-color-success" onclick="return false;">
                                             提交
                                         </button>
                                     </div>
@@ -225,9 +225,6 @@
         var title = $("#title").val().trim();
         if (title == "") {
             alert("修改失败,请填写知识点内容")
-            return false;
-        } else if (subject_id == "-1" || stage_id == "0") {
-            alert("修改失败,所属类别不能为空");
             return false;
         } else {
             $.ajax({

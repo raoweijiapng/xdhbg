@@ -341,7 +341,8 @@ public class TeacherController {
     public ModelAndView goupdateKnowledgeview(@PathVariable Integer id){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teacher/updateKnowledge");
-        mav.getModel().put("knowledgeid",id);
+        Knowledge knowledge = knowledgeServiceImpl.getKnowledgeById(id);
+        mav.getModel().put("knowledge",knowledge);
         return mav;
     }
 
@@ -383,18 +384,50 @@ public class TeacherController {
     }
 
     //删除知识点
-    @GetMapping("/teacher.deleteknowledgeview/{id}")
-    public ModelAndView godeleteKnowledgeview(@PathVariable Integer id){
-        knowledgeServiceImpl.deleteKnowledge(id);
-        return new ModelAndView("redirect:/teacher.knowledge");
+    @GetMapping("/teacher.deleteknowledgeview")
+    @ResponseBody
+    public Map<String,Object> godeleteKnowledgeview(@RequestParam(value = "id") int id,HttpServletRequest request){
+        //System.out.println(id);
+        int result = knowledgeServiceImpl.deleteKnowledge(id);
+        //System.out.println(result);
+        Map<String,Object> map = new HashMap<>();
+        if (result == 1){
+            String action = "删除知识点";
+            Cookie[] cookies = request.getCookies();
+            String mobile = null;
+            String password = null;
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("mobile")) {
+                        mobile = cookie.getValue();
+                    }
+                    if (cookie.getName().equals("password")) {
+                        password = cookie.getValue();
+                    }
+                }
+                Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+                TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+                //将日志实体类添加到日志表中
+                teacherServiceimpl.addTeacherLog(teacherLog);
+                map.put("msg","success");
+                return map;
+            }else {
+                map.put("msg","cookiefailed");
+                return map;
+            }
+        }else {
+            map.put("msg","failed");
+            return map;
+        }
+
     }
 
     //跳转到试题列表的页面
     @GetMapping("/teacher.question")
     public ModelAndView goquestionview(HttpServletRequest request,
-            @RequestParam(name="type",required=false,defaultValue="all")String type,
+                                       @RequestParam(name="type",required=false,defaultValue="all")String type,
                                        @RequestParam(name="page",required=false,defaultValue="1")int page,
-                                       @RequestParam(name="size",required=false,defaultValue="2")int size){
+                                       @RequestParam(name="size",required=false,defaultValue="10")int size){
         ModelAndView mav = new ModelAndView();
         mav.setViewName("teacher/question");
         String lookname = request.getParameter("lookname");
@@ -408,6 +441,7 @@ public class TeacherController {
         }else {
             questions = questionsServiceimpl.getAllQuestion(page - 1, size);
         }
+        //System.out.println(questions.getContent());
         mav.getModel().put("current", questions.getNumber()+1);
         mav.getModel().put("total", questions.getTotalPages());
         mav.addObject("questions",questions.getContent());
@@ -524,49 +558,51 @@ public class TeacherController {
     //提交修改试题的数据并返回状态
     @PostMapping("/teacherupdatequestion")
     @ResponseBody
-    public Map<String,Object> goupdateQuestion(int id,int type_id,String title,
+    public Map<String,Object> goupdateQuestion(int id,int type_id,
             int score,String optionA,String optionB,String optionC,String optionD,
             String answer,HttpServletRequest request){
-        //System.out.println(title);
-        List<Question> questionList = questionsServiceimpl.selectQuestionByTitle(title);
         Map<String,Object> map = new HashMap<>();
-        if (questionList.isEmpty()) {
-            String action = "修改试题";
-            Cookie[] cookies = request.getCookies();
-            String mobile = null;
-            String password = null;
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("mobile")) {
-                        mobile = cookie.getValue();
-                    }
-                    if (cookie.getName().equals("password")) {
-                        password = cookie.getValue();
-                    }
+        String action = "修改试题";
+        Cookie[] cookies = request.getCookies();
+        String mobile = null;
+        String password = null;
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("mobile")) {
+                    mobile = cookie.getValue();
                 }
-                Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
-                TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
-                //将日志实体类添加到日志表中
-                teacherServiceimpl.addTeacherLog(teacherLog);
-                //System.out.println(type_id);
-                if (type_id == 1){
-                    //System.out.println(title+": "+optionA+": "+optionB+": "+optionC+": "+optionD+": "+answer+": "+score+": "+id);
-                    questionsServiceimpl.updateChooseQuestion(title,optionA,optionB,optionC,optionD,answer,score,SomeMethods.getCurrentTime(),id);
+                if (cookie.getName().equals("password")) {
+                    password = cookie.getValue();
                 }
-                if (type_id == 2){
-                    //System.out.println(title+": "+answer+": "+score+": "+id);
-                    questionsServiceimpl.updateWriterQuestion(title,answer,score,SomeMethods.getCurrentTime(),id);
+            }
+            Teacher teacher = teacherServiceimpl.selectByPhoneAndPassword(mobile, password);
+            TeacherLog teacherLog = new TeacherLog(teacher.getId(), teacher.getName(), action, SomeMethods.getCurrentTime(), SomeMethods.getIp4());
+            //将日志实体类添加到日志表中
+            teacherServiceimpl.addTeacherLog(teacherLog);
+            //System.out.println(type_id);
+            if (type_id == 1){
+                //System.out.println(title+": "+optionA+": "+optionB+": "+optionC+": "+optionD+": "+answer+": "+score+": "+id);
+                int result = questionsServiceimpl.updateChooseQuestion(optionA,optionB,optionC,optionD,answer,score,SomeMethods.getCurrentTime(),id);
+                if (result == 1){
+                    map.put("msg","success");
+                    return map;
                 }
-                map.put("msg","success");
-                return map;
-            }else{
-                map.put("msg","cookiefailed");
+                map.put("msg","failed");
                 return map;
             }
-        }else {
-            map.put("msg","failed");
-            return map;
+            if (type_id == 2){
+                //System.out.println(title+": "+answer+": "+score+": "+id);
+                int result = questionsServiceimpl.updateWriterQuestion(answer,score,SomeMethods.getCurrentTime(),id);
+                if (result == 1){
+                    map.put("msg","success");
+                    return map;
+                }
+                map.put("msg","failed");
+                return map;
+            }
         }
+        map.put("msg","cookiefailed");
+        return map;
 
     }
 

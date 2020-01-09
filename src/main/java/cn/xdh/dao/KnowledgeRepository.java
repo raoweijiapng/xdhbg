@@ -36,6 +36,8 @@ public interface KnowledgeRepository extends JpaSpecificationExecutor<Knowledge>
     @Query(value = "select xdh_knowledges_point.id,xdh_knowledges_point.subject_id,xdh_knowledges_point.stage_id,xdh_knowledges_point.title,xdh_knowledges_point.add_time from xdh_knowledges_point where subject_id = ?1 and stage_id = ?2",nativeQuery = true)
     List<Knowledge> getAllBySubject_idAndStage_id(int subject_id, int stage_id);
 
+    @Query(value = "select id,subject_id,stage_id,title,add_time from xdh_knowledges_point where id = ?1",nativeQuery = true)
+    Knowledge getKnowledgeById(int id);
 
 
 }

@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="xdh_questions")
-@SecondaryTable(name="xdh_knowledges_point")
 public class Question {
     @Id
     @Column(table = "xdh_questions",name = "id",insertable=false,updatable=false)
@@ -34,22 +33,33 @@ public class Question {
     @Column(table = "xdh_questions",name = "add_time")
     private Long add_time;
 
-    @Column(table = "xdh_knowledges_point",name = "id",insertable=false,updatable=false)
-    private Integer xdh_knowledges_point_id;
-    @Column(table = "xdh_knowledges_point",name = "title")
     private String xdh_knowledges_point_title;
 
     public Question() {
     }
 
-    public Question(int id, String title, int type_id, int score, String xdh_knowledges_point_title) {
+    public Question(String title, int subject_id, int stage_id, int point_id, String optionA, String optionB, String optionC, String optionD, String answer, Long add_time, int xdh_knowledges_point_id, String xdh_knowledges_point_title) {
+        this.title = title;
+        this.subject_id = subject_id;
+        this.stage_id = stage_id;
+        this.point_id = point_id;
+        this.optionA = optionA;
+        this.optionB = optionB;
+        this.optionC = optionC;
+        this.optionD = optionD;
+        this.answer = answer;
+        this.add_time = add_time;
+        this.xdh_knowledges_point_title = xdh_knowledges_point_title;
+    }
+
+    public Question(int id, String title, int type_id, int score,Long add_time, String xdh_knowledges_point_title) {
         this.id = id;
         this.title = title;
         this.type_id = type_id;
         this.score = score;
+        this.add_time = add_time;
         this.xdh_knowledges_point_title = xdh_knowledges_point_title;
     }
-
 
 
     public Question(int id, int subject_id, int stage_id, int point_id, int type_id, String optionA, String optionB, String optionC, String optionD, String answer, int score, Long add_time) {
@@ -165,13 +175,6 @@ public class Question {
         this.add_time = add_time;
     }
 
-    public int getXdh_knowledges_point_id() {
-        return xdh_knowledges_point_id;
-    }
-
-    public void setXdh_knowledges_point_id(int xdh_knowledges_point_id) {
-        this.xdh_knowledges_point_id = xdh_knowledges_point_id;
-    }
 
     public String getTitle() {
         return title;
@@ -189,4 +192,23 @@ public class Question {
         this.xdh_knowledges_point_title = xdh_knowledges_point_title;
     }
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", subject_id=" + subject_id +
+                ", stage_id=" + stage_id +
+                ", point_id=" + point_id +
+                ", type_id=" + type_id +
+                ", optionA='" + optionA + '\'' +
+                ", optionB='" + optionB + '\'' +
+                ", optionC='" + optionC + '\'' +
+                ", optionD='" + optionD + '\'' +
+                ", answer='" + answer + '\'' +
+                ", score=" + score +
+                ", add_time=" + add_time +
+                ", xdh_knowledges_point_title='" + xdh_knowledges_point_title + '\'' +
+                '}';
+    }
 }

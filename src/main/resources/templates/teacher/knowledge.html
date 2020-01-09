@@ -204,7 +204,7 @@
                                                         <a th:href="@{'/teacher.updateknowledgeview/'+${knowledge.getId()}}">
                                                             <i class="am-icon-pencil"></i> 编辑
                                                         </a>
-                                                        <a th:href="@{'/teacher.deleteknowledgeview/'+${knowledge.getId()}}" class="tpl-table-black-operation-del">
+                                                        <a class="tpl-table-black-operation-del delknowledge" href="javascript:;" th:attr="knowledgeid=${knowledge.getId()}">
                                                             <i class="am-icon-trash"></i> 删除
                                                         </a>
                                                     </div>
@@ -294,6 +294,28 @@
 
         })
 
+        $(".delknowledge").click(function () {
+            var knowledgeid = $(this).attr("knowledgeid");
+            if(confirm("确定要删除吗")) {
+                $.ajax({
+                    type: "get",
+                    url: "/teacher.deleteknowledgeview",
+                    data:{
+                        id: parseInt(knowledgeid)
+                    },
+                    success: function (result) {
+                        if (result.msg == "success") {
+                            window.location.reload();
+                        } else if (result.msg == "cookiefailed"){
+                            window.location.href="/";
+                        } else {
+                            alert("删除失败,请重新删除!");
+                            window.location.reload();
+                        }
+                    }
+                });
+            }
+        })
 
     </script>
 </body>

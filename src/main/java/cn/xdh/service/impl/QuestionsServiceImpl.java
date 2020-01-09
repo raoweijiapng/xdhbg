@@ -39,8 +39,18 @@ public class QuestionsServiceImpl implements QuestionsService {
     @Override
     public Page<Question> getAllQuestion(int page, int size){
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        Pageable pageable = PageRequest.of(page, size, sort);
-        Page<Question> questions = questionsrepository.findAll(pageable);
+        final Pageable pageable = PageRequest.of(page, size, sort);
+        /*Specification<Question> queryCondition = new Specification<Question>() {
+            @Override
+            public Predicate toPredicate(Root<Question> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                //查找条件
+                Predicate p1 = cb.equal(root.get("point_id").as(Integer.class), root.get("xdh_knowledges_point_id").as(Integer.class));
+                query.where(p1);
+                query.orderBy(cb.desc(root.get("add_time").as(Long.class)));
+                return query.getGroupRestriction();
+            }
+        };*/
+        Page<Question> questions = questionsrepository.getAllBy(pageable);
         return  questions;
     }
 
@@ -52,8 +62,11 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     //增加试题
     @Override
-    public Question addQuestion(Question question){
-        return  questionsrepository.saveAndFlush(question);
+    public int addQuestion(Question question){
+        return  questionsrepository.addQuestion(
+                question.getSubject_id(),question.getStage_id(),question.getTitle(),
+                question.getPoint_id(),question.getType_id(),question.getOptionA(),question.getOptionB(),
+                question.getOptionC(),question.getOptionD(),question.getAnswer(),question.getScore(),question.getAdd_time());
     }
 
     //根据试题名查询是否存在
@@ -98,20 +111,12 @@ public class QuestionsServiceImpl implements QuestionsService {
         return msg;
     }
 
-    //根据知识点名称查找知识点并分页
+    //根据试题名称查找试题并分页
     @Override
-    public Page<Question> getAllQuestionBy(int page, int size, final String lookname) {
+    public Page<Question> getAllQuestionBy(int page, int size, String lookname) {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
-        final Pageable pageable = PageRequest.of(page, size, sort);
-        Specification<Question> queryCondition = new Specification<Question>() {
-            @Override
-            public Predicate toPredicate(Root<Question> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                //查找条件
-                Predicate p1 = cb.like(root.get("title").as(String.class), "%" + lookname + "%");
-                return p1;
-            }
-        };
-        Page<Question> questions = questionsrepository.findAll(queryCondition,pageable);
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<Question> questions = questionsrepository.getAllByTitle(lookname,pageable);
         return  questions;
     }
 
@@ -123,14 +128,14 @@ public class QuestionsServiceImpl implements QuestionsService {
 
     //修改试题
     @Override
-    public int updateChooseQuestion(String title,String optionA,String optionB,String optionC,String optionD,String answer,int score,Long add_time,int id){
-        return  questionsrepository.updateChooseQuestionById(title,optionA,optionB,optionC,optionD,answer,score,add_time,id);
+    public int updateChooseQuestion(String optionA,String optionB,String optionC,String optionD,String answer,int score,Long add_time,int id){
+        return  questionsrepository.updateChooseQuestionById(optionA,optionB,optionC,optionD,answer,score,add_time,id);
     }
 
     //修改简答题
     @Override
-    public int updateWriterQuestion(String title,String answer,int score,Long add_time,int id){
-        return  questionsrepository.updateWriterQuestionById(title,answer,score,add_time,id);
+    public int updateWriterQuestion(String answer,int score,Long add_time,int id){
+        return  questionsrepository.updateWriterQuestionById(answer,score,add_time,id);
     }
 
     //删除试题

@@ -15,7 +15,7 @@ public interface QuestionsService {
     public List<Knowledge> findBySubject_idAndStage_id(int subject_id,int stage_id);
 
     //增加试题
-    public Question addQuestion(Question question);
+    public int addQuestion(Question question);
 
     //根据试题名查询是否存在
     public List<Question> selectQuestionByTitle(String title);
@@ -27,10 +27,10 @@ public interface QuestionsService {
     public Question getQuestionById(int id);
 
     //修改选择题
-    public int updateChooseQuestion(String title,String optionA,String optionB,String optionC,String optionD,String answer,int score,Long add_time,int id);
+    public int updateChooseQuestion(String optionA,String optionB,String optionC,String optionD,String answer,int score,Long add_time,int id);
 
     //修改简答题
-    public int updateWriterQuestion(String title,String answer,int score,Long add_time,int id);
+    public int updateWriterQuestion(String answer,int score,Long add_time,int id);
 
 
     //删除试题
