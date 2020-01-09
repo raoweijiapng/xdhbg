@@ -1,6 +1,7 @@
 package cn.xdh.service.impl;
 
 import cn.xdh.dao.StudentResultDao;
+import cn.xdh.entity.AnswerList;
 import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
 import cn.xdh.service.StudentResultService;
@@ -32,6 +33,12 @@ public class StudentResultServiceImpl implements StudentResultService {
     public List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest) {
         List<PaperAndTest> selectPaperToList = studentResultDao.selectPaperToList(paperAndTest);
         return selectPaperToList;
+    }
+
+    @Override
+    public List<AnswerList> selectAnswerListById(AnswerList answerList) {
+        List<AnswerList> selectAnswerListById = studentResultDao.selectAnswerListById(answerList);
+        return selectAnswerListById;
     }
 
     @Override

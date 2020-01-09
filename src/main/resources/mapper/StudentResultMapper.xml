@@ -19,6 +19,11 @@
         from xdh_test_paper  p,xdh_attend_test  t where  p.id = ${id} and t.student_id = ${student_id}
     </select>
 
+    <select id="selectAnswerListById" resultType="cn.xdh.entity.AnswerList">
+        select *
+        from xdh_answer_list where  test_id = ${test_id} and student_id = ${student_id}
+    </select>
+
     <select id="selectPaperToLookname" resultType="cn.xdh.entity.PaperAndTest">
         select *
         from xdh_test_paper  p,xdh_attend_test  t where p.id = t.test_id and t.student_id= ${id}

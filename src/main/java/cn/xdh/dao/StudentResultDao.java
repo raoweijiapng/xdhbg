@@ -1,5 +1,6 @@
 package cn.xdh.dao;
 
+import cn.xdh.entity.AnswerList;
 import cn.xdh.entity.PaperAndTest;
 import cn.xdh.entity.Student;
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +17,7 @@ public interface StudentResultDao {
     
     List<PaperAndTest> selectPaperToList(PaperAndTest paperAndTest);
     
+    List <AnswerList> selectAnswerListById(AnswerList answerList);
     
     List<PaperAndTest> selectPaperToLookname(@Param("id") Integer id,@Param("lookname") String lookname);
 }
